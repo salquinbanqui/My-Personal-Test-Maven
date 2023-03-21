@@ -16,6 +16,8 @@
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <maven.compiler.source>1.7</maven.compiler.source>
     <maven.compiler.target>1.7</maven.compiler.target>
+    <server.hostname>127.0.0.1</server.hostname>
+	<server.port>8080</server.port>
   </properties>
 
 
