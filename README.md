@@ -1,9 +1,9 @@
-## PSC Peliculas
+# PSC Peliculas
 
 PSC peliculas es una app la cual el cliente podrá comprar peliculas para poder verlas. Además, tambien podra añadir amigos y ver sus perfiles.
 
 
-# Pre-requisitos
+## Pre-requisitos
 
 Para la ejecución de PSC Peliculas es necesario tener los siguientes programas correctamente instalados y configurados:
 
