@@ -1,7 +1,8 @@
 package es.deusto.spq;
 
 /**
- * Hello world!
+ * Hello world! a ver si esto tira
+ * 
  *
  */
 public class App 
