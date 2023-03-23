@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 /target/
 !.mvn/wrapper/maven-wrapper.jar
 
@@ -162,3 +163,7 @@ $RECYCLE.BIN/
 
 
 # End of https://www.gitignore.io/api/git,java,maven,eclipse,windows
+=======
+/bin/
+/target/
+>>>>>>> branch 'master' of https://github.com/salquinbanqui/My-Personal-Test-Maven.git
