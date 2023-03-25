@@ -1,4 +1,4 @@
-package es.deusto.spq.server.gui;
+package es.deusto.spq.cliente.gui;
 
 public class VentanaInicio {
 

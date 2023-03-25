@@ -1,6 +1,6 @@
-package es.deusto.spq.server.gui;
+package es.deusto.spq.cliente.gui;
 
-public class VentanaFilmoteca {
+public class VentanaAdmin {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub

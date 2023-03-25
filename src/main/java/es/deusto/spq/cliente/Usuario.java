@@ -1,4 +1,4 @@
-package es.deusto.spq.cliente.domain;
+package es.deusto.spq.cliente;
 
 public class Usuario {
 	private String id;
