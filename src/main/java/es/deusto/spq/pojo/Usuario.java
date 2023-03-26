@@ -1,15 +1,21 @@
-package es.deusto.spq.cliente;
+package es.deusto.spq.pojo;
 
 public class Usuario {
-	private String id;
+	public static int idd = 0;
+	
+	public int id;
 	private String nombreUsuario;
 	private String password;
 	private String email;
 	private String tarjeta;
+
 	
+	
+
 	
 	public Usuario(String nombreUsuario, String password, String email, String tarjeta) {
 		super();
+		this.id = ++idd;
 		this.nombreUsuario = nombreUsuario;
 		this.password = password;
 		this.email = email;
@@ -24,11 +30,11 @@ public class Usuario {
 		this.tarjeta = "";
 	}
 
-	public String getId() {
+	public int getId() {
 		return id;
 	}
 
-	public void setId(String id) {
+	public void setId(int id) {
 		this.id = id;
 	}
 
