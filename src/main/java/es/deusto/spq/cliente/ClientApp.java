@@ -98,7 +98,6 @@ public class ClientApp extends JFrame {
         rightPanel.add(usernameTextField);
         rightPanel.add(emailTextField);
         rightPanel.add(passwordTextField);
-
         rightPanel.add(cardTextField);
         
         

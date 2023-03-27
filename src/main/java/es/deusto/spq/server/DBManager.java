@@ -81,7 +81,7 @@ public class DBManager {
 		}
 		}
 	
-	public Usuario getUsuario(String email) {
+	public Usuario getUsuario(String nombreUsuario) {
 		PersistenceManager pm = pmf.getPersistenceManager();
 		pm.getFetchPlan().setMaxFetchDepth(4);
 		Transaction tx = pm.currentTransaction();
@@ -90,7 +90,7 @@ public class DBManager {
 		try {
 			tx.begin();
 
-			Query<?> query = pm.newQuery("SELECT FROM " + Usuario.class.getName() + " WHERE email == '" + email + "'");
+			Query<?> query = pm.newQuery("SELECT FROM " + Usuario.class.getName() + " WHERE nombreUsuario == '" + nombreUsuario + "'");
 			query.setUnique(true);
 			user = (Usuario) query.execute();
 
