@@ -15,6 +15,7 @@ public class RemoteFacade {
 
 	public RemoteFacade() {
 		this.dbmanager = DBManager.getInstance();
+		return;
 	}
 
 	private static final long serialVersionUID = 1L;
