@@ -1,6 +1,6 @@
 package es.deusto.spq.server;
 
-import javax.xml.ws.Response;
+import javax.ws.rs.core.Response;
 
 import es.deusto.spq.pojo.Usuario;
 
