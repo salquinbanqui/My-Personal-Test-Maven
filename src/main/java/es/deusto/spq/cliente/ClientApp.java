@@ -41,8 +41,8 @@ public class ClientApp extends JFrame {
     public ClientApp() {
         client = ClientBuilder.newClient();
 
-        final WebTarget appTarget = client.target("http://localhost:8080/myapp");
-        final WebTarget usersTarget = appTarget.path("users");
+        final WebTarget appTarget = client.target("http://localhost:8080/webapi");
+        final WebTarget usersTarget = appTarget.path("usuarios");
 
         setSize(620, 480);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);

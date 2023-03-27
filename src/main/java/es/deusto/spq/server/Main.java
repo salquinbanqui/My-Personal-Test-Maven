@@ -14,7 +14,7 @@ import java.net.URI;
  */
 public class Main {
     // Base URI the Grizzly HTTP server will listen on
-    public static final String BASE_URI = "http://localhost:8080/webapi";
+    public static final String BASE_URI = "http://localhost:8080/webapi/";
     protected static final Logger logger = org.apache.log4j.Logger.getRootLogger();
 
     /**
