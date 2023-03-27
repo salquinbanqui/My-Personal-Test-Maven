@@ -37,6 +37,10 @@ public class UsuarioResource {
  @Consumes(MediaType.APPLICATION_JSON)
  public void addUsuario(Usuario usuario) {
      System.out.println("Received new user: " + usuario);
+     //DBManager.getInstance().agregarUsuarioGestionPelis(usuario);
+     System.out.println("insertando usuario...");
+     DBManager.getInstance().store(usuario);
+  
  }
 
  @DELETE

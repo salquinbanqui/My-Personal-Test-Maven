@@ -30,7 +30,7 @@ public class RemoteFacade {
 	@Path("/registroGestionPelis")
 	@Consumes(MediaType.APPLICATION_JSON)
 	public Response agregarUsuarioGestionPelis(Usuario usuario) {
-		Usuario c = dbmanager.getUsuario(usuario.getEmail());
+		Usuario c = dbmanager.getUsuario(usuario.getNombreUsuario());
 		if(c== null) {
 			dbmanager.store(usuario);
 			return Response.status(Response.Status.OK).build();

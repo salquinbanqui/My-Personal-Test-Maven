@@ -1,5 +1,8 @@
 package es.deusto.spq.pojo;
 
+import javax.jdo.annotations.PersistenceCapable;
+
+@PersistenceCapable
 public class Usuario {
 	public static int idd = 0;
 	

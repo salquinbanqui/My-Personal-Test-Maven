@@ -109,6 +109,8 @@ public class ClientApp extends JFrame {
             	Usuario newUser = new Usuario(usernameTextField.getText(), emailTextField.getText(), passwordTextField.getText(), cardTextField.getText());
                 usersTarget.request(MediaType.APPLICATION_JSON).post(Entity.entity(newUser, MediaType.APPLICATION_JSON));
             }
+            
+           
         });
 
         deleteUserButton.addActionListener(new ActionListener() {

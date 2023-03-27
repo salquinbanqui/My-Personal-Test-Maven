@@ -116,13 +116,13 @@ public class DBManager {
 		DBManager.getInstance().deleteObjectFromDB(usuario);
 	}
 	
-	public void agregarUsuarioGestionPelis(List<Usuario> usuarios) {
+	public void agregarUsuarioGestionPelis(Usuario u) {
 		PreparedStatement preparedStatement = null;
 
 	        try {
-	            
-	        	for (Usuario u : usuarios) {
-	        		String query = " INSERT INTO USUARIO (USERNAME, EMAIL, PASSWORD, CARD)"
+	           
+	        	//for (Usuario u : usuarios) {
+	        		String query = " INSERT INTO USUARIOS (USERNAME, EMAIL, PASSWORD, CARD)"
 		                    + " VALUES (?, ?, ?, ?)";
 
 		            preparedStatement = conn.prepareStatement(query);
@@ -133,12 +133,12 @@ public class DBManager {
 		            preparedStatement.setString(4, u.getTarjeta());
 		            preparedStatement.execute();
 
-		            System.out.println("Usuarios agregados correctamente");
-				}
+		            System.out.println("Usuario agregado correctamente");
+				//}
 	        	
 
 	        } catch (Exception e) {
-	            System.out.println("Error agregando los usuarios");
+	            System.out.println("Error agregando el usuario");
 	            System.out.println(e);
 	        }
 	}
