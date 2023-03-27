@@ -23,11 +23,11 @@ public class UsuarioResource {
  public List<Usuario> getUsuarios() {
  // This data could be retrieved from a database
  List<Usuario> usuarios = new ArrayList<Usuario>();
- usuarios.add(new Usuario("samuelkiwi", "password_samu", "samuel.martin@opendeusto.es", "XXXX-XXXX-XXXX-XXXX"));
- usuarios.add(new Usuario("jotajota", "password_jose", "jose@opendeusto.es", "XXXX-XXXX-XXXX-XXXX"));
- usuarios.add(new Usuario("markelinho", "password_mark", "mark@opendeusto.es", "XXXX-XXXX-XXXX-XXXX"));
- usuarios.add(new Usuario("yonan99", "password_yonan", "yonander@opendeusto.es", "XXXX-XXXX-XXXX-XXXX"));
- usuarios.add(new Usuario("nachete", "password_nacho", "ignacio@opendeusto.es", "XXXX-XXXX-XXXX-XXXX"));
+ usuarios.add(new Usuario("samuelkiwi", "samuel.martin@opendeusto.es", "password_samu", "XXXX-XXXX-XXXX-XXXX"));
+ usuarios.add(new Usuario("jotajota", "jose@opendeusto.es", "password_jose", "XXXX-XXXX-XXXX-XXXX"));
+ usuarios.add(new Usuario("markelinho", "mark@opendeusto.es", "password_mark", "XXXX-XXXX-XXXX-XXXX"));
+ usuarios.add(new Usuario("yonan99", "yonander@opendeusto.es", "password_yonan", "XXXX-XXXX-XXXX-XXXX"));
+ usuarios.add(new Usuario("nachete", "ignacio@opendeusto.es", "password_nacho", "XXXX-XXXX-XXXX-XXXX"));
 
 
  return usuarios;

@@ -86,18 +86,19 @@ public class ClientApp extends JFrame {
         JButton addUserButton = new JButton("Add user");
         rightPanel.add(addUserButton);
 
-        final JTextField codeTextField = new JTextField("", 2);
+      //  final JTextField codeTextField = new JTextField("", 10);
         final JTextField usernameTextField = new JTextField("", 10);
-        final JTextField passwordTextField = new JTextField("", 10);
         final JTextField emailTextField = new JTextField("", 10);
+        final JTextField passwordTextField = new JTextField("", 10);
         final JTextField cardTextField = new JTextField("", 10);
        
 
 
-        rightPanel.add(codeTextField);
+      //  rightPanel.add(codeTextField);
         rightPanel.add(usernameTextField);
-        rightPanel.add(passwordTextField);
         rightPanel.add(emailTextField);
+        rightPanel.add(passwordTextField);
+
         rightPanel.add(cardTextField);
         
         
@@ -106,7 +107,7 @@ public class ClientApp extends JFrame {
             
             @Override
             public void actionPerformed(ActionEvent e) {
-            	Usuario newUser = new Usuario(usernameTextField.getText(), passwordTextField.getText(), emailTextField.getText(), cardTextField.getText());
+            	Usuario newUser = new Usuario(usernameTextField.getText(), emailTextField.getText(), passwordTextField.getText(), cardTextField.getText());
                 usersTarget.request(MediaType.APPLICATION_JSON).post(Entity.entity(newUser, MediaType.APPLICATION_JSON));
             }
         });
@@ -115,7 +116,7 @@ public class ClientApp extends JFrame {
 
             @Override
             public void actionPerformed(ActionEvent e) {
-                WebTarget deleteTarget = usersTarget.path(codeTextField.getText());
+                WebTarget deleteTarget = usersTarget.path(usernameTextField.getText());
                 Response response = deleteTarget.request().delete();
                 if (response.getStatus() == Status.OK.getStatusCode()) {
                     JOptionPane.showMessageDialog(ClientApp.this, "User correctly deleted", "Message", JOptionPane.INFORMATION_MESSAGE);

@@ -13,20 +13,20 @@ public class Usuario {
 	
 
 	
-	public Usuario(String nombreUsuario, String password, String email, String tarjeta) {
+	public Usuario(String nombreUsuario, String email, String password, String tarjeta) {
 		super();
 		this.id = ++idd;
 		this.nombreUsuario = nombreUsuario;
-		this.password = password;
 		this.email = email;
+		this.password = password;
 		this.tarjeta = tarjeta;
 	}
 	
 	public Usuario() {
 		super();
 		this.nombreUsuario = "";
-		this.password = "";
 		this.email = "";
+		this.password = "";
 		this.tarjeta = "";
 	}
 
@@ -72,8 +72,8 @@ public class Usuario {
 
 	@Override
 	public String toString() {
-		return "Usuario [id=" + id + ", nombreUsuario=" + nombreUsuario + ", password=" + password + ", email=" + email
-				+ ", tarjeta=" + tarjeta + "]";
+		return "Usuario [id=" + id + ", nombreUsuario=" + nombreUsuario + ", email=" + email
+				 + ", password=" + password + ", tarjeta=" + tarjeta + "]";
 	}
 	
 	

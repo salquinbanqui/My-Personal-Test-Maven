@@ -1,11 +1,16 @@
 package es.deusto.spq.server;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.util.List;
 
 import javax.jdo.JDOHelper;
 import javax.jdo.PersistenceManager;
 import javax.jdo.PersistenceManagerFactory;
+import javax.jdo.Query;
 import javax.jdo.Transaction;
+
+import es.deusto.spq.pojo.Usuario;
 
 public class DBManager {
 
@@ -75,5 +80,67 @@ public class DBManager {
 			pm.close();
 		}
 		}
+	
+	public Usuario getUsuario(String email) {
+		PersistenceManager pm = pmf.getPersistenceManager();
+		pm.getFetchPlan().setMaxFetchDepth(4);
+		Transaction tx = pm.currentTransaction();
+		Usuario user = null;
+
+		try {
+			tx.begin();
+
+			Query<?> query = pm.newQuery("SELECT FROM " + Usuario.class.getName() + " WHERE email == '" + email + "'");
+			query.setUnique(true);
+			user = (Usuario) query.execute();
+
+			tx.commit();
+		} catch (Exception ex) {
+			System.out.println(" $ Error cogiendo el usuario de la BD: " + ex.getMessage());
+		} finally {
+			if (tx != null && tx.isActive()) {
+				tx.rollback();
+			}
+
+			pm.close();
+		}
+
+		return user;	
+		}
+	
+	public void store(Usuario usuario) {
+		DBManager.getInstance().storeObjectInDB(usuario);
+	}
+
+	public void delete(Usuario usuario) {
+		DBManager.getInstance().deleteObjectFromDB(usuario);
+	}
+	
+	public void agregarUsuarioGestionPelis(List<Usuario> usuarios) {
+		PreparedStatement preparedStatement = null;
+
+	        try {
+	            
+	        	for (Usuario u : usuarios) {
+	        		String query = " INSERT INTO CLIENTE (USERNAME, EMAIL, PASSWORD, CARD)"
+		                    + " VALUES (?, ?, ?, ?)";
+
+		            preparedStatement = conn.prepareStatement(query);
+
+		            preparedStatement.setString(1, u.getNombreUsuario());
+		            preparedStatement.setString(2, u.getEmail());
+		            preparedStatement.setString(3, u.getPassword());
+		            preparedStatement.setString(4, u.getTarjeta());
+		            preparedStatement.execute();
+
+		            System.out.println("Usuarios agregados correctamente");
+				}
+	        	
+
+	        } catch (Exception e) {
+	            System.out.println("Error agregando los usuarios");
+	            System.out.println(e);
+	        }
+	}
 
 }

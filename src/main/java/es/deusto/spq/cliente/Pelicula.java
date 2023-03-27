@@ -1,5 +1,5 @@
 package es.deusto.spq.cliente;
 
-public class Peliculas {
+public class Pelicula {
 
 }
