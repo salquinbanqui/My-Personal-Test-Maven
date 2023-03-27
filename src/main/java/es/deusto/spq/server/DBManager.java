@@ -122,7 +122,7 @@ public class DBManager {
 	        try {
 	            
 	        	for (Usuario u : usuarios) {
-	        		String query = " INSERT INTO CLIENTE (USERNAME, EMAIL, PASSWORD, CARD)"
+	        		String query = " INSERT INTO USUARIO (USERNAME, EMAIL, PASSWORD, CARD)"
 		                    + " VALUES (?, ?, ?, ?)";
 
 		            preparedStatement = conn.prepareStatement(query);
