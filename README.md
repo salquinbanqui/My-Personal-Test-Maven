@@ -36,10 +36,10 @@ Si es la primera vez que se hace este proceso se haría:
 
 ## Autores
 
-Jose Javier Garcia -- josejavier.garcia@opendeusto.es
-Ignacio Echavarren -- ignacioechavarren@opendeusto.es
-Yon Ander Escobal  -- yonander.escobal@opendeusto.es
-Marcos Lopez       -- m.lopez.gutierrez@opendeusto.es
+ * Jose Javier Garcia -- josejavier.garcia@opendeusto.es
+ * Ignacio Echavarren -- ignacioechavarren@opendeusto.es
+ * Yon Ander Escobal  -- yonander.escobal@opendeusto.es
+ * Marcos Lopez       -- m.lopez.gutierrez@opendeusto.es
 
 
 
