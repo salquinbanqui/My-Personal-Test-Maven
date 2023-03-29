@@ -40,6 +40,7 @@ Si es la primera vez que se hace este proceso se haría:
  * Ignacio Echavarren -- ignacioechavarren@opendeusto.es
  * Yon Ander Escobal  -- yonander.escobal@opendeusto.es
  * Marcos Lopez       -- m.lopez.gutierrez@opendeusto.es
+ * Samuel Martin      -- samuel.martin@opendeusto.es
 
 
 
