@@ -1,9 +1,9 @@
-## PSC Peliculas
+# PSC Peliculas
 
 PSC peliculas es una app la cual el cliente podrá comprar peliculas para poder verlas. Además, tambien podra añadir amigos y ver sus perfiles.
 
 
-# Pre-requisitos
+## Pre-requisitos
 
 Para la ejecución de PSC Peliculas es necesario tener los siguientes programas correctamente instalados y configurados:
 
@@ -13,18 +13,19 @@ Para la ejecución de PSC Peliculas es necesario tener los siguientes programas 
 
 
 
-#Instalación y ejecución
+## Instalación y ejecución
 
 Para ejecutar el proyecto hay que ejecutar el cliente y el servidor.
 
 1-Para ejecutar el servidor los pasos son:
 -"mvn clean"
 -"mvn compile"
----------------------
+
+***
 Si es la primera vez que se hace este proceso se haría:
 -"mvn datanucleus:enhance"
 -"mvn datanucleus:schema-create"
----------------------
+***
 
 -"mvn exec:java-PServer"
 
@@ -33,7 +34,7 @@ Si es la primera vez que se hace este proceso se haría:
 
 
 
-#Autores
+## Autores
 
 Jose Javier Garcia -- josejavier.garcia@opendeusto.es
 Ignacio Echavarren -- ignacioechavarren@opendeusto.es
