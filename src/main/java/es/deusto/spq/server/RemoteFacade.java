@@ -36,5 +36,19 @@ public class RemoteFacade {
 			return Response.status(Response.Status.OK).build();
 		}return Response.status(Response.Status.BAD_REQUEST).build();
 	}
+	
+	@POST
+	@Path("/loginGestionPelis")
+	@Consumes(MediaType.APPLICATION_JSON)
+	public Response loginPolideportivo(Usuario usuario) {
+		Usuario user = dbmanager.getUsuario(usuario.getEmail());
+		if(user!= null && user.getPassword().equals(usuario.getPassword())) {
+			if(user.isAdmin()) {
+				return Response.status(Response.Status.OK).build();
+			}else {
+				return Response.status(Response.Status.ACCEPTED).build();
+			}	
+		}return Response.status(Response.Status.BAD_REQUEST).build();
+	}
 
 }

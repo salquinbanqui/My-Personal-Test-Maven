@@ -11,18 +11,19 @@ public class Usuario {
 	private String email;
 	private String password;
 	private String tarjeta;
-
+	private boolean Admin;
 	
 	
 
 	
-	public Usuario(String nombreUsuario, String email, String password, String tarjeta) {
+	public Usuario(String nombreUsuario, String email, String password, String tarjeta, boolean admin) {
 		super();
 		this.id = ++idd;
 		this.nombreUsuario = nombreUsuario;
 		this.email = email;
 		this.password = password;
 		this.tarjeta = tarjeta;
+		Admin = admin;
 	}
 	
 	public Usuario() {
@@ -31,6 +32,7 @@ public class Usuario {
 		this.email = "";
 		this.password = "";
 		this.tarjeta = "";
+		Admin = false;
 	}
 
 	public int getId() {
@@ -72,11 +74,18 @@ public class Usuario {
 	public void setTarjeta(String tarjeta) {
 		this.tarjeta = tarjeta;
 	}
+	public boolean isAdmin() {
+		return Admin;
+	}
+
+	public void setAdmin(boolean admin) {
+		Admin = admin;
+	}
 
 	@Override
 	public String toString() {
 		return "Usuario [id=" + id + ", nombreUsuario=" + nombreUsuario + ", email=" + email
-				 + ", password=" + password + ", tarjeta=" + tarjeta + "]";
+				 + ", password=" + password + ", tarjeta=" + tarjeta +",Admin = "+ Admin+  "]";
 	}
 	
 	

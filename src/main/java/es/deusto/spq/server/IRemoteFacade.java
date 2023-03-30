@@ -7,6 +7,7 @@ import es.deusto.spq.pojo.Usuario;
 public interface IRemoteFacade {
 	
 	Response agregarUsuarioGestionPelis(Usuario usuario);
+	Response loginGestionPelis(Usuario usuario);
 	
 
 }
