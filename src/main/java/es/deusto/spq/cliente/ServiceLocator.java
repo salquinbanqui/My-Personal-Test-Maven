@@ -61,10 +61,10 @@ public class ServiceLocator {
 	}
 	
 	
-	/**Método logearse en el polideportivo
+	/**Método logearse 
 	 * LLama al metodo al RemoteFacade del servidor con la URL establecida
-	 * @param email  de la cuenta del cliente 
-	 * @param contrasenya de la cuenta del cliente
+	 * @param email  de la cuenta del usuario 
+	 * @param contraseña de la cuenta del usuario
 	 * @return Devuelve true si todo ha salido correctamente
 	 */
 	public int loginGestionPelis(String email, String password) {

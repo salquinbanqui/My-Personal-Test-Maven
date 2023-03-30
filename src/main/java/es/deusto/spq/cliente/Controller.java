@@ -20,25 +20,12 @@ public ServiceLocator serviceLocator;
 		return serviceLocator.agregarUsuarioGestionPelis(nombreUsuario, email, password, tarjeta);
 	}
 	
-	//public boolean agregarReservaInstalacion(String IDReserva, String IDInstalacion, String emailUsuario, int anyo, int mes, int dia, int hora) {
-	//	return serviceLocator.agregarReservaInstalacion(IDReserva, IDInstalacion, emailUsuario, anyo, mes, dia , hora);
-	//}
-	//obtener todas las instalaciones
+	
+	//obtener todas las peliculas
 	public List<Pelicula> obtenerPeliculas() {
 		return serviceLocator.obtenerPeliculas();
 	}
-	//obtener todas las reservas
-	//public List<ReservaInstalaciones> obtenerReservas() {
-	//	return serviceLocator.obtenerReservas();
-	//}
-	//borrar reserva
-	//public Response borrarReserva(ReservaInstalaciones reserva) {
-	//	return serviceLocator.borrarReserva(reserva);
-	//obtener una reserva en concreto
-	//}
-	//public ReservaInstalaciones buscarReservaInstalacion(String IDReserva) {
-	//	return serviceLocator.buscarReservaInstalacion(IDReserva);
-	//}
+	
 
 
 }
