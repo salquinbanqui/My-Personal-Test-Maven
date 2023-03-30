@@ -11,6 +11,10 @@ import javax.jdo.PersistenceManager;
 import javax.jdo.PersistenceManagerFactory;
 import javax.jdo.Query;
 import javax.jdo.Transaction;
+import javax.ws.rs.client.Entity;
+import javax.ws.rs.client.WebTarget;
+import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 
 import es.deusto.spq.pojo.Usuario;
 
@@ -20,6 +24,7 @@ public class DBManager {
 	private PersistenceManagerFactory pmf = null;
 	private static boolean inicializado = false;
 	private static Connection conn;
+	private  WebTarget webTarget;
 
 	private DBManager() {
 		pmf = JDOHelper.getPersistenceManagerFactory("datanucleus.properties");
@@ -208,5 +213,15 @@ public class DBManager {
 
 		return usuarios;
 	}
-
+//mirad este metodo ?¿
+	public Response borrarUsuario(Usuario usuario) {
+		WebTarget webTarget1 = webTarget.path("server/borrarUsuario");	
+		Entity<Usuario> entity = Entity.entity(usuario, MediaType.APPLICATION_JSON);
+		Response response = webTarget1.request().post(entity);
+		return response;
+	
+	}
+	
+	
+	
 }
