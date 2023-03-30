@@ -130,7 +130,7 @@ public class ClientApp extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
             	
-            	Usuario newUser = new Usuario(usernameTextField.getText(), emailTextField.getText(), passwordTextField.getText(), cardTextField.getText());
+            	Usuario newUser = new Usuario(usernameTextField.getText(), emailTextField.getText(), passwordTextField.getText(), cardTextField.getText(), false);
                 usersTarget.request(MediaType.APPLICATION_JSON).post(Entity.entity(newUser, MediaType.APPLICATION_JSON));
             }
             

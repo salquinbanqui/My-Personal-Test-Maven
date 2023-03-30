@@ -13,7 +13,7 @@ import es.deusto.spq.pojo.Usuario;
 
 @Path("server")
 @Produces(MediaType.APPLICATION_JSON)
-public class RemoteFacade {
+public class RemoteFacade  {
 
 	private DBManager dbmanager = null;
 	private Logger logger = Logger.getLogger(RemoteFacade.class.getName());
@@ -50,5 +50,9 @@ public class RemoteFacade {
 			}	
 		}return Response.status(Response.Status.BAD_REQUEST).build();
 	}
+
+	
+
+	
 
 }
