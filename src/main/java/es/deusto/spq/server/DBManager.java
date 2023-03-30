@@ -2,8 +2,10 @@ package es.deusto.spq.server;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.util.ArrayList;
 import java.util.List;
 
+import javax.jdo.Extent;
 import javax.jdo.JDOHelper;
 import javax.jdo.PersistenceManager;
 import javax.jdo.PersistenceManagerFactory;
@@ -122,7 +124,7 @@ public class DBManager {
 	        try {
 	           
 	        	//for (Usuario u : usuarios) {
-	        		String query = " INSERT INTO USUARIOS (USERNAME, EMAIL, PASSWORD, CARD)"
+	        		String query = " INSERT INTO USUARIO (USERNAME, EMAIL, PASSWORD, CARD)"
 		                    + " VALUES (?, ?, ?, ?)";
 
 		            preparedStatement = conn.prepareStatement(query);
@@ -141,6 +143,70 @@ public class DBManager {
 	            System.out.println("Error agregando el usuario");
 	            System.out.println(e);
 	        }
+	}
+	
+	public void inicializarDatos() {
+		System.out.println(" * Inicializando base de datos");
+		
+		//USUARIOS...
+		
+		Usuario u1 = new Usuario("samuelkiwi", "samuel.martin@opendeusto.es", "password_samu", "XXXX-XXXX-XXXX-XXXX");   
+		Usuario u2 = new Usuario("jotajota", "jose@opendeusto.es", "password_jose", "XXXX-XXXX-XXXX-XXXX");              
+		Usuario u3 = new Usuario("markelinho", "mark@opendeusto.es", "password_mark", "XXXX-XXXX-XXXX-XXXX");            
+		Usuario u4 = new Usuario("yonan99", "yonander@opendeusto.es", "password_yonan", "XXXX-XXXX-XXXX-XXXX");          
+		Usuario u5 = new Usuario("nachete", "ignacio@opendeusto.es", "password_nacho", "XXXX-XXXX-XXXX-XXXX");           
+		
+		//PELICULAS...
+		
+		try {
+			 store(u1);
+			 store(u2);
+			 store(u3);
+			 store(u4);
+			 store(u5);
+			 
+			// store(p1);
+			// store(p2);
+			// store(p3);
+			// store(p4);
+			// store(p5);
+	
+			 
+		} catch (Exception ex) {
+			// TODO: handle exception
+			System.out.println(" $ Error inicializando los datos: " + ex.getMessage());
+			ex.printStackTrace();
+		}
+	}
+	
+	public List<Usuario> getUsuarios() {
+		List<Usuario> usuarios = new ArrayList<Usuario>();
+		PersistenceManager pm = pmf.getPersistenceManager();
+		pm.getFetchPlan().setMaxFetchDepth(4);
+		Transaction tx = pm.currentTransaction();
+
+		try {
+
+			tx.begin();
+
+			Extent<Usuario> extent = pm.getExtent(Usuario.class, true);
+
+			for (Usuario usuario : extent) {
+				usuarios.add(usuario);
+			}
+
+			tx.commit();
+		} catch (Exception ex) {
+			System.out.println("  $ Error retrieving all the Categories: " + ex.getMessage());
+		} finally {
+			if (tx != null && tx.isActive()) {
+				tx.rollback();
+			}
+
+			pm.close();
+		}
+
+		return usuarios;
 	}
 
 }

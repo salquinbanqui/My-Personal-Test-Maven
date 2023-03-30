@@ -28,6 +28,7 @@ import javax.ws.rs.core.Response.Status;
 import java.util.List;
 
 import es.deusto.spq.pojo.Usuario;
+import javax.swing.JLabel;
 
 public class ClientApp extends JFrame {
 
@@ -44,7 +45,7 @@ public class ClientApp extends JFrame {
         final WebTarget appTarget = client.target("http://localhost:8080/webapi");
         final WebTarget usersTarget = appTarget.path("usuarios");
 
-        setSize(620, 480);
+        setSize(904, 561);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
         JButton getUsersButton = new JButton("Get Users");
@@ -54,13 +55,13 @@ public class ClientApp extends JFrame {
 
         buttonsPanel.add(getUsersButton);
         buttonsPanel.add(deleteUserButton);
-        add(buttonsPanel, BorderLayout.SOUTH);
+        getContentPane().add(buttonsPanel, BorderLayout.SOUTH);
 
         final DefaultListModel<Usuario> userListModel = new DefaultListModel<>();
         JList<Usuario> userList = new JList<>(userListModel);
 
         JScrollPane listScrollPane = new JScrollPane(userList);
-        add(listScrollPane, BorderLayout.WEST);
+        getContentPane().add(listScrollPane, BorderLayout.WEST);
 
         getUsersButton.addActionListener(new ActionListener() {
 
@@ -81,24 +82,46 @@ public class ClientApp extends JFrame {
         });
 
         JPanel rightPanel = new JPanel();
-        add(rightPanel, BorderLayout.EAST);
+        getContentPane().add(rightPanel);
+        rightPanel.setLayout(null);
 
         JButton addUserButton = new JButton("Add user");
+        addUserButton.setBounds(310, 248, 100, 29);
         rightPanel.add(addUserButton);
-
-      //  final JTextField codeTextField = new JTextField("", 10);
-        final JTextField usernameTextField = new JTextField("", 10);
         final JTextField emailTextField = new JTextField("", 10);
+        emailTextField.setBounds(142, 135, 130, 26);
         final JTextField passwordTextField = new JTextField("", 10);
+        passwordTextField.setBounds(142, 182, 130, 26);
         final JTextField cardTextField = new JTextField("", 10);
-       
+        cardTextField.setBounds(142, 248, 130, 26);
+        
+              //  final JTextField codeTextField = new JTextField("", 10);
+                final JTextField usernameTextField = new JTextField("", 10);
+                usernameTextField.setBounds(142, 88, 130, 26);
+                
 
 
       //  rightPanel.add(codeTextField);
-        rightPanel.add(usernameTextField);
+                 rightPanel.add(usernameTextField);
         rightPanel.add(emailTextField);
         rightPanel.add(passwordTextField);
+        
+        JLabel lblNewLabel = new JLabel("Username:");
+        lblNewLabel.setBounds(55, 93, 100, 16);
+        rightPanel.add(lblNewLabel);
         rightPanel.add(cardTextField);
+        
+        JLabel lblEmail = new JLabel("Email:");
+        lblEmail.setBounds(55, 140, 100, 16);
+        rightPanel.add(lblEmail);
+        
+        JLabel lblPassword = new JLabel("Password:");
+        lblPassword.setBounds(55, 187, 100, 16);
+        rightPanel.add(lblPassword);
+        
+        JLabel lblNTarjeta = new JLabel("Nº Tarjeta:");
+        lblNTarjeta.setBounds(55, 253, 100, 16);
+        rightPanel.add(lblNTarjeta);
         
         
 
@@ -106,6 +129,7 @@ public class ClientApp extends JFrame {
             
             @Override
             public void actionPerformed(ActionEvent e) {
+            	
             	Usuario newUser = new Usuario(usernameTextField.getText(), emailTextField.getText(), passwordTextField.getText(), cardTextField.getText());
                 usersTarget.request(MediaType.APPLICATION_JSON).post(Entity.entity(newUser, MediaType.APPLICATION_JSON));
             }
@@ -114,7 +138,7 @@ public class ClientApp extends JFrame {
         });
 
         deleteUserButton.addActionListener(new ActionListener() {
-
+        	
             @Override
             public void actionPerformed(ActionEvent e) {
                 WebTarget deleteTarget = usersTarget.path(usernameTextField.getText());

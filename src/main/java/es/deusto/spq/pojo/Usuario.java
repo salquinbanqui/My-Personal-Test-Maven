@@ -8,8 +8,8 @@ public class Usuario {
 	
 	public int id;
 	private String nombreUsuario;
-	private String password;
 	private String email;
+	private String password;
 	private String tarjeta;
 
 	

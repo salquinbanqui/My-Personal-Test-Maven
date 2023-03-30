@@ -22,12 +22,14 @@ public class UsuarioResource {
  @Produces(MediaType.APPLICATION_JSON)
  public List<Usuario> getUsuarios() {
  // This data could be retrieved from a database
- List<Usuario> usuarios = new ArrayList<Usuario>();
- usuarios.add(new Usuario("samuelkiwi", "samuel.martin@opendeusto.es", "password_samu", "XXXX-XXXX-XXXX-XXXX"));
- usuarios.add(new Usuario("jotajota", "jose@opendeusto.es", "password_jose", "XXXX-XXXX-XXXX-XXXX"));
- usuarios.add(new Usuario("markelinho", "mark@opendeusto.es", "password_mark", "XXXX-XXXX-XXXX-XXXX"));
- usuarios.add(new Usuario("yonan99", "yonander@opendeusto.es", "password_yonan", "XXXX-XXXX-XXXX-XXXX"));
- usuarios.add(new Usuario("nachete", "ignacio@opendeusto.es", "password_nacho", "XXXX-XXXX-XXXX-XXXX"));
+	// DBManager.getInstance().getUsuario("*");
+	 
+ List<Usuario> usuarios = DBManager.getInstance().getUsuarios();
+// usuarios.add(new Usuario("samuelkiwi", "samuel.martin@opendeusto.es", "password_samu", "XXXX-XXXX-XXXX-XXXX"));
+// usuarios.add(new Usuario("jotajota", "jose@opendeusto.es", "password_jose", "XXXX-XXXX-XXXX-XXXX"));
+// usuarios.add(new Usuario("markelinho", "mark@opendeusto.es", "password_mark", "XXXX-XXXX-XXXX-XXXX"));
+// usuarios.add(new Usuario("yonan99", "yonander@opendeusto.es", "password_yonan", "XXXX-XXXX-XXXX-XXXX"));
+// usuarios.add(new Usuario("nachete", "ignacio@opendeusto.es", "password_nacho", "XXXX-XXXX-XXXX-XXXX"));
 
 
  return usuarios;
@@ -40,13 +42,22 @@ public class UsuarioResource {
      //DBManager.getInstance().agregarUsuarioGestionPelis(usuario);
      System.out.println("insertando usuario...");
      DBManager.getInstance().store(usuario);
+    // DBManager.getInstance().agregarUsuarioGestionPelis(usuario);
+     
+    
+     
+     System.out.println(DBManager.getInstance().getUsuario(usuario.getNombreUsuario().toString()));
+     
+     //System.out.println(DBManager.getInstance().getUsuario("myketowers"));
   
  }
 
  @DELETE
- @Path("/{code}")
- public Response deleteUser(@PathParam("code") int code) {
-     if (code == 10) {
+ @Path("/{nombreUsuario}")
+ public Response deleteUser(@PathParam("nombreUsuario") String username) {
+	 
+	 
+     if (username  == DBManager.getInstance().getUsuario(username).getNombreUsuario() ) {
          System.out.println("Deleting user...");
          return Response.status(Response.Status.OK).build();
      } else {
