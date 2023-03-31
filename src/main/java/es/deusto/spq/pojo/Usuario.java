@@ -29,6 +29,7 @@ public class Usuario {
 	
 	public Usuario() {
 		super();
+		//this.id = ++idd;
 		this.nombreUsuario = "";
 		this.email = "";
 		this.password = "";
