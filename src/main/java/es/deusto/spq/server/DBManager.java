@@ -123,7 +123,7 @@ public class DBManager {
 		DBManager.getInstance().deleteObjectFromDB(usuario);
 	}
 	
-	public void agregarUsuarioGestionPelis(Usuario u) {
+	/*public void agregarUsuarioGestionPelis(Usuario u) {
 		PreparedStatement preparedStatement = null;
 
 	        try {
@@ -150,6 +150,7 @@ public class DBManager {
 	            System.out.println(e);
 	        }
 	}
+	*/
 	
 	public void inicializarDatos() {
 		System.out.println(" * Inicializando base de datos");
