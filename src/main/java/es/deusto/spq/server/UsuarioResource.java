@@ -1,5 +1,10 @@
 package es.deusto.spq.server;
 
+import javax.jdo.JDOHelper;
+import javax.jdo.PersistenceManager;
+import javax.jdo.PersistenceManagerFactory;
+import javax.jdo.Query;
+import javax.transaction.Transaction;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -10,6 +15,8 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
+import org.apache.log4j.Logger;
+
 import java.util.List;
 import java.util.ArrayList;
 import es.deusto.spq.pojo.Usuario;
@@ -17,6 +24,8 @@ import es.deusto.spq.pojo.Usuario;
 
 @Path("/usuarios")
 public class UsuarioResource {
+	
+
 	
  @GET
  @Produces(MediaType.APPLICATION_JSON)
@@ -36,6 +45,7 @@ public class UsuarioResource {
  }
  
  @POST
+ //@Path("reg")
  @Consumes(MediaType.APPLICATION_JSON)
  public void addUsuario(Usuario usuario) {
      System.out.println("Received new user: " + usuario);
@@ -57,12 +67,18 @@ public class UsuarioResource {
  public Response deleteUser(@PathParam("nombreUsuario") String username) {
 	 
 	 
-     if (username  == DBManager.getInstance().getUsuario(username).getNombreUsuario() ) {
-         System.out.println("Deleting user...");
+     if (DBManager.getInstance().getUsuario(username).getNombreUsuario() != null) {
+    	
+         System.out.println("Deleting user..." + DBManager.getInstance().getUsuario(username));
+       
+       //  DBManager.getInstance().delete(DBManager.getInstance().getUsuario(username));
+         DBManager.getInstance().borrarUsuario(DBManager.getInstance().getUsuario(username));
          return Response.status(Response.Status.OK).build();
      } else {
          return Response.status(Response.Status.NOT_FOUND).build();
      }
  }
+ 
+ 
 }
 

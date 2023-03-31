@@ -1,8 +1,10 @@
 package es.deusto.spq.pojo;
 
+import javax.jdo.annotations.PersistenceAware;
 import javax.jdo.annotations.PersistenceCapable;
 
 @PersistenceCapable
+@PersistenceAware
 public class Usuario {
 	public static int idd = 0;
 	
@@ -11,10 +13,9 @@ public class Usuario {
 	private String email;
 	private String password;
 	private String tarjeta;
-	private boolean Admin;
+	private boolean admin;
 	
 	
-
 	
 	public Usuario(String nombreUsuario, String email, String password, String tarjeta, boolean admin) {
 		super();
@@ -23,7 +24,7 @@ public class Usuario {
 		this.email = email;
 		this.password = password;
 		this.tarjeta = tarjeta;
-		Admin = admin;
+		this.admin = admin;
 	}
 	
 	public Usuario() {
@@ -32,7 +33,7 @@ public class Usuario {
 		this.email = "";
 		this.password = "";
 		this.tarjeta = "";
-		Admin = false;
+		this.admin = false;
 	}
 
 	public int getId() {
@@ -75,17 +76,17 @@ public class Usuario {
 		this.tarjeta = tarjeta;
 	}
 	public boolean isAdmin() {
-		return Admin;
+		return admin;
 	}
 
 	public void setAdmin(boolean admin) {
-		Admin = admin;
+		this.admin = admin;
 	}
 
 	@Override
 	public String toString() {
 		return "Usuario [id=" + id + ", nombreUsuario=" + nombreUsuario + ", email=" + email
-				 + ", password=" + password + ", tarjeta=" + tarjeta +",Admin = "+ Admin+  "]";
+				 + ", password=" + password + ", tarjeta=" + tarjeta +", admin = "+ admin+  "]";
 	}
 	
 	

@@ -40,7 +40,7 @@ public class RemoteFacade  {
 	@POST
 	@Path("/loginGestionPelis")
 	@Consumes(MediaType.APPLICATION_JSON)
-	public Response loginPolideportivo(Usuario usuario) {
+	public Response loginGestionPelis(Usuario usuario) {
 		Usuario user = dbmanager.getUsuario(usuario.getEmail());
 		if(user!= null && user.getPassword().equals(usuario.getPassword())) {
 			if(user.isAdmin()) {

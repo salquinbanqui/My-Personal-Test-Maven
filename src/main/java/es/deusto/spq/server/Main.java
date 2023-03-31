@@ -38,6 +38,7 @@ public class Main {
      */
     public static void main(String[] args) throws IOException {
     	//DBManager.getInstance().deleteObjectFromDB("*");
+    	DBManager.getInstance().borrarUsuarios();
     	DBManager.getInstance().inicializarDatos();;
     	
     	

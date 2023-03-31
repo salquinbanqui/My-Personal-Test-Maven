@@ -29,9 +29,10 @@ import java.util.List;
 
 import es.deusto.spq.pojo.Usuario;
 import javax.swing.JLabel;
-import javax.swing.JRadioButton;
+import java.awt.Component;
+import javax.swing.Box;
 
-public class ClientApp extends JFrame {
+public class VentanaRegistro extends JFrame {
 
     /**
      *
@@ -40,7 +41,7 @@ public class ClientApp extends JFrame {
 
     private Client client;
 
-    public ClientApp() {
+    public VentanaRegistro() {
         client = ClientBuilder.newClient();
 
         final WebTarget appTarget = client.target("http://localhost:8080/webapi");
@@ -49,22 +50,22 @@ public class ClientApp extends JFrame {
         setSize(904, 561);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
-        JButton getUsersButton = new JButton("Get Users");
-        JPanel buttonsPanel = new JPanel();
+  //    JButton getUsersButton = new JButton("Get Users");
+  //	JPanel buttonsPanel = new JPanel();
 
-        JButton deleteUserButton = new JButton("Delete User");
+  //   	JButton deleteUserButton = new JButton("Delete User");
 
-        buttonsPanel.add(getUsersButton);
-        buttonsPanel.add(deleteUserButton);
-        getContentPane().add(buttonsPanel, BorderLayout.SOUTH);
+ //       buttonsPanel.add(getUsersButton);
+   //     buttonsPanel.add(deleteUserButton);
+  //      getContentPane().add(buttonsPanel, BorderLayout.SOUTH);
 
-        final DefaultListModel<Usuario> userListModel = new DefaultListModel<>();
-        JList<Usuario> userList = new JList<>(userListModel);
+ //       final DefaultListModel<Usuario> userListModel = new DefaultListModel<>();
+  //      JList<Usuario> userList = new JList<>(userListModel);
 
-        JScrollPane listScrollPane = new JScrollPane(userList);
-        getContentPane().add(listScrollPane, BorderLayout.WEST);
+    //    JScrollPane listScrollPane = new JScrollPane(userList);
+     //   getContentPane().add(listScrollPane, BorderLayout.WEST);
 
-        getUsersButton.addActionListener(new ActionListener() {
+    /*    getUsersButton.addActionListener(new ActionListener() {
 
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -81,6 +82,8 @@ public class ClientApp extends JFrame {
             }
             
         });
+        
+        */
 
         JPanel rightPanel = new JPanel();
         getContentPane().add(rightPanel);
@@ -94,7 +97,7 @@ public class ClientApp extends JFrame {
         final JTextField passwordTextField = new JTextField("", 10);
         passwordTextField.setBounds(142, 182, 130, 26);
         final JTextField cardTextField = new JTextField("", 10);
-        cardTextField.setBounds(142, 248, 130, 26);
+        cardTextField.setBounds(142, 282, 130, 26);
         
               //  final JTextField codeTextField = new JTextField("", 10);
                 final JTextField usernameTextField = new JTextField("", 10);
@@ -121,16 +124,12 @@ public class ClientApp extends JFrame {
         rightPanel.add(lblPassword);
         
         JLabel lblNTarjeta = new JLabel("Nº Tarjeta:");
-        lblNTarjeta.setBounds(55, 253, 100, 16);
+        lblNTarjeta.setBounds(55, 287, 100, 16);
         rightPanel.add(lblNTarjeta);
         
-        JLabel lblNewLabel_1 = new JLabel("Admin:");
-        lblNewLabel_1.setBounds(55, 307, 61, 16);
+        JLabel lblNewLabel_1 = new JLabel("Confirm password:");
+        lblNewLabel_1.setBounds(55, 233, 149, 16);
         rightPanel.add(lblNewLabel_1);
-        
-        JRadioButton rdbtnNewRadioButton = new JRadioButton("is admin");
-        rdbtnNewRadioButton.setBounds(131, 303, 141, 23);
-        rightPanel.add(rdbtnNewRadioButton);
         
         
 
@@ -139,24 +138,19 @@ public class ClientApp extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
             	
-            	Usuario newUser = new Usuario(usernameTextField.getText(), emailTextField.getText(), passwordTextField.getText(), cardTextField.getText(), rdbtnNewRadioButton.isSelected());
+            	Usuario newUser = new Usuario(usernameTextField.getText(), emailTextField.getText(), passwordTextField.getText(), cardTextField.getText(), false);
                 usersTarget.request(MediaType.APPLICATION_JSON).post(Entity.entity(newUser, MediaType.APPLICATION_JSON));
             }
             
            
         });
 
-        deleteUserButton.addActionListener(new ActionListener() {
+    /*    deleteUserButton.addActionListener(new ActionListener() {
         	
             @Override
             public void actionPerformed(ActionEvent e) {
-                WebTarget deleteTarget = usersTarget.path(userList.getSelectedValue().getNombreUsuario());
+                WebTarget deleteTarget = usersTarget.path(usernameTextField.getText());
                 Response response = deleteTarget.request().delete();
-                
-                System.out.println(userList.getSelectedValue().getNombreUsuario());
-                
-               // WebTarget.class.
-                
                 if (response.getStatus() == Status.OK.getStatusCode()) {
                     JOptionPane.showMessageDialog(ClientApp.this, "User correctly deleted", "Message", JOptionPane.INFORMATION_MESSAGE);
                 } else {
@@ -165,6 +159,8 @@ public class ClientApp extends JFrame {
             }
 
         });
+        
+        */
 
         setVisible(true);
     }

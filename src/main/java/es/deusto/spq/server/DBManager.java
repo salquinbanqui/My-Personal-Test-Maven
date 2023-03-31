@@ -129,8 +129,8 @@ public class DBManager {
 	        try {
 	           
 	        	//for (Usuario u : usuarios) {
-	        		String query = " INSERT INTO USUARIO (USERNAME, EMAIL, PASSWORD, CARD)"
-		                    + " VALUES (?, ?, ?, ?)";
+	        		String query = " INSERT INTO USUARIO (USERNAME, EMAIL, PASSWORD, CARD, ADMIN)"
+		                    + " VALUES (?, ?, ?, ?, ?)";
 
 		            preparedStatement = conn.prepareStatement(query);
 
@@ -138,6 +138,7 @@ public class DBManager {
 		            preparedStatement.setString(2, u.getEmail());
 		            preparedStatement.setString(3, u.getPassword());
 		            preparedStatement.setString(4, u.getTarjeta());
+		            preparedStatement.setBoolean(5, false);
 		            preparedStatement.execute();
 
 		            System.out.println("Usuario agregado correctamente");
@@ -175,8 +176,7 @@ public class DBManager {
 			// store(p3);
 			// store(p4);
 			// store(p5);
-	
-			 
+	 
 		} catch (Exception ex) {
 			// TODO: handle exception
 			System.out.println(" $ Error inicializando los datos: " + ex.getMessage());
@@ -187,7 +187,7 @@ public class DBManager {
 	public List<Usuario> getUsuarios() {
 		List<Usuario> usuarios = new ArrayList<Usuario>();
 		PersistenceManager pm = pmf.getPersistenceManager();
-		pm.getFetchPlan().setMaxFetchDepth(4);
+		pm.getFetchPlan().setMaxFetchDepth(5);
 		Transaction tx = pm.currentTransaction();
 
 		try {
@@ -214,6 +214,9 @@ public class DBManager {
 		return usuarios;
 	}
 //mirad este metodo ?¿
+
+	
+/*	
 	public Response borrarUsuario(Usuario usuario) {
 		WebTarget webTarget1 = webTarget.path("server/borrarUsuario");	
 		Entity<Usuario> entity = Entity.entity(usuario, MediaType.APPLICATION_JSON);
@@ -221,7 +224,59 @@ public class DBManager {
 		return response;
 	
 	}
+	*/
+	
+	
+	public void borrarUsuario(Usuario usuario) {
+		PersistenceManager pm = pmf.getPersistenceManager();
+		Transaction tx = pm.currentTransaction();
+		try {
+			tx.begin();
+			Query<?> query = pm.newQuery("SELECT FROM " + Usuario.class.getName() + " WHERE nombreUsuario == '" + usuario.getNombreUsuario() + "'");
+			System.out.println(" * '" + query.deletePersistentAll() + "' usuario borrado de la DB.");
+			tx.commit();
+		} catch (Exception ex) {
+			System.out.println(" $ Error querying a Reserva: " + ex.getMessage());
+			ex.printStackTrace();
+		} finally {
+			if (tx != null && tx.isActive()) {
+				tx.rollback();
+			}
+			if (pm != null && !pm.isClosed()) {
+				pm.close();
+			}
+		}
+	}
+	
+	
+	public void borrarUsuarios() {
+		List<Usuario> usuarios = new ArrayList<Usuario>();
+		PersistenceManager pm = pmf.getPersistenceManager();
+		pm.getFetchPlan().setMaxFetchDepth(4);
+		Transaction tx = pm.currentTransaction();
+
+		try {
+
+			tx.begin();
+
+			Extent<Usuario> extent = pm.getExtent(Usuario.class, true);
+
+			for (Usuario usuario : extent) {
+				pm.deletePersistent(usuario);
+			}
+
+			tx.commit();
+		} catch (Exception ex) {
+			System.out.println("  $ Error retrieving all the Categories: " + ex.getMessage());
+		} finally {
+			if (tx != null && tx.isActive()) {
+				tx.rollback();
+			}
+
+			pm.close();
+		}
 	
 	
 	
+}
 }
