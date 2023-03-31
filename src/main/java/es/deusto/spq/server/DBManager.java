@@ -138,7 +138,7 @@ public class DBManager {
 		            preparedStatement.setString(2, u.getEmail());
 		            preparedStatement.setString(3, u.getPassword());
 		            preparedStatement.setString(4, u.getTarjeta());
-		            preparedStatement.setBoolean(5, false);
+		            preparedStatement.setBoolean(5, u.isAdmin());
 		            preparedStatement.execute();
 
 		            System.out.println("Usuario agregado correctamente");
