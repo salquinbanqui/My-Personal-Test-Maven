@@ -153,13 +153,13 @@ public class ClientApp extends JFrame {
             	
             	WebTarget userRegTarget = userTarget.path("reg");
 				List<String> usuarioL = new ArrayList<>(); 
-				usuarioL.add(usernameTextField.getText());
-				usuarioL.add(emailTextField.getText());
-				usuarioL.add(passwordTextField.getText());
-				usuarioL.add(cardTextField.getText());
-				usuarioL.add((String)rdbtnNewRadioButton.getSelectedObjects().toString());
+				usuarioL.add(newUser.getNombreUsuario());
+				usuarioL.add(newUser.getEmail());
+				usuarioL.add(newUser.getPassword());
+				usuarioL.add(newUser.getTarjeta());
+				usuarioL.add(newUser.getAdmin());
 				
-				userRegTarget.request().post(Entity.entity(usuarioL, MediaType.APPLICATION_JSON));
+				userRegTarget.request().post(Entity.entity(newUser, MediaType.APPLICATION_JSON));
 				
             	//userTarget.request().post(Entity.entity(newUser, MediaType.APPLICATION_JSON));
             }

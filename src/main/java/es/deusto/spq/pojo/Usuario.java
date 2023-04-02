@@ -27,6 +27,8 @@ public class Usuario {
 		this.admin = admin;
 	}
 	
+	
+	
 	public Usuario() {
 		super();
 		this.id = idd;
@@ -83,6 +85,15 @@ public class Usuario {
 	public void setAdmin(boolean admin) {
 		this.admin = admin;
 	}
+	
+	public String getAdmin() {
+		if(this.isAdmin()) {
+			return "true";
+		}else {
+			return "false";
+		}
+	}
+
 
 	@Override
 	public String toString() {

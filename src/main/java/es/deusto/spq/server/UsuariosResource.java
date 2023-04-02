@@ -22,13 +22,13 @@ import java.util.ArrayList;
 import es.deusto.spq.pojo.Usuario;
 
 
-@Path("/usuarios")
+@Path("usuarios")
 public class UsuariosResource {
 	private final static Logger LOGGER = Logger.getLogger(Logger.class);
 	
 	
  @GET
- @Path("/all")
+ @Path("all")
  @Produces(MediaType.APPLICATION_JSON)
  public List<Usuario> getUsuarios() {
  // This data could be retrieved from a database
@@ -80,19 +80,20 @@ public class UsuariosResource {
  @POST
  @Path("reg")
  @Consumes(MediaType.APPLICATION_JSON)
- public void addUsuario(List<String> usuarioL) {
+ @Produces(MediaType.APPLICATION_JSON)
+ public Response addUsuario(List<String> usuarioL) {
 	 	String nick = usuarioL.get(0);
 		String email = usuarioL.get(1);
 		String contraseña = usuarioL.get(2);
 		String tarjeta = usuarioL.get(3);
-		//String admin = usuarioL.get(4).toString();
+		String admin = usuarioL.get(4);
 		
 		PersistenceManagerFactory pmf = JDOHelper.getPersistenceManagerFactory("datanucleus.properties");
 		PersistenceManager pm = pmf.getPersistenceManager();
 		Transaction tx = pm.currentTransaction();
 		try {
 			tx.begin();
-			Usuario usuario1 = new Usuario(nick, contraseña,email, tarjeta, true);
+			Usuario usuario1 = new Usuario(nick, contraseña,email, tarjeta, admin.contains("true"));
 			pm.makePersistent(usuario1);
 			tx.commit();
 		} finally {
@@ -101,8 +102,11 @@ public class UsuariosResource {
 			}
 			pm.close();
 		}
+		return Response.ok(new Usuario()).build();
   
  }
+ 
+
 
  @DELETE
  @Path("/{nombreUsuario}")
