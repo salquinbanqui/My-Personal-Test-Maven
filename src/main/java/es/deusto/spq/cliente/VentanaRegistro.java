@@ -1,36 +1,20 @@
 package es.deusto.spq.cliente;
 
-import static javax.swing.JOptionPane.ERROR_MESSAGE;
-
-import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-import javax.swing.JScrollPane;
 import javax.swing.JTextField;
-import javax.swing.JList;
-import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
-import javax.ws.rs.ProcessingException;
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
 import javax.ws.rs.client.Entity;
 import javax.ws.rs.client.WebTarget;
-import javax.ws.rs.core.GenericType;
 import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.Response;
-import javax.ws.rs.core.Response.Status;
-
-import java.util.List;
-
 import es.deusto.spq.pojo.Usuario;
 import javax.swing.JLabel;
-import java.awt.Component;
-import javax.swing.Box;
 
 public class VentanaRegistro extends JFrame {
 

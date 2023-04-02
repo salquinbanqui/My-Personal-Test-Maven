@@ -2,8 +2,6 @@ package es.deusto.spq.cliente;
 
 import java.util.List;
 
-import javax.ws.rs.core.Response;
-
 public class Controller {
 	
 public ServiceLocator serviceLocator;
