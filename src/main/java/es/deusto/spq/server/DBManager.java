@@ -11,6 +11,8 @@ import javax.jdo.PersistenceManager;
 import javax.jdo.PersistenceManagerFactory;
 import javax.jdo.Query;
 import javax.jdo.Transaction;
+import javax.ws.rs.POST;
+import javax.ws.rs.Path;
 import javax.ws.rs.client.Entity;
 import javax.ws.rs.client.WebTarget;
 import javax.ws.rs.core.MediaType;
@@ -185,6 +187,43 @@ public class DBManager {
 		}
 	}
 	
+	 @POST
+	 @Path("/login")
+	 public Response loginUsuario(Usuario usuario) {
+		 PersistenceManager pm = pmf.getPersistenceManager();
+    	 pm.getFetchPlan().setMaxFetchDepth(4);
+ 		 Transaction tx = pm.currentTransaction();
+	     try
+	     {
+	         tx.begin();
+	         System.out.println("Checking whether the user already exits or not: '{}'" + usuario.getNombreUsuario());
+	         Usuario user = null;
+	         try {
+	             user = pm.getObjectById(Usuario.class, usuario.getNombreUsuario());
+	         } catch (javax.jdo.JDOObjectNotFoundException jonfe) {
+	             System.out.println("Exception launched: {}" + jonfe.getMessage());
+	         }
+	         System.out.println("User: {}" + user);
+	         if (user != null) {
+	             if(!user.getPassword().equals(usuario.getPassword())) {
+	                 return Response.serverError().build();
+	             }
+	         } else {
+	             return Response.serverError().build();
+	         }
+	         tx.commit();
+	         return Response.ok().build();
+	     }
+	     finally
+	     {
+	         if (tx.isActive())
+	         {
+	             tx.rollback();
+	         }
+
+	     }
+	 }
+	
 	public List<Usuario> getUsuarios() {
 		List<Usuario> usuarios = new ArrayList<Usuario>();
 		PersistenceManager pm = pmf.getPersistenceManager();
@@ -276,6 +315,7 @@ public class DBManager {
 
 			pm.close();
 		}
+	
 	
 	
 	

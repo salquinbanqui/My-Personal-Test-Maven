@@ -11,10 +11,13 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
+import es.deusto.spq.cliente.Controller;
+
 
 public class VentanaLogin extends JFrame {
 	
@@ -30,6 +33,7 @@ public class VentanaLogin extends JFrame {
 		private JPasswordField textoContrasenya = new JPasswordField();
 		private JButton botonIniciarSesion = new JButton();
 		private JButton botonRegistrarse = new JButton();
+		private Controller controller = new Controller(null);
 		
 
 		public  VentanaLogin() {
@@ -47,7 +51,7 @@ public class VentanaLogin extends JFrame {
 
 			labelUsuario.setText("Usuario:");
 			labelUsuario.setOpaque(true);
-			labelUsuario.setBounds(78, 124, 91, 20);
+			labelUsuario.setBounds(86, 122, 91, 20);
 			labelUsuario.setFont(new Font("Perpetua", Font.BOLD, 16));
 			contentpane.add(labelUsuario, BorderLayout.SOUTH);
 
@@ -55,7 +59,7 @@ public class VentanaLogin extends JFrame {
 			contentpane.add(textoUsuario);
 
 			labelContrasenya.setText("Contraseña:");
-			labelContrasenya.setBounds(65, 175, 89, 20);
+			labelContrasenya.setBounds(64, 175, 105, 20);
 			labelContrasenya.setOpaque(true);
 			labelContrasenya.setFont(new Font("Perpetua", Font.BOLD, 16));
 			contentpane.add(labelContrasenya);
@@ -80,7 +84,7 @@ public class VentanaLogin extends JFrame {
 
 				@Override
 				public void actionPerformed(ActionEvent e) {
-					// TODO Auto-generated method stub
+					controller.logUsuario(textoUsuario.getText(), textoContrasenya.getText());
 					
 				}
 				
@@ -97,7 +101,7 @@ public class VentanaLogin extends JFrame {
 				}
 			});
 			setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-			setSize(440, 355);
+			setSize(542, 355);
 			setVisible(true);
 			setTitle("Pelis PSC");
 
