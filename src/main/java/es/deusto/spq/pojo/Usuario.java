@@ -6,9 +6,9 @@ import javax.jdo.annotations.PersistenceCapable;
 @PersistenceCapable
 @PersistenceAware
 public class Usuario {
-	public static int idd = 0;
+	private static int idd = 0;
 	
-	public int id;
+	private int id;
 	private String nombreUsuario;
 	private String email;
 	private String password;
@@ -29,7 +29,7 @@ public class Usuario {
 	
 	public Usuario() {
 		super();
-		//this.id = ++idd;
+		this.id = idd;
 		this.nombreUsuario = "";
 		this.email = "";
 		this.password = "";

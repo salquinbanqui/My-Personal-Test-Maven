@@ -25,9 +25,12 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import es.deusto.spq.pojo.Usuario;
+import es.deusto.spq.server.DBManager;
+
 import javax.swing.JLabel;
 import javax.swing.JRadioButton;
 
@@ -44,7 +47,9 @@ public class ClientApp extends JFrame {
         client = ClientBuilder.newClient();
 
         final WebTarget appTarget = client.target("http://localhost:8080/webapi");
-        final WebTarget usersTarget = appTarget.path("usuarios");
+        final WebTarget userTarget = appTarget.path("usuarios");
+        final WebTarget userAllTarget = userTarget.path("all");
+        final WebTarget userRegTarget = userTarget.path("reg");
 
         setSize(904, 561);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -63,25 +68,7 @@ public class ClientApp extends JFrame {
 
         JScrollPane listScrollPane = new JScrollPane(userList);
         getContentPane().add(listScrollPane, BorderLayout.WEST);
-
-        getUsersButton.addActionListener(new ActionListener() {
-
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                try {
-                    GenericType<List<Usuario>> genericType = new GenericType<List<Usuario>>() {};
-                    List<Usuario> usuarios = usersTarget.request(MediaType.APPLICATION_JSON).get(genericType);
-                    userListModel.clear();
-                    for (Usuario user : usuarios) {
-                        userListModel.addElement(user);
-                    }
-                } catch (ProcessingException ex) {
-                    JOptionPane.showMessageDialog(ClientApp.this, "Error connecting with server", "Error message", ERROR_MESSAGE);
-                }
-            }
-            
-        });
-
+        
         JPanel rightPanel = new JPanel();
         getContentPane().add(rightPanel);
         rightPanel.setLayout(null);
@@ -103,7 +90,7 @@ public class ClientApp extends JFrame {
 
 
       //  rightPanel.add(codeTextField);
-                 rightPanel.add(usernameTextField);
+        rightPanel.add(usernameTextField);
         rightPanel.add(emailTextField);
         rightPanel.add(passwordTextField);
         
@@ -133,14 +120,48 @@ public class ClientApp extends JFrame {
         rightPanel.add(rdbtnNewRadioButton);
         
         
+        
 
+        getUsersButton.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                try {
+                    GenericType<List<Usuario>> genericType = new GenericType<List<Usuario>>() {};
+                    List<Usuario> usuarios = userAllTarget.request(MediaType.APPLICATION_JSON).get(genericType);
+                    userListModel.clear();
+                    for (Usuario user : usuarios) {
+                        userListModel.addElement(user);
+                    }
+                } catch (ProcessingException ex) {
+                    JOptionPane.showMessageDialog(ClientApp.this, "Error connecting with server", "Error message", ERROR_MESSAGE);
+                }
+            }
+            
+        });
+
+       
+        
+       
         addUserButton.addActionListener(new ActionListener() {
             
             @Override
             public void actionPerformed(ActionEvent e) {
-            	
+            	//DBManager.getInstance();
             	Usuario newUser = new Usuario(usernameTextField.getText(), emailTextField.getText(), passwordTextField.getText(), cardTextField.getText(), rdbtnNewRadioButton.isSelected());
-                usersTarget.request(MediaType.APPLICATION_JSON).post(Entity.entity(newUser, MediaType.APPLICATION_JSON));
+            	userListModel.addElement(newUser);
+            	
+            	WebTarget userRegTarget = userTarget.path("reg");
+				List<String> usuarioL = new ArrayList<>(); 
+				usuarioL.add(usernameTextField.getText());
+				usuarioL.add(emailTextField.getText());
+				usuarioL.add(passwordTextField.getText());
+				usuarioL.add(cardTextField.getText());
+				usuarioL.add((String)rdbtnNewRadioButton.getSelectedObjects().toString());
+				
+				userRegTarget.request().post(Entity.entity(usuarioL, MediaType.APPLICATION_JSON));
+				
+            	//userTarget.request().post(Entity.entity(newUser, MediaType.APPLICATION_JSON));
             }
             
            
@@ -150,18 +171,23 @@ public class ClientApp extends JFrame {
         	
             @Override
             public void actionPerformed(ActionEvent e) {
-                WebTarget deleteTarget = usersTarget.path(userList.getSelectedValue().getNombreUsuario());
+                WebTarget deleteTarget = userTarget.path(userList.getSelectedValue().getNombreUsuario());
                 Response response = deleteTarget.request().delete();
                 
                 System.out.println(userList.getSelectedValue().getNombreUsuario());
                 
                // WebTarget.class.
+               
                 
                 if (response.getStatus() == Status.OK.getStatusCode()) {
                     JOptionPane.showMessageDialog(ClientApp.this, "User correctly deleted", "Message", JOptionPane.INFORMATION_MESSAGE);
+                    
                 } else {
                     JOptionPane.showMessageDialog(ClientApp.this, "Could not delete user", "Message", JOptionPane.ERROR_MESSAGE);
                 }
+               
+                //AUTO-REPAINT DE LA LISTA
+               
             }
 
         });
