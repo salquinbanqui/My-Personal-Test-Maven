@@ -18,19 +18,21 @@ Para la ejecución de PSC Peliculas es necesario tener los siguientes programas 
 Para ejecutar el proyecto hay que ejecutar el cliente y el servidor.
 
 1-Para ejecutar el servidor los pasos son:
- * "mvn clean"
- * "mvn compile"
+ * mvn clean
+ * mvn compile
 
 ***
 Si es la primera vez que se hace este proceso se haría:
- * "mvn datanucleus:enhance"
- * "mvn datanucleus:schema-create"
+ * mvn datanucleus:enhance
+ * mvn datanucleus:schema-create
 ***
 
- * "mvn exec:java-PServer"
+ * mvn jetty:run
+
+ * mvn exec:java-PServer
 
 2-Para ejecutar el cliente:
-* "mvn exec:java-PClient"
+* mvn exec:java-PClient
 
 
 
