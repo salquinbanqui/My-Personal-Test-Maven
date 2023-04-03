@@ -81,7 +81,7 @@ public class UsuariosResource {
  @Path("reg")
  @Consumes(MediaType.APPLICATION_JSON)
  @Produces(MediaType.APPLICATION_JSON)
- public Response addUsuario(List<String> usuarioL) {
+ public Response addUsuario( List<String> usuarioL) {
 	 	String nick = usuarioL.get(0);
 		String email = usuarioL.get(1);
 		String contraseña = usuarioL.get(2);
@@ -93,7 +93,7 @@ public class UsuariosResource {
 		Transaction tx = pm.currentTransaction();
 		try {
 			tx.begin();
-			Usuario usuario1 = new Usuario(nick, contraseña,email, tarjeta, admin.contains("true"));
+			Usuario usuario1 = new Usuario(nick, contraseña,email, tarjeta, Boolean.parseBoolean(admin));
 			pm.makePersistent(usuario1);
 			tx.commit();
 		} finally {
