@@ -38,10 +38,10 @@ public class DBManager {
 	 */
 
 	public static DBManager getInstance() {
-//		if (instance == null) {
+		if (instance == null) {
 		instance = new DBManager();
 //			System.out.println("Nuevo DBManager");
-//		}
+		}
 
 		return instance;
 	}
