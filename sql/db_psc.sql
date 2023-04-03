@@ -7,14 +7,14 @@
 #	PRIMARY KEY("ID" AUTOINCREMENT)
 #);
 
-/* DELETE 'gestion_cine' database*/
-DROP SCHEMA IF EXISTS gestion_cine;
+/* DELETE 'db_psc' database*/
+DROP SCHEMA IF EXISTS db_psc;
 /* DELETE USER 'sqp' AT LOCAL SERVER*/
 DROP USER IF EXISTS 'spq'@'localhost';
 
-/* CREATE 'gestion_cine' DATABASE */
-CREATE SCHEMA gestion_cine;
+/* CREATE 'db_psc' DATABASE */
+CREATE SCHEMA db_psc;
 /* CREATE THE USER 'spq' AT LOCAL SERVER WITH PASSWORD '1234' */
 CREATE USER IF NOT EXISTS 'spq'@'localhost' IDENTIFIED BY '1234';
 
-GRANT ALL ON gestion_cine.* TO 'spq'@'localhost';
+GRANT ALL ON db_psc.* TO 'spq'@'localhost';
