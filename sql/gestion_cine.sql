@@ -1,0 +1,20 @@
+#CREATE TABLE ""."USUARIOS" (
+#	"ID"	INTEGER,
+#	"USERNAME"	TEXT NOT NULL UNIQUE,
+#	"EMAIL"	TEXT,
+#	"PASSWORD"	TEXT,
+#	"CARD"	TEXT,
+#	PRIMARY KEY("ID" AUTOINCREMENT)
+#);
+
+/* DELETE 'gestion_cine' database*/
+DROP SCHEMA IF EXISTS gestion_cine;
+/* DELETE USER 'sqp' AT LOCAL SERVER*/
+DROP USER IF EXISTS 'spq'@'localhost';
+
+/* CREATE 'gestion_cine' DATABASE */
+CREATE SCHEMA gestion_cine;
+/* CREATE THE USER 'spq' AT LOCAL SERVER WITH PASSWORD '1234' */
+CREATE USER IF NOT EXISTS 'spq'@'localhost' IDENTIFIED BY '1234';
+
+GRANT ALL ON gestion_cine.* TO 'spq'@'localhost';
