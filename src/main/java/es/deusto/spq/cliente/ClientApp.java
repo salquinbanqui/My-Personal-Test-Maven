@@ -159,9 +159,9 @@ public class ClientApp extends JFrame {
 				usuarioL.add(newUser.getTarjeta());
 				usuarioL.add(newUser.getAdmin());
 				
-				userRegTarget.request().post(Entity.entity(newUser, MediaType.APPLICATION_JSON));
+				//userRegTarget.request().post(Entity.entity(newUser, MediaType.APPLICATION_JSON));
 				
-            	//userTarget.request().post(Entity.entity(newUser, MediaType.APPLICATION_JSON));
+				userRegTarget.request().post(Entity.entity(usuarioL, MediaType.APPLICATION_JSON));
             }
             
            
