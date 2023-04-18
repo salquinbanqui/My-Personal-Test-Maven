@@ -171,7 +171,7 @@ public class ClientApp extends JFrame {
         	
             @Override
             public void actionPerformed(ActionEvent e) {
-                WebTarget deleteTarget = userTarget.path(userList.getSelectedValue().getNombreUsuario());
+                WebTarget deleteTarget = userTarget.path("/{"+userList.getSelectedValue().getNombreUsuario()+"}");
                 Response response = deleteTarget.request().delete();
                 
                 System.out.println(userList.getSelectedValue().getNombreUsuario());

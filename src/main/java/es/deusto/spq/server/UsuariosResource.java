@@ -93,7 +93,7 @@ public class UsuariosResource {
 		Transaction tx = pm.currentTransaction();
 		try {
 			tx.begin();
-			Usuario usuario1 = new Usuario(nick, contraseña,email, tarjeta, Boolean.parseBoolean(admin));
+			Usuario usuario1 = new Usuario(nick, email, contraseña, tarjeta, Boolean.parseBoolean(admin));
 			pm.makePersistent(usuario1);
 			tx.commit();
 		} finally {
