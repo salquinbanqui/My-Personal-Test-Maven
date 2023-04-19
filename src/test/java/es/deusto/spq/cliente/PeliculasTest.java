@@ -45,7 +45,7 @@ public class PeliculasTest {
 	
 	@Test
 	public void testSetFecha() {
-		p.setCategoria("2000");
+		p.setFecha("2000");
 		assertEquals("2000", p.getFecha());
 	}
 	
