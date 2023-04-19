@@ -12,7 +12,7 @@ public class PeliculasTest {
 	private Pelicula p;
 	
 	@Before
-    public void crearusuario() {
+    public void crearPelicula() {
         p = new Pelicula("Titanic","Drama",12,"1997","Pelicula nominada a los Oscar");
     }
 	
@@ -36,6 +36,17 @@ public class PeliculasTest {
 	public void testSetCategoria() {
 		p.setCategoria("Diversion");
 		assertEquals("Diversion", p.getCategoria());
+	}
+	
+	@Test
+	public void testGetFecha() {
+		assertEquals("1997", p.getFecha());
+	}
+	
+	@Test
+	public void testSetFecha() {
+		p.setCategoria("2000");
+		assertEquals("2000", p.getFecha());
 	}
 	
 }
