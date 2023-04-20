@@ -42,7 +42,7 @@ public class UsuariosResource {
 // usuarios.add(new Usuario("markelinho", "mark@opendeusto.es", "password_mark", "XXXX-XXXX-XXXX-XXXX"));
 // usuarios.add(new Usuario("yonan99", "yonander@opendeusto.es", "password_yonan", "XXXX-XXXX-XXXX-XXXX"));
 // usuarios.add(new Usuario("nachete", "ignacio@opendeusto.es", "password_nacho", "XXXX-XXXX-XXXX-XXXX"));
- 	List<Usuario> usuarios = null;
+ 	List<Usuario> usuarios = new ArrayList<Usuario>();
 
 	try {
 		Query<Usuario> q = pm.newQuery(Usuario.class);

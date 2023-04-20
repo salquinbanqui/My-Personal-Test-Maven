@@ -47,7 +47,7 @@ public class ClientApp extends JFrame {
         client = ClientBuilder.newClient();
 
         final WebTarget appTarget = client.target("http://localhost:8080/webapi");
-        final WebTarget userTarget = appTarget.path("usuarios");
+        final WebTarget userTarget = appTarget.path("usuarios/");
         final WebTarget userAllTarget = userTarget.path("all");
         final WebTarget userRegTarget = userTarget.path("reg");
 
@@ -171,9 +171,10 @@ public class ClientApp extends JFrame {
         	
             @Override
             public void actionPerformed(ActionEvent e) {
-                WebTarget deleteTarget = userTarget.path("/{"+userList.getSelectedValue().getNombreUsuario()+"}");
+                WebTarget deleteTarget = userTarget.path(userList.getSelectedValue().getNombreUsuario());
                 Response response = deleteTarget.request().delete();
                 
+               // deleteTarget.request().delete();
                 System.out.println(userList.getSelectedValue().getNombreUsuario());
                 
                // WebTarget.class.
