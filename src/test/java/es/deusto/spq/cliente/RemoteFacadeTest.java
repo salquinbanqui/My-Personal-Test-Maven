@@ -15,7 +15,7 @@ public class RemoteFacadeTest {
 
 	RemoteFacade rf = new RemoteFacade();
 	
-	Usuario u = new Usuario("jose","jose@gmail.com","1234","nº_tarjeta",true);
+	Usuario u = new Usuario("jose","jose@gmail.com","1234","nº_tarjeta",false);
 	
 	@Mock
 	DBManager db;

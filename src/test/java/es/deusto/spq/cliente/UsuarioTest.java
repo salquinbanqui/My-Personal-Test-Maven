@@ -13,7 +13,7 @@ public class UsuarioTest {
 	
 	@Before
     public void crearusuario() {
-        u = new Usuario("jose","jose@gmail.com","1234","n_tarjeta",false);
+        u = new Usuario("jose","jose@gmail.com","1234","nº_tarjeta",false);
     }
 	
 	@Test
