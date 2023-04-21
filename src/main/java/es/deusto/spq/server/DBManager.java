@@ -267,13 +267,14 @@ public class DBManager {
 	*/
 	
 	
-	public void borrarUsuario(Usuario usuario) {
+	public void borrarUsuario(String username) {
 		PersistenceManager pm = pmf.getPersistenceManager();
 		Transaction tx = pm.currentTransaction();
 		try {
 			tx.begin();
-			Query<?> query = pm.newQuery("SELECT FROM " + Usuario.class.getName() + " WHERE nombreUsuario == '" + usuario.getNombreUsuario() + "'");
+			Query<?> query = pm.newQuery("SELECT FROM " + Usuario.class.getName() + " WHERE nombreUsuario == '" + username + "'");
 			System.out.println(" * '" + query.deletePersistentAll() + "' usuario borrado de la DB.");
+			System.out.println(" * '" + username + "' *");
 			tx.commit();
 		} catch (Exception ex) {
 			System.out.println(" $ Error querying a Reserva: " + ex.getMessage());

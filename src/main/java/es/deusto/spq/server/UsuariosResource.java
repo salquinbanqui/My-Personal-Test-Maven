@@ -19,12 +19,18 @@ import org.apache.log4j.Logger;
 
 import java.util.List;
 import java.util.ArrayList;
+import java.util.HashMap;
+
 import es.deusto.spq.pojo.Usuario;
+
 
 
 @Path("usuarios")
 public class UsuariosResource {
 	private final static Logger LOGGER = Logger.getLogger(Logger.class);
+	private Usuario u1;
+	
+	HashMap<String,Usuario> mp = new HashMap<>();
 	
 	
  @GET
@@ -112,18 +118,23 @@ public class UsuariosResource {
  @Path("/{nombreUsuario}")
  public Response deleteUser(@PathParam("nombreUsuario") String username) {
 	 
+//	 u1 = new Usuario();
+//	 u1 = DBManager.getInstance().getUsuario(username).getNombreUsuario();
 	 
      if (DBManager.getInstance().getUsuario(username).getNombreUsuario() != null) {
     	
-         System.out.println("Deleting user..." + DBManager.getInstance().getUsuario(username));
+         System.out.println("Deleting user..." + username);
        
        //  DBManager.getInstance().delete(DBManager.getInstance().getUsuario(username));
-         DBManager.getInstance().borrarUsuario(DBManager.getInstance().getUsuario(username));
+         DBManager.getInstance().borrarUsuario(username);
          return Response.status(Response.Status.OK).build();
      } else {
          return Response.status(Response.Status.NOT_FOUND).build();
      }
  }
+ 
+ 
+ 
  
  
 }

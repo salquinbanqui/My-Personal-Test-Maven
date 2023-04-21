@@ -39,6 +39,8 @@ public class ClientApp extends JFrame {
     /**
      *
      */
+	
+
     private static final long serialVersionUID = 1L;
 
     private Client client;
@@ -47,7 +49,7 @@ public class ClientApp extends JFrame {
         client = ClientBuilder.newClient();
 
         final WebTarget appTarget = client.target("http://localhost:8080/webapi");
-        final WebTarget userTarget = appTarget.path("usuarios/");
+        final WebTarget userTarget = appTarget.path("usuarios");
         final WebTarget userAllTarget = userTarget.path("all");
         final WebTarget userRegTarget = userTarget.path("reg");
 
@@ -172,7 +174,7 @@ public class ClientApp extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 WebTarget deleteTarget = userTarget.path(userList.getSelectedValue().getNombreUsuario());
-                Response response = deleteTarget.request().delete();
+                Response response = deleteTarget.request().buildDelete().invoke();
                 
                // deleteTarget.request().delete();
                 System.out.println(userList.getSelectedValue().getNombreUsuario());
@@ -181,13 +183,18 @@ public class ClientApp extends JFrame {
                
                 
                 if (response.getStatus() == Status.OK.getStatusCode()) {
-                    JOptionPane.showMessageDialog(ClientApp.this, "User correctly deleted", "Message", JOptionPane.INFORMATION_MESSAGE);
+                    JOptionPane.showMessageDialog(ClientApp.this, "User '" + userList.getSelectedValue().getNombreUsuario() + "'" + " correctly deleted", "Message", JOptionPane.INFORMATION_MESSAGE);
+                    userListModel.removeElementAt(userList.getSelectedIndex());
+                    usernameTextField.setText("");
+                    emailTextField.setText("");
+                    passwordTextField.setText("");
+                    cardTextField.setText("");
+                    rdbtnNewRadioButton.setSelected(false);
+                    
                     
                 } else {
-                    JOptionPane.showMessageDialog(ClientApp.this, "Could not delete user", "Message", JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(ClientApp.this, "Could not delete user '" + userList.getSelectedValue().getNombreUsuario() + "'", "Message", JOptionPane.ERROR_MESSAGE);
                 }
-               
-                //AUTO-REPAINT DE LA LISTA
                
             }
 
