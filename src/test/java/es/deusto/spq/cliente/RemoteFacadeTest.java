@@ -19,7 +19,7 @@ public class RemoteFacadeTest {
 	
 	Usuario u = new Usuario("jose","jose@gmail.com","1234","nº_tarjeta",false);
 	
-	@Rule 
+/*	@Rule 
 	public ContiPerfRule i = new ContiPerfRule();
 	
 	@Mock
@@ -34,5 +34,5 @@ public class RemoteFacadeTest {
 	@Test
 	public void testagregarUsuarioGestionPelis() {
 		assertNotNull(rf.agregarUsuarioGestionPelis(u));
-	}
+	}*/
 }

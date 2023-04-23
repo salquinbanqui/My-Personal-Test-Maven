@@ -21,6 +21,7 @@ public class UsuarioTest {
 		assertEquals("jose", u.getNombreUsuario());
 	}
 	
+	
 	@Test
 	public void testSetNombreUsuario() {
 		u.setNombreUsuario("samu");
