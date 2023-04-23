@@ -4,6 +4,8 @@ import static org.junit.Assert.*;
 
 import org.databene.contiperf.PerfTest;
 import org.databene.contiperf.Required;
+import org.databene.contiperf.junit.ContiPerfRule;
+import org.junit.Rule;
 import org.junit.Test;
 import org.mockito.Mock;
 
@@ -17,7 +19,10 @@ public class RemoteFacadeTest {
 	
 	Usuario u = new Usuario("jose","jose@gmail.com","1234","nº_tarjeta",false);
 	
-/*	@Mock
+	@Rule 
+	public ContiPerfRule i = new ContiPerfRule();
+	
+	@Mock
 	DBManager db;
 	
 	@Test
@@ -29,5 +34,5 @@ public class RemoteFacadeTest {
 	@Test
 	public void testagregarUsuarioGestionPelis() {
 		assertNotNull(rf.agregarUsuarioGestionPelis(u));
-	}*/
+	}
 }
