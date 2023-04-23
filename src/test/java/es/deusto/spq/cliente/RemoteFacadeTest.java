@@ -21,18 +21,18 @@ public class RemoteFacadeTest {
 	
 /*	@Rule 
 	public ContiPerfRule i = new ContiPerfRule();
-	
+	*/
 	@Mock
 	DBManager db;
 	
-	@Test
+/*	@Test
 	public void testloginGestionPelis() {
 		assertNotNull(rf.loginGestionPelis(u));
 	}
-
+*/
 	
 	@Test
 	public void testagregarUsuarioGestionPelis() {
 		assertNotNull(rf.agregarUsuarioGestionPelis(u));
-	}*/
+	}
 }
