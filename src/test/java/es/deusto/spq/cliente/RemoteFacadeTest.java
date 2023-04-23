@@ -28,10 +28,10 @@ public class RemoteFacadeTest {
 	public void testloginGestionPelis() {
 		assertNotNull(rf.loginGestionPelis(u));
 	}
-*/
+
 	@Mock
 	DBManager db;
-	
+*/	
 	@Test
 	@PerfTest(invocations = 10, threads =2)
 	@Required(max = 1200, average = 250)
