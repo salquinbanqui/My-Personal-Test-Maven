@@ -13,18 +13,14 @@ jobs:
         with:
           java-version: '17'
           distribution: 'temurin'
-     
- 	- name: clean compile
-        run: mvn --batch-mode --update-snapshots clean compile 
+      - name: Build with Maven
+        run: mvn --batch-mode --update-snapshots package
 	
-	- name: Set up MySQL
-        run: | 
-          sudo /etc/init.d/mysql start
-          mysql -uroot -proot < sql/db_psc.sql
-          mvn --batch-mode --update-snapshots compile 
-          mvn --batch-mode --update-snapshots datanucleus:enhance
-          mvn --batch-mode --update-snapshots datanucleus:schema-create
-          mvn --batch-mode --update-snapshots exec:java -PServer
+	- name: Prepare database for integration tests
+ 	  run: |
+        sudo /etc/init.d/mysql start
+        mysql -uroot -proot < sql/db_psc.sql
+	  mvn --batch-mode --update-snapshots datanucleus:enhance datanucleus:schema-create
 
- 	- name: Build with Maven
-        run: mvn --batch-mode --update-snapshots test
+ 	- name: Build with Maven including integration tests
+        run: mvn --batch-mode --update-snapshots package
