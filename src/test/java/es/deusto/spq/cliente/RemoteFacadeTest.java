@@ -25,14 +25,14 @@ public class RemoteFacadeTest {
 	@Mock
 	DBManager db;
 	
-/*	@Test
+	@Test
 	public void testloginGestionPelis() {
 		assertNotNull(rf.loginGestionPelis(u));
 	}
-*/
-	
+
+/*	
 	@Test
 	public void testagregarUsuarioGestionPelis() {
 		assertNotNull(rf.agregarUsuarioGestionPelis(u));
-	}
+	}*/
 }
