@@ -41,7 +41,8 @@ public class RemoteFacade  {
 	@Path("/loginGestionPelis")
 	@Consumes(MediaType.APPLICATION_JSON)
 	public Response loginGestionPelis(Usuario usuario) {
-		Usuario user = dbmanager.getUsuario(usuario.getEmail());
+		Usuario user = dbmanager.getUsuario(usuario.getNombreUsuario());
+		System.out.println("HOLA " + usuario.getNombreUsuario());
 		if(user!= null && user.getPassword().equals(usuario.getPassword())) {
 			if(user.isAdmin()) {
 				return Response.status(Response.Status.OK).build();

@@ -28,6 +28,7 @@ import javax.ws.rs.core.Response.Status;
 import java.util.ArrayList;
 import java.util.List;
 
+import es.deusto.spq.cliente.gui.VentanaLogin;
 import es.deusto.spq.pojo.Usuario;
 import es.deusto.spq.server.DBManager;
 
@@ -209,6 +210,8 @@ public class ClientApp extends JFrame {
             @Override
             public void run() {
                 new ClientApp();
+                new VentanaLogin();
+                
             }
         });
     }

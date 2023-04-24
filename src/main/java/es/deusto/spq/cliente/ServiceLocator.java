@@ -26,7 +26,7 @@ public class ServiceLocator {
 	
 	public ServiceLocator() {
 		c = ClientBuilder.newClient();
-		wt = c.target(cogerUrl());
+		wt = c.target("http://localhost:8080/webapi");
 	}
 	
 	public static String cogerUrl() {
@@ -67,19 +67,22 @@ public class ServiceLocator {
 	 * @param contraseña de la cuenta del usuario
 	 * @return Devuelve true si todo ha salido correctamente
 	 */
-	public int loginGestionPelis(String email, String password) {
+	public int loginGestionPelis(String nombreUsuario, String password) {
 		WebTarget webTarget1 = wt.path("server/loginGestionPelis");
 		Invocation.Builder invocationBuilder = webTarget1.request(MediaType.APPLICATION_JSON);
 
 		Usuario u = new Usuario();
-		u.setEmail(email);
+		u.setNombreUsuario(nombreUsuario);
 		u.setPassword(password);
 
-		Response response = invocationBuilder.post(Entity.entity(c, MediaType.APPLICATION_JSON));
+		Response response = invocationBuilder.post(Entity.entity(u, MediaType.APPLICATION_JSON));
 		if (response.getStatus() == Status.OK.getStatusCode()) {
+			System.out.println("Login correcto como ADMINISTRADOR");//VISUALIZACION DE ADMINISTRADOR
 			return 2;
+			
 
 		} else if (response.getStatus() == Status.ACCEPTED.getStatusCode()) {
+			System.out.println("Login correcto como USUARIO");//VISUALIZACION DE USUARIO
 			return 1;
 		}
 		return 0;

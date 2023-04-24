@@ -16,6 +16,11 @@ import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
+import javax.ws.rs.client.Client;
+import javax.ws.rs.client.ClientBuilder;
+import javax.ws.rs.client.WebTarget;
+import es.deusto.spq.cliente.ServiceLocator;
+
 import es.deusto.spq.cliente.Controller;
 
 
@@ -33,11 +38,24 @@ public class VentanaLogin extends JFrame {
 		private JPasswordField textoContrasenya = new JPasswordField();
 		private JButton botonIniciarSesion = new JButton();
 		private JButton botonRegistrarse = new JButton();
-		private Controller controller = new Controller(null);
+		ServiceLocator serviceLocator = new ServiceLocator();
+		private Controller controller = new Controller(serviceLocator);
 		
-
+		Client client = ClientBuilder.newClient();
+		final WebTarget appTarget = client.target("http://localhost:8080/webapi");
+		final WebTarget userTarget = appTarget.path("usuarios");
+		final WebTarget userAllTarget = userTarget.path("all");
+		
+		
 		public  VentanaLogin() {
 			
+			
+		//	client = ClientBuilder.newClient();
+			
+		//	final WebTarget appTarget = client.target("http://localhost:8080/webapi");
+		//    final WebTarget userTarget = appTarget.path("usuarios");
+		//    final WebTarget userAllTarget = userTarget.path("all");
+		//    final WebTarget userRegTarget = userTarget.path("reg");
 		
 			contentpane = new JPanel();
 			contentpane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -84,7 +102,7 @@ public class VentanaLogin extends JFrame {
 
 				@Override
 				public void actionPerformed(ActionEvent e) {
-					controller.logUsuario(textoUsuario.getText(), textoContrasenya.getText());
+					controller.loginGestionPelis(textoUsuario.getText(), textoContrasenya.getText());
 					
 				}
 				
