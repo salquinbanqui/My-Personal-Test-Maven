@@ -16,6 +16,7 @@ import javax.ws.rs.core.Response.Status;
 import org.apache.log4j.Logger;
 
 import es.deusto.spq.cliente.gui.VentanaAdmin;
+import es.deusto.spq.pojo.Pelicula;
 import es.deusto.spq.pojo.Usuario;
 
 public class ServiceLocator {
@@ -79,7 +80,7 @@ public class ServiceLocator {
 		Response response = invocationBuilder.post(Entity.entity(u, MediaType.APPLICATION_JSON));
 		if (response.getStatus() == Status.OK.getStatusCode()) {
 			System.out.println("Login correcto como ADMINISTRADOR");//VISUALIZACION DE ADMINISTRADOR
-			VentanaAdmin ventanaAdmin = new VentanaAdmin();
+			VentanaAdmin ventanaAdmin = new VentanaAdmin(c);
 			ventanaAdmin.setVisible(true);
 			return 2;
 			
@@ -93,7 +94,7 @@ public class ServiceLocator {
 	
 	
 	public List<Pelicula> obtenerPeliculas() {
-        WebTarget webTarget4 = wt.path("server/getPeliculas");
+        WebTarget webTarget4 = wt.path("server/obtenerPeliculas");
 		Invocation.Builder invocationBuilder = webTarget4.request(MediaType.APPLICATION_JSON);
 
 		List<Pelicula> instalaciones = new ArrayList<Pelicula>();

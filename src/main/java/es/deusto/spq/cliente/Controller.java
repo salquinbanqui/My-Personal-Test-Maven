@@ -12,6 +12,7 @@ import javax.ws.rs.core.Response.Status;
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
 
+import es.deusto.spq.pojo.Pelicula;
 import es.deusto.spq.pojo.Usuario;
 
 public class Controller {
@@ -28,6 +29,7 @@ private ServiceLocator serviceLocator;
 		return serviceLocator.loginGestionPelis(nombreUsuario, contrasenya);
 	}
 	
+	/*
 	public void logUsuario(String name, String password) {
 		WebTarget webTarget = ClientBuilder.newClient().target("http://localhost:8080/webapi");
 		//WebTarget appTarget = client.target("http://localhost:8080/webapi");
@@ -48,6 +50,8 @@ private ServiceLocator serviceLocator;
         }
     }
 	
+	*/
+
 	public boolean agregarUsuarioGestionPelis(String nombreUsuario, String password, String email, String tarjeta){
 		return serviceLocator.agregarUsuarioGestionPelis(nombreUsuario, email, password, tarjeta);
 	}

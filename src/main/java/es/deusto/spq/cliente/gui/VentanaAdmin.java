@@ -5,6 +5,7 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+import javax.ws.rs.client.Client;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import java.awt.Font;
@@ -25,7 +26,7 @@ public class VentanaAdmin extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					VentanaAdmin frame = new VentanaAdmin();
+					VentanaAdmin frame = new VentanaAdmin(null);
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -37,7 +38,7 @@ public class VentanaAdmin extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public VentanaAdmin() {
+	public VentanaAdmin(Client c) {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();

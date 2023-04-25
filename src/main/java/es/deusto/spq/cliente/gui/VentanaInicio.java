@@ -50,7 +50,7 @@ public class VentanaInicio extends JFrame{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
-				new VentanaModPeliculas();
+				//new VentanaModPeliculas();
 				dispose();
 
 			}
@@ -60,7 +60,7 @@ public class VentanaInicio extends JFrame{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
-				new VentanaTCompra();
+				//new VentanaTCompra();
 				dispose();
 
 			}

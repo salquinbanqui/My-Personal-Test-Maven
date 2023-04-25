@@ -1,17 +1,22 @@
 package es.deusto.spq.pojo;
 
+import javax.jdo.annotations.PersistenceAware;
+import javax.jdo.annotations.PersistenceCapable;
+
+@PersistenceCapable
+@PersistenceAware
 public class Pelicula {
 
-	private String nombre;
+	private String nombrePelicula;
 	private String categoria;
 	private double precio;
 	private String fecha;
 	private String descripcion;
 	
 	
-	public Pelicula(String nombre, String categoria, double precio, String fecha, String descripcion) {
+	public Pelicula(String nombrePelicula, String categoria, double precio, String fecha, String descripcion) {
 		super();
-		this.nombre = nombre;
+		this.nombrePelicula = nombrePelicula;
 		this.categoria = categoria;
 		this.precio = precio;
 		this.fecha = fecha;
@@ -22,7 +27,7 @@ public class Pelicula {
 	
 	public Pelicula() {
 		super();
-		this.nombre = "";
+		this.nombrePelicula = "";
 		this.categoria = "";
 		this.precio = 0;
 		this.fecha = "";
@@ -32,13 +37,13 @@ public class Pelicula {
 
 
 	public String getNombre() {
-		return nombre;
+		return nombrePelicula;
 	}
 
 
 
 	public void setNombre(String nombre) {
-		this.nombre = nombre;
+		this.nombrePelicula = nombre;
 	}
 
 
@@ -93,7 +98,7 @@ public class Pelicula {
 
 	@Override
 	public String toString() {
-		return "Pelicula [nombre=" + nombre + ", categoria=" + categoria + ", precio=" + precio + ", fecha=" + fecha
+		return "Pelicula [nombre=" + nombrePelicula + ", categoria=" + categoria + ", precio=" + precio + ", fecha=" + fecha
 				+ ", descripcion=" + descripcion + "]";
 	}
 	
