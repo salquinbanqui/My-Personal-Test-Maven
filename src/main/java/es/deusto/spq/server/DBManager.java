@@ -362,4 +362,35 @@ public class DBManager {
 	
 	
 }
+	public void borrarPeliculas() {
+		List<Pelicula> peliculas = new ArrayList<Pelicula>();
+		PersistenceManager pm = pmf.getPersistenceManager();
+		pm.getFetchPlan().setMaxFetchDepth(4);
+		Transaction tx = pm.currentTransaction();
+
+		try {
+
+			tx.begin();
+
+			Extent<Pelicula> extent = pm.getExtent(Pelicula.class, true);
+
+			for (Pelicula pelicula : extent) {
+				pm.deletePersistent(pelicula);
+			}
+
+			tx.commit();
+		} catch (Exception ex) {
+			System.out.println("  $ Error retrieving all the Categories: " + ex.getMessage());
+		} finally {
+			if (tx != null && tx.isActive()) {
+				tx.rollback();
+			}
+
+			pm.close();
+		}
+	
+	
+	
+	
+}
 }
