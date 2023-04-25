@@ -85,7 +85,7 @@ public class VentanaInicio extends JFrame{
 					VentanaInicio window = new VentanaInicio();
 					window.setVisible(true);
 				} catch (Exception e) {
-					e.printStackTrace(); // Sensitive
+					e.printStackTrace();
 				}
 			}
 		});
