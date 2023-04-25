@@ -135,7 +135,7 @@ public class VentanaLogin extends JFrame {
 						VentanaLogin window = new VentanaLogin();
 						window.setVisible(true);
 					} catch (Exception e) {
-						e.printStackTrace();
+						e.printStackTrace(); // Sensitive
 					}
 				}
 			});

@@ -183,7 +183,7 @@ public class DBManager {
 		} catch (Exception ex) {
 			// TODO: handle exception
 			System.out.println(" $ Error inicializando los datos: " + ex.getMessage());
-			ex.printStackTrace();
+			ex.printStackTrace(); // Sensitive
 		}
 	}
 	
@@ -278,7 +278,7 @@ public class DBManager {
 			tx.commit();
 		} catch (Exception ex) {
 			System.out.println(" $ Error querying a Reserva: " + ex.getMessage());
-			ex.printStackTrace();
+			ex.printStackTrace(); // Sensitive
 		} finally {
 			if (tx != null && tx.isActive()) {
 				tx.rollback();

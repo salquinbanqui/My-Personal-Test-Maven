@@ -36,7 +36,7 @@ public class ServiceLocator {
 		try {
 			url = gp.getUrl();
 		} catch (Exception e) {
-			e.printStackTrace();
+			e.printStackTrace(); //Sensitive
 		}
 		return url;
 	}
