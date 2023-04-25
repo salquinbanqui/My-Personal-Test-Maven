@@ -7,27 +7,27 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v3
-      - name: Set up JDK 17
-        uses: actions/setup-java@v3
-        with:
-          java-version: '17'
-          distribution: 'temurin'
+    - uses: actions/checkout@v3
+    - name: Set up JDK 17
+      uses: actions/setup-java@v3
+      with:
+       java-version: '17'
+       distribution: 'temurin'
 	  
-      - name: Clean compile
-	run: mvn --batch-mode --update-snapshots clean compile 
+    - name: Clean compile
+      run: mvn --batch-mode --update-snapshots clean compile 
 	    
-      - name: Set up MySQL
-        run: |
-	 sudo /etc/init.d/mysql start
-	 mysql -uroot -proot < sql/db_psc.sql
+    - name: Set up MySQL
+      run: |
+       sudo /etc/init.d/mysql start
+       mysql -uroot -proot < sql/db_psc.sql
          mvn --batch-mode --update-snapshots compile 
          mvn --batch-mode --update-snapshots datanucleus:enhance
          mvn --batch-mode --update-snapshots datanucleus:schema-create
          mvn --batch-mode --update-snapshots exec:java -PServer
 	 
-	- name: Build with Maven
-          run: mvn --batch-mode --update-snapshots test
+    - name: Build with Maven
+      run: mvn --batch-mode --update-snapshots test
 	 
 
 	
