@@ -26,4 +26,3 @@ jobs:
 
     - name: Build with Maven including integration tests 
       run: mvn --batch-mode --update-snapshots package
-	 
