@@ -393,4 +393,34 @@ public class DBManager {
 	
 	
 }
+	
+	public List<Usuario> getlistaAmigos() {
+		List<Usuario> amigos = new ArrayList<Usuario>();
+		PersistenceManager pm = pmf.getPersistenceManager();
+		pm.getFetchPlan().setMaxFetchDepth(5);
+		Transaction tx = pm.currentTransaction();
+
+		try {
+
+			tx.begin();
+
+			Extent<Usuario> extent = pm.getExtent(Usuario.class, true);
+
+			for (Usuario usuario : extent) {
+				amigos.add(usuario);
+			}
+
+			tx.commit();
+		} catch (Exception ex) {
+			System.out.println("  $ Error retrieving all the Categories: " + ex.getMessage());
+		} finally {
+			if (tx != null && tx.isActive()) {
+				tx.rollback();
+			}
+
+			pm.close();
+		}
+
+		return amigos;
+	}
 }

@@ -10,6 +10,8 @@ import java.awt.SystemColor;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
+import javax.ws.rs.client.Client;
+import javax.ws.rs.client.ClientBuilder;
 
 import javax.swing.DefaultListModel;
 import javax.swing.JButton;
@@ -27,7 +29,7 @@ import javax.ws.rs.client.WebTarget;
 import javax.ws.rs.core.GenericType;
 import javax.ws.rs.core.MediaType;
 
-import com.mysql.cj.xdevapi.Client;
+
 
 import es.deusto.spq.cliente.ClientApp;
 import es.deusto.spq.cliente.Controller;
@@ -38,10 +40,9 @@ import javax.swing.JComboBox;
 import javax.swing.JScrollPane;
 
 
-
+	
 public class VentanaAmigo extends JFrame {
 	
-
 		private static final long serialVersionUID = 1L;
 
 		
@@ -53,14 +54,19 @@ public class VentanaAmigo extends JFrame {
 		ServiceLocator serviceLocator = new ServiceLocator();
 		private Controller controller = new Controller(serviceLocator);
 		private JTextField textField;
-		private JTextField textField_1;
 		
-		
+		private Client client;
 		
 		
 		public  VentanaAmigo() {
 			
-		
+			
+			client = ClientBuilder.newClient();
+
+	        final WebTarget appTarget = client.target("http://localhost:8080/webapi");
+	        final WebTarget userTarget = appTarget.path("usuarios");
+	        final WebTarget userAllTarget = userTarget.path("all");
+	        final WebTarget userRegTarget = userTarget.path("reg");
 		
 			contentpane = new JPanel();
 			contentpane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -94,44 +100,49 @@ public class VentanaAmigo extends JFrame {
 			contentpane.add(botonAnyadirAmigo);
 			
 			textField = new JTextField();
-			textField.setBounds(275, 122, 96, 19);
+			textField.setBounds(289, 139, 96, 19);
 			contentpane.add(textField);
 			textField.setColumns(10);
 			
 			JLabel lblNewLabel = new JLabel("Usuario:");
-			lblNewLabel.setBounds(202, 115, 79, 32);
+			lblNewLabel.setBounds(224, 132, 79, 32);
 			contentpane.add(lblNewLabel);
-			
-			textField_1 = new JTextField();
-			textField_1.setBounds(275, 151, 96, 20);
-			contentpane.add(textField_1);
-			textField_1.setColumns(10);
-			
-			JLabel lblNewLabel_1 = new JLabel("Email:");
-			lblNewLabel_1.setBounds(202, 154, 62, 13);
-			contentpane.add(lblNewLabel_1);
 			
 			JScrollPane scrollPane = new JScrollPane();
 			scrollPane.setBounds(189, 247, -167, -169);
 			contentpane.add(scrollPane);
 			
-			JList list = new JList();
-			list.setBounds(135, 294, -113, -209);
-			contentpane.add(list);
+			final DefaultListModel<Usuario> userListModel = new DefaultListModel<>();
+	        JList<Usuario> userList = new JList<>(userListModel);
+
+	        scrollPane.add(userList);
+	        
+			
 			
 			JButton getAmigosButton = new JButton("Get Amigos");
 			getAmigosButton.setBounds(36, 294, 85, 21);
 			contentpane.add(getAmigosButton);
 			
+			
+			
 			  getAmigosButton.addActionListener(new ActionListener() {
-
-		            @Override
+				  @Override
 		            public void actionPerformed(ActionEvent e) {
-		                
+		                try {
+		                    GenericType<List<Usuario>> genericType = new GenericType<List<Usuario>>() {};
+		                    List<Usuario> usuarios = userAllTarget.request(MediaType.APPLICATION_JSON).get(genericType);
+		                    userListModel.clear();
+		                    for (Usuario user : usuarios) {
+		                        userListModel.addElement(user);
+		                    }
+		                } catch (ProcessingException ex) {
+		                    JOptionPane.showMessageDialog(ClientApp.this, "Error connecting with server", "Error message", ERROR_MESSAGE);
+		                }
 		            }
 		            
 		        });
 
+		       
 			botonAnyadirAmigo.addActionListener(new ActionListener() {
 
 				@Override
