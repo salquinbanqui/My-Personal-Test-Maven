@@ -17,17 +17,28 @@ Para la ejecución de PSC Peliculas es necesario tener los siguientes programas 
 
 Para ejecutar el proyecto hay que ejecutar el cliente y el servidor con los siguientes comandos.
 
- 
- <h2> Si es la primera vez que se hace este proceso se haría: </h2>
-
-    mvn datanucleus:enhance
-    mvn datanucleus:schema-create
-    mvn jetty:run
-    
 <h2> Para ejecutar el servidor los pasos son: </h2>
+<h3> El primer comando  </h3>
 
     mvn clean
+    
+<h3> El segundo comando  </h3>
+
     mvn compile
+
+<h3> El comando para realizar los test  </h3>
+
+    mvn test
+    
+<h3> Despues hariamos los comando del datanucleus</h3>
+
+    mvn datanucleus:enhance
+    
+<h3>  El siguiente comando del datanucleus: </h3>
+
+    mvn datanucleus:schema-create
+    
+
 <h2> Para ejecutar el server: </h2>
 
     mvn exec:java -PServer
