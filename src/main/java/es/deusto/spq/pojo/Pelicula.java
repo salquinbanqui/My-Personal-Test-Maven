@@ -6,7 +6,9 @@ import javax.jdo.annotations.PersistenceCapable;
 @PersistenceCapable
 @PersistenceAware
 public class Pelicula {
-
+	private static int idd = 0;
+	
+	private int id;
 	private String nombrePelicula;
 	private String categoria;
 	private double precio;
@@ -16,6 +18,7 @@ public class Pelicula {
 	
 	public Pelicula(String nombrePelicula, String categoria, double precio, String fecha, String descripcion) {
 		super();
+		this.id = ++idd;
 		this.nombrePelicula = nombrePelicula;
 		this.categoria = categoria;
 		this.precio = precio;
@@ -27,6 +30,7 @@ public class Pelicula {
 	
 	public Pelicula() {
 		super();
+		this.id = idd;
 		this.nombrePelicula = "";
 		this.categoria = "";
 		this.precio = 0;
@@ -35,6 +39,14 @@ public class Pelicula {
 	}
 
 
+	
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
 
 	public String getNombre() {
 		return nombrePelicula;
@@ -98,8 +110,8 @@ public class Pelicula {
 
 	@Override
 	public String toString() {
-		return "Pelicula [nombre=" + nombrePelicula + ", categoria=" + categoria + ", precio=" + precio + ", fecha=" + fecha
-				+ ", descripcion=" + descripcion + "]";
+		return "[ "+fecha + " ]: "+nombrePelicula + "\t| cat.: " + categoria + "\t| prec.: " + precio + "€" + 
+				"\t| desc.: " + descripcion + ".";
 	}
 	
 	
