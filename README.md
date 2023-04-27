@@ -22,7 +22,7 @@ Para ejecutar el proyecto hay que ejecutar el cliente y el servidor con los sigu
 
     mvn clean
     
-<h3> El segundo comando  </h3>
+<h3> El comando para compilar el proyecto  </h3>
 
     mvn compile
 
