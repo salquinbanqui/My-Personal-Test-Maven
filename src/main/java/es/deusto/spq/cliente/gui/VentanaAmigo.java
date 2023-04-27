@@ -136,7 +136,6 @@ public class VentanaAmigo extends JFrame {
 		                        userListModel.addElement(user);
 		                    }
 		                } catch (ProcessingException ex) {
-		                   // JOptionPane.showMessageDialog(ClientApp.this, "Error connecting with server", "Error message", ERROR_MESSAGE);
 		                }
 		            }
 		            
