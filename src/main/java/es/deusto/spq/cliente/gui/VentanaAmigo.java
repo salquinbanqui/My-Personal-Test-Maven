@@ -9,10 +9,12 @@ import java.awt.Font;
 import java.awt.SystemColor;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import java.util.List;
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
-
+import javax.ws.rs.client.Entity;
+import javax.swing.AbstractButton;
 import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -21,6 +23,7 @@ import javax.swing.JList;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
+import javax.swing.JRadioButton;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 import javax.ws.rs.ProcessingException;
@@ -28,8 +31,8 @@ import javax.ws.rs.client.ClientBuilder;
 import javax.ws.rs.client.WebTarget;
 import javax.ws.rs.core.GenericType;
 import javax.ws.rs.core.MediaType;
-
-
+import javax.ws.rs.core.Response;
+import javax.ws.rs.core.Response.Status;
 
 import es.deusto.spq.cliente.ClientApp;
 import es.deusto.spq.cliente.Controller;
@@ -117,6 +120,13 @@ public class VentanaAmigo extends JFrame {
 
 	        scrollPane.add(userList);
 	        
+	        
+	        final JTextField emailTextField = new JTextField("", 10);
+	        emailTextField.setBounds(142, 135, 130, 26);
+	        final JTextField passwordTextField = new JTextField("", 10);
+	        passwordTextField.setBounds(142, 182, 130, 26);
+	        final JTextField cardTextField = new JTextField("", 10);
+	        JRadioButton rdbtnNewRadioButton = new JRadioButton("is admin");
 			
 			
 			JButton getAmigosButton = new JButton("Get Amigos");
@@ -146,19 +156,55 @@ public class VentanaAmigo extends JFrame {
 
 				@Override
 				public void actionPerformed(ActionEvent e) {
-				
-					
-				}
+			            	
+							//DBManager.getInstance();
+			            	Usuario newUser = new Usuario(textField.getText(), emailTextField.getText(), passwordTextField.getText(), cardTextField.getText(), rdbtnNewRadioButton.isSelected());
+			            	userListModel.addElement(newUser);
+			            	
+			            	WebTarget userRegTarget = userTarget.path("reg");
+							List<String> usuarioL = new ArrayList<>(); 
+							usuarioL.add(newUser.getNombreUsuario());
+							usuarioL.add(newUser.getEmail());
+							usuarioL.add(newUser.getPassword());
+							usuarioL.add(newUser.getTarjeta());
+							usuarioL.add(newUser.getAdmin());
+							
+							//userRegTarget.request().post(Entity.entity(newUser, MediaType.APPLICATION_JSON));
+							
+							userRegTarget.request().post(Entity.entity(usuarioL, MediaType.APPLICATION_JSON));
+			            }
+			            
 				
 			});
 			
 			
 			botonEliminarAmigo.addActionListener(new ActionListener() {
-				@Override
-				public void actionPerformed(ActionEvent e) {
-					// TODO Auto-generated method stub
-					
-				}
+				 @Override
+		            public void actionPerformed(ActionEvent e) {
+		                WebTarget deleteTarget = userTarget.path(userList.getSelectedValue().getNombreUsuario());
+		                Response response = deleteTarget.request().buildDelete().invoke();
+		                
+		               // deleteTarget.request().delete();
+		                System.out.println(userList.getSelectedValue().getNombreUsuario());
+		                
+		               // WebTarget.class.
+		               
+		                
+		                if (response.getStatus() == Status.OK.getStatusCode()) {
+		                    JOptionPane.showMessageDialog(VentanaAmigo.this, "User '" + userList.getSelectedValue().getNombreUsuario() + "'" + " correctly deleted", "Message", JOptionPane.INFORMATION_MESSAGE);
+		                    userListModel.removeElementAt(userList.getSelectedIndex());
+		                    textField.setText("");
+		                    emailTextField.setText("");
+		                    passwordTextField.setText("");
+		                    cardTextField.setText("");
+		                    rdbtnNewRadioButton.setSelected(false);
+		                    
+		                    
+		                } else {
+		                    JOptionPane.showMessageDialog(VentanaAmigo.this, "Could not delete user '" + userList.getSelectedValue().getNombreUsuario() + "'", "Message", JOptionPane.ERROR_MESSAGE);
+		                }
+		               
+		            }
 			});
 			setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 			setSize(542, 355);
