@@ -5,9 +5,10 @@ import static org.junit.Assert.*;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-import es.deusto.spq.cliente.gui.VentanaTCompra;
 
-public class VentanaTCompraTest {
+import es.deusto.spq.cliente.gui.VentanaModPeliculas;
+
+public class VentanaModPeliculasTest {
 
 	@Before
 	public void setUp() throws Exception {
@@ -20,10 +21,11 @@ public class VentanaTCompraTest {
 	@Test
 	public void test() {
 		try {
-			VentanaTCompra vtc = new VentanaTCompra();
+			VentanaModPeliculas vmp = new VentanaModPeliculas();
 		} catch (Exception e) {
 			// TODO: handle exception
 		}
 		
 	}
-	}
+
+}

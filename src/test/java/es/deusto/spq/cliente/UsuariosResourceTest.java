@@ -5,9 +5,8 @@ import static org.junit.Assert.*;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-import es.deusto.spq.cliente.gui.VentanaTCompra;
 
-public class VentanaTCompraTest {
+public class UsuariosResourceTest {
 
 	@Before
 	public void setUp() throws Exception {
@@ -19,11 +18,7 @@ public class VentanaTCompraTest {
 
 	@Test
 	public void test() {
-		try {
-			VentanaTCompra vtc = new VentanaTCompra();
-		} catch (Exception e) {
-			// TODO: handle exception
-		}
-		
+		fail("Not yet implemented");
 	}
-	}
+
+}
