@@ -53,8 +53,8 @@ public class PeliculasResourceTest {
 	public void testgetPelicula() {
 		WebTarget peliculasTarget = appTarget.path("peliculas");
 
-		List<Pelicula> listaPeliculas = Arrays.asList(new Pelicula(), new Pelicula(), 
-				new Pelicula());
+		List<Pelicula> listaPeliculas = Arrays.asList(new Pelicula("Tarzan", "dibujos",3.5,"26-03-2009","pelicula de dibujos para niños "), new Pelicula("Tarzan", "dibujos",3.5,"26-03-2009","pelicula de dibujos para niños "), 
+				new Pelicula("Tarzan", "dibujos",3.5,"26-03-2009","pelicula de dibujos para niños "));
 
 		GenericType<List<Pelicula>> genericType = new GenericType<List<Pelicula>>() {
 		};
