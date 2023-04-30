@@ -5,6 +5,8 @@ import static javax.swing.JOptionPane.ERROR_MESSAGE;
 import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
 import javax.swing.DefaultListModel;
 import javax.swing.JButton;
@@ -48,11 +50,37 @@ public class ClientApp extends JFrame {
 
     public ClientApp() {
         client = ClientBuilder.newClient();
+        
+        
+
+
+
+
 
         final WebTarget appTarget = client.target("http://localhost:8080/webapi");
         final WebTarget userTarget = appTarget.path("usuarios");
         final WebTarget userAllTarget = userTarget.path("all");
         final WebTarget userRegTarget = userTarget.path("reg");
+        
+        
+        /*
+        // Create the main frame for the client
+        this.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+
+        // Add a WindowListener to handle the window closing event
+        this.addWindowListener(new WindowAdapter() {
+            public void windowClosing(WindowEvent e) {
+                // Make a logout API call to the server
+             
+              //  WebTarget target = client.target("http://localhost:8080/webapi");
+                
+                userTarget.path("logout").request().post(Entity.json(null));
+                // Close the client application
+                System.exit(0);
+            }
+        });
+        
+        */
 
         setSize(904, 561);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);

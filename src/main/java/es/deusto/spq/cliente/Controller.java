@@ -29,6 +29,10 @@ private ServiceLocator serviceLocator;
 		return serviceLocator.loginGestionPelis(nombreUsuario, contrasenya);
 	}
 	
+	public int logoutGestionPelis(){
+		return serviceLocator.logoutGestionPelis();
+	}
+	
 	/*
 	public void logUsuario(String name, String password) {
 		WebTarget webTarget = ClientBuilder.newClient().target("http://localhost:8080/webapi");

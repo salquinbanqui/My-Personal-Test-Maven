@@ -12,6 +12,7 @@ import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
@@ -135,6 +136,17 @@ public class UsuariosResource {
  
  
  
+ /*
+ @POST
+ @Path("logout/{nombreUsuario}")
+ public Response logout(@PathParam("nombreUsuario") String username) {
+     // Remove the user's authentication token from the map
+     mp.remove(username);
+     return Response.ok().build();
+ }
+
+ 
+ */
  
  
 }

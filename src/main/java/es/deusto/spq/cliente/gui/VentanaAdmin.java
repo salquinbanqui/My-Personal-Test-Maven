@@ -76,6 +76,13 @@ public class VentanaAdmin extends JFrame {
 		btnAnyadirPelicula.setBounds(6, 123, 170, 29);
 		contentPane.add(btnAnyadirPelicula);
 		
+		btnAnyadirPelicula.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				VentanaAnyadirPelicula vAP = new VentanaAnyadirPelicula();
+				vAP.setVisible(true);
+			}
+		});
+		
 		JLabel lblBienvenido = new JLabel("Bienvenido [ADMIN] - ");
 		lblBienvenido.setHorizontalAlignment(SwingConstants.CENTER);
 		lblBienvenido.setBounds(6, 17, 438, 16);

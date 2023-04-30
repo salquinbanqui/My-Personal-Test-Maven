@@ -7,6 +7,8 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 import javax.ws.rs.ProcessingException;
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
@@ -62,7 +64,7 @@ public class VentanaModPeliculas extends JFrame {
 	        final WebTarget addPeliTarget = pelisTarget.path("reg");
 
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 500, 500);
+		setBounds(100, 100, 800, 500);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 
@@ -77,7 +79,7 @@ public class VentanaModPeliculas extends JFrame {
 	     JList<Pelicula> listaPelis = new JList<>(peliListModel);
 	     
 	     JScrollPane scrollPane = new JScrollPane(listaPelis);
-			scrollPane.setBounds(6, 6, 293, 444);
+			scrollPane.setBounds(6, 6, 600, 444);
 			contentPane.add(scrollPane);
 		
 		JButton btnGetPeliculas = new JButton("Get Peliculas");
@@ -95,16 +97,36 @@ public class VentanaModPeliculas extends JFrame {
 	                }
 			}
 		});
-		btnGetPeliculas.setBounds(311, 46, 183, 29);
+		btnGetPeliculas.setBounds(611, 46, 183, 29);
 		contentPane.add(btnGetPeliculas);
+		
+		
 		
 		JButton btnModSeleccion = new JButton("Modificar Selección");
 		btnModSeleccion.setEnabled(false);
-		btnModSeleccion.setBounds(311, 123, 183, 29);
+		btnModSeleccion.setBounds(611, 123, 183, 29);
 		contentPane.add(btnModSeleccion);
 		
+		btnModSeleccion.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				VentanaModPeliculaForm vMPF = new VentanaModPeliculaForm(listaPelis.getSelectedValue());
+				vMPF.setVisible(true);
+			}
+		});
+		
+		
+		listaPelis.addListSelectionListener(new ListSelectionListener() {
+		    public void valueChanged(ListSelectionEvent e) {
+		        if (!e.getValueIsAdjusting() && listaPelis.getSelectedIndex() != -1) {
+		        	btnModSeleccion.setEnabled(true);
+		        } else {
+		        	btnModSeleccion.setEnabled(false);
+		        }
+		    }
+		});
+		
 		JButton btnMenu = new JButton("Volver al Menu");
-		btnMenu.setBounds(311, 421, 183, 29);
+		btnMenu.setBounds(611, 421, 183, 29);
 		contentPane.add(btnMenu);
 	}
 }

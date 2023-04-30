@@ -93,6 +93,30 @@ public class ServiceLocator {
 	}
 	
 	
+	public int logoutGestionPelis() {
+		WebTarget webTarget1 = wt.path("server/logoutGestionPelis");
+		Invocation.Builder invocationBuilder = webTarget1.request(MediaType.TEXT_PLAIN);
+
+	//	Usuario u = new Usuario();
+	//	u.setNombreUsuario(nombreUsuario);
+	//	u.setPassword(password);
+
+		Response response = invocationBuilder.post(null);
+		if (response.getStatus() == Status.OK.getStatusCode()) {
+			System.out.println("LOGOUT correcto como ADMINISTRADOR");//VISUALIZACION DE ADMINISTRADOR
+			//VentanaAdmin ventanaAdmin = new VentanaAdmin(c);
+			//ventanaAdmin.setVisible(true);
+			return 2;
+			
+
+		} else if (response.getStatus() == Status.ACCEPTED.getStatusCode()) {
+			System.out.println("LOGOUT correcto como USUARIO");//VISUALIZACION DE USUARIO
+			return 1;
+		}
+		return 0;
+	}
+	
+	
 	public List<Pelicula> obtenerPeliculas() {
         WebTarget webTarget4 = wt.path("server/obtenerPeliculas");
 		Invocation.Builder invocationBuilder = webTarget4.request(MediaType.APPLICATION_JSON);
