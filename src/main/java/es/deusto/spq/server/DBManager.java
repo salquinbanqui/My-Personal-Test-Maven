@@ -18,6 +18,7 @@ import javax.ws.rs.client.WebTarget;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
+import es.deusto.spq.pojo.Pelicula;
 import es.deusto.spq.pojo.Usuario;
 
 public class DBManager {
@@ -117,8 +118,40 @@ public class DBManager {
 		return user;	
 		}
 	
+	
+	public Pelicula getPelicula(String nombrePelicula) {
+		PersistenceManager pm = pmf.getPersistenceManager();
+		pm.getFetchPlan().setMaxFetchDepth(4);
+		Transaction tx = pm.currentTransaction();
+		Pelicula peli = null;
+
+		try {
+			tx.begin();
+
+			Query<?> query = pm.newQuery("SELECT FROM " + Pelicula.class.getName() + " WHERE nombrePelicula == '" + nombrePelicula + "'");
+			query.setUnique(true);
+			peli = (Pelicula) query.execute();
+
+			tx.commit();
+		} catch (Exception ex) {
+			System.out.println(" $ Error cogiendo la pelicula de la BD: " + ex.getMessage());
+		} finally {
+			if (tx != null && tx.isActive()) {
+				tx.rollback();
+			}
+
+			pm.close();
+		}
+
+		return peli;	
+		}
+	
 	public void store(Usuario usuario) {
 		DBManager.getInstance().storeObjectInDB(usuario);
+	}
+	
+	public void storePelicula(Pelicula pelicula) {
+		DBManager.getInstance().storeObjectInDB(pelicula);
 	}
 
 	public void delete(Usuario usuario) {
@@ -167,6 +200,14 @@ public class DBManager {
 		
 		//PELICULAS...
 		
+		
+		Pelicula p1 = new Pelicula("Indiana Jones", "Accion", 3, "26/04/2023", "DESCRIPCION");   
+		Pelicula p2 = new Pelicula("Star Wars", "Scifi", 3, "27/04/2023", "DESCRIPCION");              
+		Pelicula p3 = new Pelicula("Batman", "Accion", 3, "28/04/2023", "DESCRIPCION");            
+		Pelicula p4 = new Pelicula("Los Vengadores", "Accion", 3, "29/04/2023", "DESCRIPCION");          
+		Pelicula p5 = new Pelicula("[V.O.] El Triangulo de la Tristeza", "Comedia", 3, "30/04/2023", "DESCRIPCION");    
+		
+		
 		try {
 			 store(u1);
 			 store(u2);
@@ -174,11 +215,11 @@ public class DBManager {
 			 store(u4);
 			 store(u5);
 			 
-			// store(p1);
-			// store(p2);
-			// store(p3);
-			// store(p4);
-			// store(p5);
+			 storePelicula(p1);
+			 storePelicula(p2);
+			 storePelicula(p3);
+			 storePelicula(p4);
+			 storePelicula(p5);
 	 
 		} catch (Exception ex) {
 			// TODO: handle exception
@@ -321,4 +362,65 @@ public class DBManager {
 	
 	
 }
+	public void borrarPeliculas() {
+		List<Pelicula> peliculas = new ArrayList<Pelicula>();
+		PersistenceManager pm = pmf.getPersistenceManager();
+		pm.getFetchPlan().setMaxFetchDepth(4);
+		Transaction tx = pm.currentTransaction();
+
+		try {
+
+			tx.begin();
+
+			Extent<Pelicula> extent = pm.getExtent(Pelicula.class, true);
+
+			for (Pelicula pelicula : extent) {
+				pm.deletePersistent(pelicula);
+			}
+
+			tx.commit();
+		} catch (Exception ex) {
+			System.out.println("  $ Error retrieving all the Categories: " + ex.getMessage());
+		} finally {
+			if (tx != null && tx.isActive()) {
+				tx.rollback();
+			}
+
+			pm.close();
+		}
+	
+	
+	
+	
+}
+	
+	public List<Usuario> getlistaAmigos() {
+		List<Usuario> amigos = new ArrayList<Usuario>();
+		PersistenceManager pm = pmf.getPersistenceManager();
+		pm.getFetchPlan().setMaxFetchDepth(5);
+		Transaction tx = pm.currentTransaction();
+
+		try {
+
+			tx.begin();
+
+			Extent<Usuario> extent = pm.getExtent(Usuario.class, true);
+
+			for (Usuario usuario : extent) {
+				amigos.add(usuario);
+			}
+
+			tx.commit();
+		} catch (Exception ex) {
+			System.out.println("  $ Error retrieving all the Categories: " + ex.getMessage());
+		} finally {
+			if (tx != null && tx.isActive()) {
+				tx.rollback();
+			}
+
+			pm.close();
+		}
+
+		return amigos;
+	}
 }

@@ -15,6 +15,8 @@ import javax.ws.rs.core.Response.Status;
 
 import org.apache.log4j.Logger;
 
+import es.deusto.spq.cliente.gui.VentanaAdmin;
+import es.deusto.spq.pojo.Pelicula;
 import es.deusto.spq.pojo.Usuario;
 
 public class ServiceLocator {
@@ -78,6 +80,8 @@ public class ServiceLocator {
 		Response response = invocationBuilder.post(Entity.entity(u, MediaType.APPLICATION_JSON));
 		if (response.getStatus() == Status.OK.getStatusCode()) {
 			System.out.println("Login correcto como ADMINISTRADOR");//VISUALIZACION DE ADMINISTRADOR
+			VentanaAdmin ventanaAdmin = new VentanaAdmin(c);
+			ventanaAdmin.setVisible(true);
 			return 2;
 			
 
@@ -89,8 +93,32 @@ public class ServiceLocator {
 	}
 	
 	
+	public int logoutGestionPelis() {
+		WebTarget webTarget1 = wt.path("server/logoutGestionPelis");
+		Invocation.Builder invocationBuilder = webTarget1.request(MediaType.TEXT_PLAIN);
+
+	//	Usuario u = new Usuario();
+	//	u.setNombreUsuario(nombreUsuario);
+	//	u.setPassword(password);
+
+		Response response = invocationBuilder.post(null);
+		if (response.getStatus() == Status.OK.getStatusCode()) {
+			System.out.println("LOGOUT correcto como ADMINISTRADOR");//VISUALIZACION DE ADMINISTRADOR
+			//VentanaAdmin ventanaAdmin = new VentanaAdmin(c);
+			//ventanaAdmin.setVisible(true);
+			return 2;
+			
+
+		} else if (response.getStatus() == Status.ACCEPTED.getStatusCode()) {
+			System.out.println("LOGOUT correcto como USUARIO");//VISUALIZACION DE USUARIO
+			return 1;
+		}
+		return 0;
+	}
+	
+	
 	public List<Pelicula> obtenerPeliculas() {
-        WebTarget webTarget4 = wt.path("server/getPeliculas");
+        WebTarget webTarget4 = wt.path("server/obtenerPeliculas");
 		Invocation.Builder invocationBuilder = webTarget4.request(MediaType.APPLICATION_JSON);
 
 		List<Pelicula> instalaciones = new ArrayList<Pelicula>();

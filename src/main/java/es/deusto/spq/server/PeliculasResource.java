@@ -12,7 +12,6 @@ import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
-import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
@@ -22,22 +21,22 @@ import java.util.List;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import es.deusto.spq.pojo.Usuario;
+import es.deusto.spq.pojo.Pelicula;
 
 
 
-@Path("usuarios")
-public class UsuariosResource {
+@Path("peliculas")
+public class PeliculasResource {
 	private final static Logger LOGGER = Logger.getLogger(Logger.class);
-	private Usuario u1;
+	private Pelicula p1;
 	
-	HashMap<String,Usuario> mp = new HashMap<>();
+	HashMap<String,Pelicula> mp = new HashMap<>();
 	
 	
  @GET
  @Path("all")
  @Produces(MediaType.APPLICATION_JSON)
- public List<Usuario> getUsuarios() {
+ public List<Pelicula> getPeliculas() {
  // This data could be retrieved from a database
 	// DBManager.getInstance().getUsuario("*");
 	 
@@ -49,17 +48,17 @@ public class UsuariosResource {
 // usuarios.add(new Usuario("markelinho", "mark@opendeusto.es", "password_mark", "XXXX-XXXX-XXXX-XXXX"));
 // usuarios.add(new Usuario("yonan99", "yonander@opendeusto.es", "password_yonan", "XXXX-XXXX-XXXX-XXXX"));
 // usuarios.add(new Usuario("nachete", "ignacio@opendeusto.es", "password_nacho", "XXXX-XXXX-XXXX-XXXX"));
- 	List<Usuario> usuarios = new ArrayList<Usuario>();
+ 	List<Pelicula> peliculas = new ArrayList<Pelicula>();
 
 	try {
-		Query<Usuario> q = pm.newQuery(Usuario.class);
-		usuarios = q.executeList();
+		Query<Pelicula> q = pm.newQuery(Pelicula.class);
+		peliculas = q.executeList();
 	} catch (Exception e) {
 		LOGGER.error(e.getMessage());
 	} finally {
 		pm.close();
 	}
-	return usuarios;
+	return peliculas;
  }
  
  
@@ -88,20 +87,20 @@ public class UsuariosResource {
  @Path("reg")
  @Consumes(MediaType.APPLICATION_JSON)
  @Produces(MediaType.APPLICATION_JSON)
- public Response addUsuario( List<String> usuarioL) {
-	 	String nick = usuarioL.get(0);
-		String email = usuarioL.get(1);
-		String contraseña = usuarioL.get(2);
-		String tarjeta = usuarioL.get(3);
-		String admin = usuarioL.get(4);
+ public Response addPelicula( List<String> peliculaL) {
+	 	String nombrePelicula = peliculaL.get(0);
+		String categoria = peliculaL.get(1);
+		String precio = peliculaL.get(2);
+		String fecha = peliculaL.get(3);
+		String descripcion = peliculaL.get(4);
 		
 		PersistenceManagerFactory pmf = JDOHelper.getPersistenceManagerFactory("datanucleus.properties");
 		PersistenceManager pm = pmf.getPersistenceManager();
 		Transaction tx = pm.currentTransaction();
 		try {
 			tx.begin();
-			Usuario usuario1 = new Usuario(nick, email, contraseña, tarjeta, Boolean.parseBoolean(admin));
-			pm.makePersistent(usuario1);
+			Pelicula pelicula1 = new Pelicula(nombrePelicula, categoria, Double.parseDouble(precio), fecha, descripcion);
+			pm.makePersistent(pelicula1);
 			tx.commit();
 		} finally {
 			if (tx.isActive()) {
@@ -109,25 +108,25 @@ public class UsuariosResource {
 			}
 			pm.close();
 		}
-		return Response.ok(new Usuario()).build();
+		return Response.ok(new Pelicula()).build();
   
  }
  
 
 
  @DELETE
- @Path("/{nombreUsuario}")
- public Response deleteUser(@PathParam("nombreUsuario") String username) {
+ @Path("/{nombrePelicula}")
+ public Response deletePelicula(@PathParam("nombrePelicula") String nombrePelicula) {
 	 
 //	 u1 = new Usuario();
 //	 u1 = DBManager.getInstance().getUsuario(username).getNombreUsuario();
 	 
-     if (DBManager.getInstance().getUsuario(username).getNombreUsuario() != null) {
+     if (DBManager.getInstance().getPelicula(nombrePelicula).getNombre() != null) {
     	
-         System.out.println("Deleting user..." + username);
+         System.out.println("Deleting movie..." + nombrePelicula);
        
        //  DBManager.getInstance().delete(DBManager.getInstance().getUsuario(username));
-         DBManager.getInstance().borrarUsuario(username);
+         DBManager.getInstance().deleteObjectFromDB(DBManager.getInstance().getPelicula(nombrePelicula));
          return Response.status(Response.Status.OK).build();
      } else {
          return Response.status(Response.Status.NOT_FOUND).build();
@@ -136,17 +135,6 @@ public class UsuariosResource {
  
  
  
- /*
- @POST
- @Path("logout/{nombreUsuario}")
- public Response logout(@PathParam("nombreUsuario") String username) {
-     // Remove the user's authentication token from the map
-     mp.remove(username);
-     return Response.ok().build();
- }
-
- 
- */
  
  
 }

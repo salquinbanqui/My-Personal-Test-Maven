@@ -40,6 +40,8 @@ public class Main {
     	//DBManager.getInstance().deleteObjectFromDB("*");
     
     	DBManager.getInstance().borrarUsuarios();
+    	DBManager.getInstance().borrarPeliculas();
+    	
     	DBManager.getInstance().inicializarDatos();;
     	
     	

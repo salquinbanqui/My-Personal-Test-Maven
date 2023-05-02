@@ -46,11 +46,22 @@ public class VentanaInicio extends JFrame{
 		btnAmigos.setFont(new Font("Harrington", Font.BOLD | Font.ITALIC, 16));
 		contentpane.add(btnAmigos);
 		
+		JButton btnPerfil = new JButton("Perfil");
+		btnPerfil.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				VentanaPerfil vp = new VentanaPerfil();
+				vp.setVisible(true);
+			}
+		});
+		btnPerfil.setFont(new Font("Dialog", Font.BOLD | Font.ITALIC, 16));
+		btnPerfil.setBounds(137, 236, 153, 31);
+		contentpane.add(btnPerfil);
+		
 		btnVerPelis.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
-				new VentanaPeliculaInfo();
+				//new VentanaModPeliculas();
 				dispose();
 
 			}
@@ -60,7 +71,7 @@ public class VentanaInicio extends JFrame{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
-				new VentanaTCompra();
+				//new VentanaTCompra();
 				dispose();
 
 			}
