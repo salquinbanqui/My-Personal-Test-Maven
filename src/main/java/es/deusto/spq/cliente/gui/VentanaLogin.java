@@ -20,7 +20,7 @@ import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
 import javax.ws.rs.client.WebTarget;
 import es.deusto.spq.cliente.ServiceLocator;
-
+import es.deusto.spq.cliente.gui.VentanaAdmin;
 import es.deusto.spq.cliente.Controller;
 
 
@@ -39,8 +39,20 @@ public class VentanaLogin extends JFrame {
 		private JButton botonIniciarSesion = new JButton();
 		private JButton botonRegistrarse = new JButton();
 		ServiceLocator serviceLocator = new ServiceLocator();
-		private Controller controller = new Controller(serviceLocator);
+        private Controller controller = new Controller(serviceLocator);
 		
+		public Controller getController() {
+			return controller;
+		}
+
+
+
+
+		public void setController(Controller controller) {
+			this.controller = controller;
+		}
+
+
 		Client client = ClientBuilder.newClient();
 		final WebTarget appTarget = client.target("http://localhost:8080/webapi");
 		final WebTarget userTarget = appTarget.path("usuarios");
@@ -103,6 +115,8 @@ public class VentanaLogin extends JFrame {
 				@Override
 				public void actionPerformed(ActionEvent e) {
 					controller.loginGestionPelis(textoUsuario.getText(), textoContrasenya.getText());
+					VentanaAdmin vi = new VentanaAdmin(client);
+					vi.setVisible(true);
 					
 				}
 				

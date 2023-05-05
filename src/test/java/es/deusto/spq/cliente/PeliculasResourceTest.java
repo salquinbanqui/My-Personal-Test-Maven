@@ -49,7 +49,7 @@ public class PeliculasResourceTest {
 	
 	@Ignore
 	@Test
-	@PerfTest(invocations = 100, threads = 40)
+	//@PerfTest(invocations = 100, threads = 40)
 	public void testgetPelicula() {
 		WebTarget peliculasTarget = appTarget.path("peliculas");
 
