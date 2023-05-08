@@ -48,13 +48,13 @@ public class Pelicula {
 		this.id = id;
 	}
 
-	public String getNombre() {
+	public String getNombrePelicula() {
 		return nombrePelicula;
 	}
 
 
 
-	public void setNombre(String nombre) {
+	public void setNombrePelicula(String nombre) {
 		this.nombrePelicula = nombre;
 	}
 

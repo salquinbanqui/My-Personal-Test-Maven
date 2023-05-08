@@ -158,6 +158,10 @@ public class DBManager {
 		DBManager.getInstance().deleteObjectFromDB(usuario);
 	}
 	
+	public void delete(Pelicula pelicula) {
+		DBManager.getInstance().deleteObjectFromDB(pelicula);
+	}
+	
 	/*public void agregarUsuarioGestionPelis(Usuario u) {
 		PreparedStatement preparedStatement = null;
 
@@ -330,6 +334,28 @@ public class DBManager {
 		}
 	}
 	
+	public void borrarPelicula(String nombrePelicula) {
+		PersistenceManager pm = pmf.getPersistenceManager();
+		Transaction tx = pm.currentTransaction();
+		try {
+			tx.begin();
+			Query<?> query = pm.newQuery("SELECT FROM " + Pelicula.class.getName() + " WHERE nombrePelicula == '" + nombrePelicula + "'");
+			System.out.println(" * '" + query.deletePersistentAll() + "' pelicula borrada de la DB.");
+			System.out.println(" * '" + nombrePelicula + "' *");
+			tx.commit();
+		} catch (Exception ex) {
+			System.out.println(" $ Error querying a Movie: " + ex.getMessage());
+			ex.printStackTrace();
+		} finally {
+			if (tx != null && tx.isActive()) {
+				tx.rollback();
+			}
+			if (pm != null && !pm.isClosed()) {
+				pm.close();
+			}
+		}
+	}
+	
 	
 	public void borrarUsuarios() {
 		List<Usuario> usuarios = new ArrayList<Usuario>();
@@ -349,7 +375,7 @@ public class DBManager {
 
 			tx.commit();
 		} catch (Exception ex) {
-			System.out.println("  $ Error retrieving all the Categories: " + ex.getMessage());
+			System.out.println("  $ Error retrieving all the Users: " + ex.getMessage());
 		} finally {
 			if (tx != null && tx.isActive()) {
 				tx.rollback();
@@ -380,7 +406,7 @@ public class DBManager {
 
 			tx.commit();
 		} catch (Exception ex) {
-			System.out.println("  $ Error retrieving all the Categories: " + ex.getMessage());
+			System.out.println("  $ Error retrieving all the Movies: " + ex.getMessage());
 		} finally {
 			if (tx != null && tx.isActive()) {
 				tx.rollback();
@@ -412,7 +438,7 @@ public class DBManager {
 
 			tx.commit();
 		} catch (Exception ex) {
-			System.out.println("  $ Error retrieving all the Categories: " + ex.getMessage());
+			System.out.println("  $ Error retrieving list of friends: " + ex.getMessage());
 		} finally {
 			if (tx != null && tx.isActive()) {
 				tx.rollback();

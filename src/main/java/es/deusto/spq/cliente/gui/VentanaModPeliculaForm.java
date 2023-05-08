@@ -1,12 +1,24 @@
 package es.deusto.spq.cliente.gui;
 
 import java.awt.EventQueue;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+import javax.ws.rs.client.Client;
+import javax.ws.rs.client.ClientBuilder;
+import javax.ws.rs.client.Entity;
+import javax.ws.rs.client.WebTarget;
+import javax.ws.rs.core.MediaType;
+
+
 
 import es.deusto.spq.pojo.Pelicula;
+import es.deusto.spq.pojo.Usuario;
 
 import javax.swing.JLabel;
 import javax.swing.JTextField;
@@ -19,16 +31,25 @@ public class VentanaModPeliculaForm extends JFrame {
 
 	private JPanel contentPane;
 	private JTextField textFieldTitulo;
-	private JTextField textFieldcategoria;
-	private JTextField textFieldPrceio;
+	private JTextField textFieldCategoria;
+	private JTextField textFieldPrecio;
 	private JTextField textFieldFecha;
 	private JTextField textFieldDescripcion;
+	
+	private Client client;
+	
+	
+	
 
 	/**
 	 * Launch the application.
 	 */
 	public static void main(String[] args) {
+		
+		
 		EventQueue.invokeLater(new Runnable() {
+			
+			
 			public void run() {
 				try {
 					VentanaModPeliculaForm frame = new VentanaModPeliculaForm(null);
@@ -44,7 +65,13 @@ public class VentanaModPeliculaForm extends JFrame {
 	 * Create the frame.
 	 */
 	public VentanaModPeliculaForm(Pelicula p) {
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		
+		client = (Client) ClientBuilder.newClient();
+		
+	     final WebTarget appTarget = client.target("http://localhost:8080/webapi");
+		  final WebTarget pelisTarget = appTarget.path("peliculas");
+		
+		//setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 570, 340);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -82,20 +109,20 @@ public class VentanaModPeliculaForm extends JFrame {
 		textFieldTitulo.setBounds(113, 35, 260, 26);
 		contentPane.add(textFieldTitulo);
 		textFieldTitulo.setColumns(10);
-		textFieldTitulo.setText(p.getNombre());
+		textFieldTitulo.setText(p.getNombrePelicula());
 		
-		textFieldcategoria = new JTextField();
-		textFieldcategoria.setBounds(113, 63, 153, 26);
-		contentPane.add(textFieldcategoria);
-		textFieldcategoria.setColumns(10);
-		textFieldcategoria.setText(p.getCategoria());
+		textFieldCategoria = new JTextField();
+		textFieldCategoria.setBounds(113, 63, 153, 26);
+		contentPane.add(textFieldCategoria);
+		textFieldCategoria.setColumns(10);
+		textFieldCategoria.setText(p.getCategoria());
 		
-		textFieldPrceio = new JTextField();
-		textFieldPrceio.setHorizontalAlignment(SwingConstants.RIGHT);
-		textFieldPrceio.setBounds(113, 91, 80, 26);
-		contentPane.add(textFieldPrceio);
-		textFieldPrceio.setColumns(10);
-		textFieldPrceio.setText(String.valueOf(p.getPrecio()));
+		textFieldPrecio = new JTextField();
+		textFieldPrecio.setHorizontalAlignment(SwingConstants.RIGHT);
+		textFieldPrecio.setBounds(113, 91, 80, 26);
+		contentPane.add(textFieldPrecio);
+		textFieldPrecio.setColumns(10);
+		textFieldPrecio.setText(String.valueOf(p.getPrecio()));
 		
 		textFieldFecha = new JTextField();
 		textFieldFecha.setBounds(113, 119, 130, 26);
@@ -126,5 +153,35 @@ public class VentanaModPeliculaForm extends JFrame {
 		JButton btnVolver = new JButton("Cancelar");
 		btnVolver.setBounds(400, 83, 164, 29);
 		contentPane.add(btnVolver);
+	
+	
+	btnGuardarCambios.addActionListener(new ActionListener() {
+         
+         @Override
+         public void actionPerformed(ActionEvent e) {
+         	//DBManager.getInstance();
+         	Pelicula newPeli = new Pelicula(textFieldTitulo.getText(), textFieldCategoria.getText(), Double.parseDouble(textFieldPrecio.getText()), textFieldFecha.getText(), textFieldDescripcion.getText());
+         	//userListModel.addElement(newUser);
+         	
+         	
+         	WebTarget peliRegTarget = pelisTarget.path("reg");
+				List<String> peliL = new ArrayList<>(); 
+         		peliL.add(newPeli.getNombrePelicula());
+         		peliL.add(newPeli.getCategoria());
+         		peliL.add(String.valueOf(newPeli.getPrecio()));
+         		peliL.add(newPeli.getFecha());
+         		peliL.add(newPeli.getDescripcion());
+				
+				//userRegTarget.request().post(Entity.entity(newUser, MediaType.APPLICATION_JSON));
+				
+         		peliRegTarget.request().post(Entity.entity(peliL, MediaType.APPLICATION_JSON));
+         }
+         
+         
+         
+        
+     });
+	
+
 	}
 }

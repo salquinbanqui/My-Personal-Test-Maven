@@ -60,6 +60,11 @@ private ServiceLocator serviceLocator;
 		return serviceLocator.agregarUsuarioGestionPelis(nombreUsuario, email, password, tarjeta);
 	}
 	
+	/*
+	public boolean agregarPelicula(String titulo, String categoria, Double email, String tarjeta){
+		return serviceLocator.agregarUsuarioGestionPelis(nombreUsuario, email, password, tarjeta);
+	}
+	*/
 	
 	//obtener todas las peliculas
 	public List<Pelicula> obtenerPeliculas() {

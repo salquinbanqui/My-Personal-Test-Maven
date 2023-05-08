@@ -60,7 +60,6 @@ public class ClientApp extends JFrame {
         final WebTarget appTarget = client.target("http://localhost:8080/webapi");
         final WebTarget userTarget = appTarget.path("usuarios");
         final WebTarget userAllTarget = userTarget.path("all");
-        final WebTarget userRegTarget = userTarget.path("reg");
         
         
         /*
@@ -83,7 +82,7 @@ public class ClientApp extends JFrame {
         */
 
         setSize(904, 561);
-        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        setDefaultCloseOperation(EXIT_ON_CLOSE);
 
         JButton getUsersButton = new JButton("Get Users");
         JPanel buttonsPanel = new JPanel();
@@ -114,9 +113,9 @@ public class ClientApp extends JFrame {
         final JTextField cardTextField = new JTextField("", 10);
         cardTextField.setBounds(142, 248, 130, 26);
         
-              //  final JTextField codeTextField = new JTextField("", 10);
-                final JTextField usernameTextField = new JTextField("", 10);
-                usernameTextField.setBounds(142, 88, 130, 26);
+        //  final JTextField codeTextField = new JTextField("", 10);
+        final JTextField usernameTextField = new JTextField("", 10);
+        usernameTextField.setBounds(142, 88, 130, 26);
                 
 
 

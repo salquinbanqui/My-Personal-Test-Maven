@@ -15,6 +15,8 @@ import javax.ws.rs.client.ClientBuilder;
 import javax.ws.rs.client.WebTarget;
 import javax.ws.rs.core.GenericType;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
+import javax.ws.rs.core.Response.Status;
 
 import es.deusto.spq.cliente.ClientApp;
 import es.deusto.spq.pojo.Pelicula;
@@ -63,7 +65,7 @@ public class VentanaModPeliculas extends JFrame {
 	        final WebTarget peliculasAllTarget = pelisTarget.path("all");
 	        final WebTarget addPeliTarget = pelisTarget.path("reg");
 
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		//setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 800, 500);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -79,8 +81,8 @@ public class VentanaModPeliculas extends JFrame {
 	     JList<Pelicula> listaPelis = new JList<>(peliListModel);
 	     
 	     JScrollPane scrollPane = new JScrollPane(listaPelis);
-			scrollPane.setBounds(6, 6, 600, 444);
-			contentPane.add(scrollPane);
+		scrollPane.setBounds(6, 6, 600, 444);
+		contentPane.add(scrollPane);
 		
 		JButton btnGetPeliculas = new JButton("Get Peliculas");
 		btnGetPeliculas.addActionListener(new ActionListener() {
@@ -128,5 +130,47 @@ public class VentanaModPeliculas extends JFrame {
 		JButton btnMenu = new JButton("Volver al Menu");
 		btnMenu.setBounds(611, 421, 183, 29);
 		contentPane.add(btnMenu);
+		
+		JButton btnEliminarPelicula = new JButton("Eliminar Selección");
+		btnEliminarPelicula.setBounds(611, 177, 183, 29);
+		contentPane.add(btnEliminarPelicula);
+		
+		
+		listaPelis.addListSelectionListener(new ListSelectionListener() {
+		    public void valueChanged(ListSelectionEvent e) {
+		        if (!e.getValueIsAdjusting() && listaPelis.getSelectedIndex() != -1) {
+		        	btnEliminarPelicula.setEnabled(true);
+		        } else {
+		        	btnEliminarPelicula.setEnabled(false);
+		        }
+		    }
+		});
+		
+		
+		btnEliminarPelicula.addActionListener(new ActionListener() {
+	        	
+	            @Override
+	            public void actionPerformed(ActionEvent e) {
+	                WebTarget deleteTarget = pelisTarget.path(listaPelis.getSelectedValue().getNombrePelicula());
+	                Response response = deleteTarget.request().buildDelete().invoke();
+	                
+	               // deleteTarget.request().delete();
+	                System.out.println(listaPelis.getSelectedValue().getNombrePelicula());
+	                
+	               // WebTarget.class.
+	               
+	                
+	                if (response.getStatus() == Status.OK.getStatusCode()) {
+	                    JOptionPane.showMessageDialog(VentanaModPeliculas.this, "Pelicula '" + listaPelis.getSelectedValue().getNombrePelicula() + "'" + " correctly deleted", "Message", JOptionPane.INFORMATION_MESSAGE);
+	                    peliListModel.removeElementAt(listaPelis.getSelectedIndex());
+	                    
+	                    
+	                } else {
+	                    JOptionPane.showMessageDialog(VentanaModPeliculas.this, "Could not delete user '" + listaPelis.getSelectedValue().getNombrePelicula() + "'", "Message", JOptionPane.ERROR_MESSAGE);
+	                }
+	               
+	            }
+
+	        });
 	}
 }

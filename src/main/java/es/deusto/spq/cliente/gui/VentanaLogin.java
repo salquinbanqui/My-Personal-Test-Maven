@@ -132,7 +132,7 @@ public class VentanaLogin extends JFrame {
 
 				}
 			});
-			setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+			//setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 			setSize(542, 355);
 			setVisible(true);
 			setTitle("Pelis PSC");

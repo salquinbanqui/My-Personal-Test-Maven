@@ -87,7 +87,7 @@ public class PeliculasResource {
  @Path("reg")
  @Consumes(MediaType.APPLICATION_JSON)
  @Produces(MediaType.APPLICATION_JSON)
- public Response addPelicula( List<String> peliculaL) {
+ public Response addPelicula(List<String> peliculaL) {
 	 	String nombrePelicula = peliculaL.get(0);
 		String categoria = peliculaL.get(1);
 		String precio = peliculaL.get(2);
@@ -121,12 +121,17 @@ public class PeliculasResource {
 //	 u1 = new Usuario();
 //	 u1 = DBManager.getInstance().getUsuario(username).getNombreUsuario();
 	 
-     if (DBManager.getInstance().getPelicula(nombrePelicula).getNombre() != null) {
+     if (DBManager.getInstance().getPelicula(nombrePelicula).getNombrePelicula() != null) {
     	
          System.out.println("Deleting movie..." + nombrePelicula);
        
        //  DBManager.getInstance().delete(DBManager.getInstance().getUsuario(username));
-         DBManager.getInstance().deleteObjectFromDB(DBManager.getInstance().getPelicula(nombrePelicula));
+       //  Pelicula p = DBManager.getInstance().getPelicula(nombrePelicula);
+        
+         
+         //DBManager.getInstance().delete( DBManager.getInstance().getPelicula(nombrePelicula));
+         DBManager.getInstance().borrarPelicula(nombrePelicula);
+         
          return Response.status(Response.Status.OK).build();
      } else {
          return Response.status(Response.Status.NOT_FOUND).build();
