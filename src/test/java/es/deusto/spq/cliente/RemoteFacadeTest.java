@@ -31,8 +31,8 @@ public class RemoteFacadeTest {
 	}
 
 	@Test
-	//@PerfTest(invocations = 10, threads =2)
-	//@Required(max = 1200, average = 250)
+	@PerfTest(invocations = 10, threads =2)
+	@Required(max = 1200, average = 250)
 	public void testagregarUsuarioGestionPelis() {
 		assertNotNull(rf.agregarUsuarioGestionPelis(u));
 	}
