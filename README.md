@@ -10,7 +10,8 @@ Para la ejecución de PSC Peliculas es necesario tener los siguientes programas 
 - [Java JDK 17] https://openjdk.org/projects/jdk/17/
 - [Apache Maven (bin)] https://maven.apache.org/download.cgi
 - [MySQL Workbench] https://dev.mysql.com/downloads/workbench/
-
+- [Postman] https://www.postman.com/
+- [SonarCloud] https://www.sonarsource.com/products/sonarcloud/
 
 
 ## Instalación y ejecución
@@ -38,7 +39,6 @@ Para ejecutar el proyecto hay que ejecutar el cliente y el servidor con los sigu
 
     mvn datanucleus:schema-create
     
-
 <h2> Para ejecutar el server: </h2>
 
     mvn exec:java -PServer
@@ -46,7 +46,6 @@ Para ejecutar el proyecto hay que ejecutar el cliente y el servidor con los sigu
 <h2> Para ejecutar el cliente: </h2>
 
     mvn exec:java -PClient 
-
 
 ## Autores
 
