@@ -2,31 +2,15 @@ package es.deusto.spq.cliente.gui;
 
 import static javax.swing.JOptionPane.ERROR_MESSAGE;
 
-import java.awt.BorderLayout;
-import java.awt.Color;
 import java.awt.EventQueue;
-import java.awt.Font;
-import java.awt.SystemColor;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.util.ArrayList;
-import java.util.List;
-import javax.ws.rs.client.Client;
-import javax.ws.rs.client.ClientBuilder;
-import javax.ws.rs.client.Entity;
-import javax.swing.AbstractButton;
-import javax.swing.DefaultListModel;
-import javax.swing.JButton;
+
 import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JList;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.JPasswordField;
-import javax.swing.JRadioButton;
-import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 import javax.ws.rs.ProcessingException;
+import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
 import javax.ws.rs.client.WebTarget;
 import javax.ws.rs.core.GenericType;
@@ -35,197 +19,170 @@ import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
 
 import es.deusto.spq.cliente.ClientApp;
-import es.deusto.spq.cliente.Controller;
-import es.deusto.spq.cliente.ServiceLocator;
 import es.deusto.spq.pojo.Usuario;
 
-import javax.swing.JComboBox;
 import javax.swing.JScrollPane;
+import javax.swing.JList;
+import javax.swing.JOptionPane;
+import javax.swing.JScrollBar;
+import javax.swing.DefaultListModel;
+import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.util.List;
+import java.awt.event.ActionEvent;
 
-
-	
 public class VentanaAmigo extends JFrame {
-	
-		private static final long serialVersionUID = 1L;
 
-		
+	private JPanel contentPane;
 
-		private JPanel contentpane;
-		private JLabel labelUsuario = new JLabel();
-		private JButton botonEliminarAmigo = new JButton();
-		private JButton botonAnyadirAmigo = new JButton();
-		ServiceLocator serviceLocator = new ServiceLocator();
-		private Controller controller = new Controller(serviceLocator);
-		private JTextField textField;
+	/**
+	 * Launch the application.
+	 */
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					VentanaAmigo frame = new VentanaAmigo();
+					frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
+
+	/**
+	 * Create the frame.
+	 */
+   private Client client;
+	public VentanaAmigo() {
 		
-		private Client client;
-		
-		
-		public  VentanaAmigo() {
-			
-			
-			client = ClientBuilder.newClient();
+		  client = ClientBuilder.newClient();
 
 	        final WebTarget appTarget = client.target("http://localhost:8080/webapi");
-	        final WebTarget userTarget = appTarget.path("usuarios");
-	        final WebTarget userAllTarget = userTarget.path("all");
-	        final WebTarget userRegTarget = userTarget.path("reg");
+	        final WebTarget friendsTarget = appTarget.path("Amigos");
+	        final WebTarget friendsAllTarget = friendsTarget.path("all");
+	        final WebTarget addfriendTarget = friendsTarget.path("reg");
+
+		//setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setBounds(100, 100, 800, 500);
+		contentPane = new JPanel();
+		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+
+		setContentPane(contentPane);
+		contentPane.setLayout(null);
 		
-			contentpane = new JPanel();
-			contentpane.setBorder(new EmptyBorder(5, 5, 5, 5));
-			setContentPane(contentpane);
-			contentpane.setLayout(null);
-			
 		
+		//JList listaAmigos = new JList();
+		//scrollPane.setRowHeaderView(listaAmigos);
+		
+	     final DefaultListModel<Usuario> amigoListModel = new DefaultListModel<>();
+	     JList<Usuario> listaAmigos = new JList<>(amigoListModel);
+	     
+	     JScrollPane scrollPane = new JScrollPane(listaAmigos);
+		scrollPane.setBounds(6, 6, 600, 444);
+		contentPane.add(scrollPane);
+		
+		JButton btnGetAmigos = new JButton("Get Amigos");
+		btnGetAmigos.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				 try {
+	                    GenericType<List<Usuario>> genericType = new GenericType<List<Usuario>>() {};
+	                    List<Usuario> amigos = friendsAllTarget.request(MediaType.APPLICATION_JSON).get(genericType);
+	                    amigoListModel.clear();
+	                    for (Usuario amigo : amigos) {
+	                    	amigoListModel.addElement(amigo);
+	                    }
+	                } catch (ProcessingException ex) {
+	                    JOptionPane.showMessageDialog(VentanaAmigo.this, "Error connecting with server", "Error message", ERROR_MESSAGE);
+	                }
+			}
+		});
+		btnGetAmigos.setBounds(611, 46, 183, 29);
+		contentPane.add(btnGetAmigos);
+		
+		
+		
+		JButton btnModSeleccion = new JButton("Modificar Selección");
+		btnModSeleccion.setEnabled(false);
+		btnModSeleccion.setBounds(611, 123, 183, 29);
+		contentPane.add(btnModSeleccion);
+		
+		btnModSeleccion.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				VentanaAmigoForm vaf = new VentanaAmigoForm(listaAmigos.getSelectedValue());
+				vaf.setVisible(true);
+			}
+		});
+		
+		
+		listaAmigos.addListSelectionListener(new ListSelectionListener() {
+		    public void valueChanged(ListSelectionEvent e) {
+		        if (!e.getValueIsAdjusting() && listaAmigos.getSelectedIndex() != -1) {
+		        	btnModSeleccion.setEnabled(true);
+		        } else {
+		        	btnModSeleccion.setEnabled(false);
+		        }
+		    }
+		});
+		
+		JButton btnMenu = new JButton("Volver al Menu");
+		btnMenu.setBounds(611, 421, 183, 29);
+		contentPane.add(btnMenu);
+		
+		btnMenu.addActionListener(new ActionListener() {
 
-			JLabel labelTitle = new JLabel("Pelis PSC");
-			labelTitle.setFont(new Font("French Script MT", Font.BOLD, 40));
-			labelTitle.setBounds(161, 10, 334, 50);
-			contentpane.add(labelTitle);
-
-			labelUsuario.setText("Lista de amigos");
-			labelUsuario.setOpaque(true);
-			labelUsuario.setBounds(24, 50, 169, 20);
-			labelUsuario.setFont(new Font("Perpetua", Font.BOLD, 16));
-			contentpane.add(labelUsuario, BorderLayout.SOUTH);
-
-			botonEliminarAmigo.setForeground(new Color(0, 0, 0));
-			botonEliminarAmigo.setBackground(new Color(0, 51, 255));
-			botonEliminarAmigo.setBounds(341, 243, 154, 32);
-			botonEliminarAmigo.setText("Eliminar amigo");
-			botonEliminarAmigo.setFont(new Font("Harrington", Font.BOLD | Font.ITALIC, 16));
-			contentpane.add(botonEliminarAmigo);
-
-			botonAnyadirAmigo.setBackground(SystemColor.inactiveCaptionBorder);
-			botonAnyadirAmigo.setBounds(341, 190, 154, 32);
-			botonAnyadirAmigo.setText("Añadir amigo");
-			botonAnyadirAmigo.setFont(new Font("Harrington", Font.BOLD | Font.ITALIC, 16));
-			contentpane.add(botonAnyadirAmigo);
-			
-			textField = new JTextField();
-			textField.setBounds(289, 139, 96, 19);
-			contentpane.add(textField);
-			textField.setColumns(10);
-			
-			JLabel lblNewLabel = new JLabel("Usuario:");
-			lblNewLabel.setBounds(224, 132, 79, 32);
-			contentpane.add(lblNewLabel);
-			
-			JScrollPane scrollPane = new JScrollPane();
-			scrollPane.setBounds(189, 247, -167, -169);
-			contentpane.add(scrollPane);
-			
-			final DefaultListModel<Usuario> userListModel = new DefaultListModel<>();
-	        JList<Usuario> userList = new JList<>(userListModel);
-
-	        scrollPane.add(userList);
-	        
-	        
-	        final JTextField emailTextField = new JTextField("", 10);
-	        emailTextField.setBounds(142, 135, 130, 26);
-	        final JTextField passwordTextField = new JTextField("", 10);
-	        passwordTextField.setBounds(142, 182, 130, 26);
-	        final JTextField cardTextField = new JTextField("", 10);
-	        JRadioButton rdbtnNewRadioButton = new JRadioButton("is admin");
-			
-			
-			JButton getAmigosButton = new JButton("Get Amigos");
-			getAmigosButton.setBounds(36, 294, 85, 21);
-			contentpane.add(getAmigosButton);
-			
-			
-			
-			  getAmigosButton.addActionListener(new ActionListener() {
-				  @Override
-		            public void actionPerformed(ActionEvent e) {
-		                try {
-		                    GenericType<List<Usuario>> genericType = new GenericType<List<Usuario>>() {};
-		                    List<Usuario> usuarios = userAllTarget.request(MediaType.APPLICATION_JSON).get(genericType);
-		                    userListModel.clear();
-		                    for (Usuario user : usuarios) {
-		                        userListModel.addElement(user);
-		                    }
-		                } catch (ProcessingException ex) {
-		                }
-		            }
-		            
-		        });
-
-		       
-			botonAnyadirAmigo.addActionListener(new ActionListener() {
-
-				@Override
-				public void actionPerformed(ActionEvent e) {
-			            	
-							//DBManager.getInstance();
-			            	Usuario newUser = new Usuario(textField.getText(), emailTextField.getText(), passwordTextField.getText(), cardTextField.getText(), rdbtnNewRadioButton.isSelected());
-			            	userListModel.addElement(newUser);
-			            	
-			            	WebTarget userRegTarget = userTarget.path("reg");
-							List<String> usuarioL = new ArrayList<>(); 
-							usuarioL.add(newUser.getNombreUsuario());
-							usuarioL.add(newUser.getEmail());
-							usuarioL.add(newUser.getPassword());
-							usuarioL.add(newUser.getTarjeta());
-							usuarioL.add(newUser.getAdmin());
-							
-							//userRegTarget.request().post(Entity.entity(newUser, MediaType.APPLICATION_JSON));
-							
-							userRegTarget.request().post(Entity.entity(usuarioL, MediaType.APPLICATION_JSON));
-			            }
-			            
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				// TODO Auto-generated method stub
+				dispose();
+				VentanaAdmin aw = new VentanaAdmin(client);
+				aw.setVisible(true);
 				
-			});
+			}
 			
-			
-			botonEliminarAmigo.addActionListener(new ActionListener() {
-				 @Override
-		            public void actionPerformed(ActionEvent e) {
-		                WebTarget deleteTarget = userTarget.path(userList.getSelectedValue().getNombreUsuario());
-		                Response response = deleteTarget.request().buildDelete().invoke();
-		                
-		               // deleteTarget.request().delete();
-		                System.out.println(userList.getSelectedValue().getNombreUsuario());
-		                
-		               // WebTarget.class.
-		               
-		                
-		                if (response.getStatus() == Status.OK.getStatusCode()) {
-		                    JOptionPane.showMessageDialog(VentanaAmigo.this, "User '" + userList.getSelectedValue().getNombreUsuario() + "'" + " correctly deleted", "Message", JOptionPane.INFORMATION_MESSAGE);
-		                    userListModel.removeElementAt(userList.getSelectedIndex());
-		                    textField.setText("");
-		                    emailTextField.setText("");
-		                    passwordTextField.setText("");
-		                    cardTextField.setText("");
-		                    rdbtnNewRadioButton.setSelected(false);
-		                    
-		                    
-		                } else {
-		                    JOptionPane.showMessageDialog(VentanaAmigo.this, "Could not delete user '" + userList.getSelectedValue().getNombreUsuario() + "'", "Message", JOptionPane.ERROR_MESSAGE);
-		                }
-		               
-		            }
-			});
-			setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-			setSize(542, 355);
-			setVisible(true);
-			setTitle("Pelis PSC");
-
-		}
-
+		});
+		
+		JButton btnEliminarAmigo = new JButton("Eliminar Selección");
+		btnEliminarAmigo.setBounds(611, 177, 183, 29);
+		contentPane.add(btnEliminarAmigo);
 		
 		
+		listaAmigos.addListSelectionListener(new ListSelectionListener() {
+		    public void valueChanged(ListSelectionEvent e) {
+		        if (!e.getValueIsAdjusting() && listaAmigos.getSelectedIndex() != -1) {
+		        	btnEliminarAmigo.setEnabled(true);
+		        } else {
+		        	btnEliminarAmigo.setEnabled(false);
+		        }
+		    }
+		});
+		
+		
+		btnEliminarAmigo.addActionListener(new ActionListener() {
+	        	
+	            @Override
+	            public void actionPerformed(ActionEvent e) {
+	                WebTarget deleteTarget = friendsTarget.path(listaAmigos.getSelectedValue().getNombreUsuario());
+	                Response response = deleteTarget.request().buildDelete().invoke();
+	                
+	               // deleteTarget.request().delete();
+	                System.out.println(listaAmigos.getSelectedValue().getNombreUsuario());
+	                
+	               // WebTarget.class.
+	               
+	                
+	                if (response.getStatus() == Status.OK.getStatusCode()) {
+	                    JOptionPane.showMessageDialog(VentanaAmigo.this, "Amigo '" + listaAmigos.getSelectedValue().getNombreUsuario() + "'" + " correctly deleted", "Message", JOptionPane.INFORMATION_MESSAGE);
+	                    amigoListModel.removeElementAt(listaAmigos.getSelectedIndex());
+	                    
+	                    
+	                } else {
+	                    JOptionPane.showMessageDialog(VentanaAmigo.this, "Could not delete pelicula '" + listaAmigos.getSelectedValue().getNombreUsuario() + "'", "Message", JOptionPane.ERROR_MESSAGE);
+	                }
+	               
+	            }
 
-		public static void main(String[] args) {
-			EventQueue.invokeLater(new Runnable() {
-				public void run() {
-					try {
-						VentanaAmigo va = new VentanaAmigo();
-						va.setVisible(true);
-					} catch (Exception e) {
-						e.printStackTrace();
-					}
-				}
-			});
-		}
+	        });
 	}
+}
