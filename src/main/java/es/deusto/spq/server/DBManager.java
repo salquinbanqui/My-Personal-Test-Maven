@@ -200,7 +200,8 @@ public class DBManager {
 		Usuario u2 = new Usuario("jotajota", "jose@opendeusto.es", "password_jose", "XXXX-XXXX-XXXX-XXXX", false);              
 		Usuario u3 = new Usuario("markelinho", "mark@opendeusto.es", "password_mark", "XXXX-XXXX-XXXX-XXXX", false);            
 		Usuario u4 = new Usuario("yonan99", "yonander@opendeusto.es", "password_yonan", "XXXX-XXXX-XXXX-XXXX", false);          
-		Usuario u5 = new Usuario("nachete", "ignacio@opendeusto.es", "password_nacho", "XXXX-XXXX-XXXX-XXXX", false);           
+		Usuario u5 = new Usuario("nachete", "ignacio@opendeusto.es", "password_nacho", "XXXX-XXXX-XXXX-XXXX", false);      
+		Usuario u6 = new Usuario("admin", "admin@admin.es", "admin", "XXXX-XXXX-XXXX-XXXX", true);  
 		
 		//PELICULAS...
 		
@@ -218,6 +219,7 @@ public class DBManager {
 			 store(u3);
 			 store(u4);
 			 store(u5);
+			 store(u6);
 			 
 			 storePelicula(p1);
 			 storePelicula(p2);

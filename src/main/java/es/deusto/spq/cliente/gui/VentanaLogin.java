@@ -117,6 +117,7 @@ public class VentanaLogin extends JFrame {
 					controller.loginGestionPelis(textoUsuario.getText(), textoContrasenya.getText());
 					VentanaAdmin vi = new VentanaAdmin(client);
 					vi.setVisible(true);
+					setVisible(false);
 					
 				}
 				
