@@ -17,6 +17,7 @@ Para la ejecución de PSC Peliculas es necesario tener los siguientes programas 
 ## Instalación y ejecución
 
 Para ejecutar el proyecto hay que ejecutar el cliente y el servidor con los siguientes comandos.
+Puedes iniciar sesion con el usuario de admin y la contraseña de admin.
 
 <h2> Para ejecutar el servidor los pasos son: </h2>
 <h3> El primer comando  </h3>
