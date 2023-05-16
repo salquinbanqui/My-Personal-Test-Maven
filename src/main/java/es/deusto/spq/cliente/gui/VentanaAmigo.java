@@ -60,9 +60,9 @@ public class VentanaAmigo extends JFrame {
 		  client = ClientBuilder.newClient();
 
 	        final WebTarget appTarget = client.target("http://localhost:8080/webapi");
-	        final WebTarget friendsTarget = appTarget.path("Amigos");
-	        final WebTarget friendsAllTarget = friendsTarget.path("all");
-	        final WebTarget addfriendTarget = friendsTarget.path("reg");
+	        final WebTarget usuariosTarget = appTarget.path("Amigos");
+	        final WebTarget usuariosAllTarget = usuariosTarget.path("all");
+	        final WebTarget addUsuarioTarget = usuariosTarget.path("reg");
 
 		//setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 800, 500);
@@ -88,7 +88,7 @@ public class VentanaAmigo extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				 try {
 	                    GenericType<List<Usuario>> genericType = new GenericType<List<Usuario>>() {};
-	                    List<Usuario> amigos = friendsAllTarget.request(MediaType.APPLICATION_JSON).get(genericType);
+	                    List<Usuario> amigos = usuariosAllTarget.request(MediaType.APPLICATION_JSON).get(genericType);
 	                    amigoListModel.clear();
 	                    for (Usuario amigo : amigos) {
 	                    	amigoListModel.addElement(amigo);
@@ -163,7 +163,7 @@ public class VentanaAmigo extends JFrame {
 	        	
 	            @Override
 	            public void actionPerformed(ActionEvent e) {
-	                WebTarget deleteTarget = friendsTarget.path(listaAmigos.getSelectedValue().getNombreUsuario());
+	                WebTarget deleteTarget = usuariosTarget.path(listaAmigos.getSelectedValue().getNombreUsuario());
 	                Response response = deleteTarget.request().buildDelete().invoke();
 	                
 	               // deleteTarget.request().delete();

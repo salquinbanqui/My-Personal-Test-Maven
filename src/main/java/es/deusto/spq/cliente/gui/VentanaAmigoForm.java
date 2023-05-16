@@ -65,7 +65,7 @@ public class VentanaAmigoForm extends JFrame {
 		client = (Client) ClientBuilder.newClient();
 		
 	     final WebTarget appTarget = client.target("http://localhost:8080/webapi");
-		  final WebTarget amigosTarget = appTarget.path("amigos");
+		  final WebTarget usuariosTarget = appTarget.path("usuarios");
 		
 		//setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 570, 340);
@@ -131,7 +131,7 @@ public class VentanaAmigoForm extends JFrame {
          	//userListModel.addElement(newUser);
          	
          	
-         	WebTarget peliRegTarget = amigosTarget.path("reg");
+         	WebTarget peliRegTarget = usuariosTarget.path("reg");
 				List<String> amigos = new ArrayList<>(); 
          		amigos.add(newUsu.getNombreUsuario());
          		amigos.add(newUsu.getEmail());
