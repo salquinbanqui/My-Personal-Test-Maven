@@ -47,7 +47,7 @@ public class PeliculasResourceTest {
 		server.stop();
 	}
 	
-	@Ignore
+	
 	@Test
 	@PerfTest(invocations = 100, threads = 40)
 	public void testgetPelicula() {
