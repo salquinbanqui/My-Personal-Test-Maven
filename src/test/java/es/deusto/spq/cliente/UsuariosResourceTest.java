@@ -1,12 +1,11 @@
 package es.deusto.spq.cliente;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import javax.ws.rs.core.MediaType;
 
-import java.awt.PageAttributes.MediaType;
 import java.util.Arrays;
 import java.util.List;
 
-import es.deusto.spq.pojo.Usuario;
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
 import javax.ws.rs.client.WebTarget;
@@ -20,6 +19,7 @@ import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 
+import es.deusto.spq.pojo.Usuario;
 import es.deusto.spq.server.Main;
 
 public class UsuariosResourceTest {

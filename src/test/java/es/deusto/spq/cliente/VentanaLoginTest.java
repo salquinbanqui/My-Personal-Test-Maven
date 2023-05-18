@@ -28,8 +28,7 @@ public class VentanaLoginTest {
 	private JPasswordField pass3;
 
 	private VentanaLogin l1;
-	private VentanaLogin l2;
-	private VentanaLogin l3;
+
 
 	private HttpServer server;
 	private WebTarget appTarget;
