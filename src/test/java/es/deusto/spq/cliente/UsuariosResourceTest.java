@@ -3,6 +3,7 @@ package es.deusto.spq.cliente;
 import static org.junit.Assert.assertEquals;
 import javax.ws.rs.core.MediaType;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -19,6 +20,7 @@ import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 
+import es.deusto.spq.pojo.Pelicula;
 import es.deusto.spq.pojo.Usuario;
 import es.deusto.spq.server.Main;
 
@@ -49,13 +51,16 @@ public class UsuariosResourceTest {
 		WebTarget usersTarget = appTarget.path("users");
 		WebTarget usersallTarget = usersTarget.path("allusers");
 
-		List<Usuario> listausers = Arrays
-				.asList(new Usuario("Unai", "unai@unai.com", "passwordunai", "33-33-33-33", false));
+		List<Usuario> listausers = Arrays.asList(new Usuario("Unai", "unai@unai.com", "passwordunai", "33-33-33-33", false));
 
+		
+		
 		GenericType<List<Usuario>> genericType = new GenericType<List<Usuario>>() {
 		};
 		List<Usuario> users = usersallTarget.request(MediaType.APPLICATION_JSON).get(genericType);
 
+		
+		
 		assertEquals(listausers.get(0).getNombreUsuario(), users.get(0).getNombreUsuario());
 	}
 
@@ -64,8 +69,7 @@ public class UsuariosResourceTest {
 	public void testGetUser() {
 		WebTarget usersTarget = appTarget.path("users");
 		WebTarget getusersTarget = usersTarget.path("getuser").queryParam("nickname", "jaimesanta");
-		List<Usuario> listauser = Arrays
-				.asList(new Usuario("Unai", "unai@unai.com", "passwordunai", "44-44-44-44", false));
+		List<Usuario> listauser = Arrays.asList(new Usuario("Unai", "unai@unai.com", "passwordunai", "44-44-44-44", false));
 
 		GenericType<Usuario> genericType = new GenericType<Usuario>() {
 		};
