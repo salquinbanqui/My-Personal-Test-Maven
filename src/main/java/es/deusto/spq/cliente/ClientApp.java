@@ -39,9 +39,10 @@ import javax.swing.JRadioButton;
 
 public class ClientApp extends JFrame {
 
-    /**
-     *
-     */
+	/**
+	 * Cliente app.
+	 *
+	 */
 	
 
     private static final long serialVersionUID = 1L;
