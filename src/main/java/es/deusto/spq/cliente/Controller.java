@@ -55,7 +55,7 @@ private ServiceLocator serviceLocator;
     }
 	
 	*/
-
+	// agregar usuario 
 	public boolean agregarUsuarioGestionPelis(String nombreUsuario, String password, String email, String tarjeta){
 		return serviceLocator.agregarUsuarioGestionPelis(nombreUsuario, email, password, tarjeta);
 	}

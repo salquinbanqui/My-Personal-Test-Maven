@@ -21,10 +21,13 @@ public class VentanaRegistro extends JFrame{
 
 	
 	 private static final long serialVersionUID = 1L;
-
-	    private Client client;
-
-	    public VentanaRegistro() {
+	 private Client client;
+	    
+	    /**
+		 * Create the frame.
+		 */
+	 
+	  public VentanaRegistro() {
 	        client = ClientBuilder.newClient();
 
 	        final WebTarget appTarget = client.target("http://localhost:8080/webapi");
@@ -117,7 +120,9 @@ public class VentanaRegistro extends JFrame{
 	    }
 	        
 
-	       
+	    /**
+		 * Launch the application.
+		 */
         
 	    public static void main(String[] args) {
 	        SwingUtilities.invokeLater(new Runnable(){

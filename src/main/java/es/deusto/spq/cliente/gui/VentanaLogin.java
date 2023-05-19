@@ -58,6 +58,9 @@ public class VentanaLogin extends JFrame {
 		final WebTarget userTarget = appTarget.path("usuarios");
 		final WebTarget userAllTarget = userTarget.path("all");
 		
+		/**
+		 * Create the frame.
+		 */
 		
 		public  VentanaLogin() {
 			
@@ -141,7 +144,9 @@ public class VentanaLogin extends JFrame {
 		}
 
 		
-		
+		/**
+		 * Launch the application.
+		 */
 
 		public static void main(String[] args) {
 			EventQueue.invokeLater(new Runnable() {

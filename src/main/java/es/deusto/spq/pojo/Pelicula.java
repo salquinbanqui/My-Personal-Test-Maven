@@ -15,6 +15,13 @@ public class Pelicula {
 	private String fecha;
 	private String descripcion;
 	
+	/** Constructor de pelicula 
+	 * @param nombre Nombre de pelicula
+	 * @param categoria Categoria de pelicula 
+	 * @param precio Precio de pelicula 
+	 * @param fecha Fecha de pelicula 
+	 * @param descripcion Descripcion de pelicula
+	 */
 	
 	public Pelicula(String nombrePelicula, String categoria, double precio, String fecha, String descripcion) {
 		super();

@@ -313,6 +313,7 @@ public class DBManager {
 	}
 	*/
 	
+	//Metodo para borrar usuario
 	
 	public void borrarUsuario(String username) {
 		PersistenceManager pm = pmf.getPersistenceManager();
@@ -336,6 +337,7 @@ public class DBManager {
 		}
 	}
 	
+	//Metodo para borrar las peliculas
 	public void borrarPelicula(String nombrePelicula) {
 		PersistenceManager pm = pmf.getPersistenceManager();
 		Transaction tx = pm.currentTransaction();
@@ -358,7 +360,7 @@ public class DBManager {
 		}
 	}
 	
-	
+	//Metodo para borrar los usuarios al iniciar
 	public void borrarUsuarios() {
 		List<Usuario> usuarios = new ArrayList<Usuario>();
 		PersistenceManager pm = pmf.getPersistenceManager();

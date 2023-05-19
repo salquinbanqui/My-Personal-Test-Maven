@@ -15,7 +15,13 @@ public class Usuario {
 	private String tarjeta;
 	private boolean admin;
 	
-	
+	/** Constructor del usuario 
+	 * @param nombre Nombre del usuario
+	 * @param email Email del usuario
+	 * @param password Password del usuario
+	 * @param tarjeta Tarjeta del usuario
+	 * @param Admin Boolean para saber si el usuario es admin o no 
+	 */
 	
 	public Usuario(String nombreUsuario, String email, String password, String tarjeta, boolean admin) {
 		super();
