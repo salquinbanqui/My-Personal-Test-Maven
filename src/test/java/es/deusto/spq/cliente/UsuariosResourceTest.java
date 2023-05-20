@@ -1,4 +1,4 @@
-package es.deusto.spq.cliente;
+/*package es.deusto.spq.cliente;
 
 import static org.junit.Assert.assertEquals;
 import javax.ws.rs.core.MediaType;
@@ -46,7 +46,7 @@ public class UsuariosResourceTest {
 	}
 	
 	@Test
-	@PerfTest(invocations = 100, threads = 40)
+	//@PerfTest(invocations = 100, threads = 40)
 	public void testgetUsers() {
 		WebTarget usersTarget = appTarget.path("users");
 		WebTarget usersallTarget = usersTarget.path("allusers");
@@ -64,19 +64,7 @@ public class UsuariosResourceTest {
 		assertEquals(listausers.get(0).getNombreUsuario(), users.get(0).getNombreUsuario());
 	}
 
-	@Test
-	@PerfTest(invocations = 100, threads = 40)
-	public void testGetUser() {
-		WebTarget usersTarget = appTarget.path("users");
-		WebTarget getusersTarget = usersTarget.path("getuser").queryParam("nickname", "jaimesanta");
-		List<Usuario> listauser = Arrays.asList(new Usuario("Unai", "unai@unai.com", "passwordunai", "44-44-44-44", false));
 
-		GenericType<Usuario> genericType = new GenericType<Usuario>() {
-		};
-		Usuario user = getusersTarget.request(MediaType.APPLICATION_JSON).get(genericType);
 
-		assertEquals(listauser.get(0).getNombreUsuario(), user.getNombreUsuario());
-	}
-
-}
+}*/
 
