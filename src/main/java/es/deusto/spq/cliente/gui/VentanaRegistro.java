@@ -15,6 +15,7 @@ import javax.ws.rs.client.ClientBuilder;
 import javax.ws.rs.client.Entity;
 import javax.ws.rs.client.WebTarget;
 import javax.ws.rs.core.MediaType;
+
 import es.deusto.spq.pojo.Usuario;
 
 public class VentanaRegistro extends JFrame{

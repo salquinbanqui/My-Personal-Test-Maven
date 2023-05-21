@@ -32,6 +32,14 @@ public class VentanaAnyadirPelicula extends JFrame {
 	private JTextField textFieldPrecio;
 	private JTextField textFieldFecha;
 	private JTextField textFieldDescripcion;
+	
+
+	private JLabel lblNewLabel;
+	private JButton btnAnyadir;
+	
+	
+	
+	private JButton btnVolver;
 
 	
 	private Client client;
@@ -169,4 +177,59 @@ public class VentanaAnyadirPelicula extends JFrame {
 	
 	
 	}
+
+	public JButton getBtnAnyadir() {
+		// TODO Auto-generated method stub
+		return this.btnAnyadir;
+	}
+
+	public JTextField getTextFieldTitulo() {
+		// TODO Auto-generated method stub
+		return this.textFieldTitulo;
+	}
+
+	public JTextField getTextFieldCategoria() {
+		// TODO Auto-generated method stub
+		return this.textFieldCategoria;
+	}
+	
+	public JTextField getTextFieldPrecio() {
+		// TODO Auto-generated method stub
+		return this.textFieldPrecio;
+	}
+	public JTextField getTextFieldFecha() {
+		// TODO Auto-generated method stub
+		return this.textFieldFecha;
+	}
+	public JTextField getTextFieldDescripcion() {
+		// TODO Auto-generated method stub
+		return this.textFieldCategoria;
+	}
+
+	public void btnAnyadirActionPerformed(Object object) {
+		// TODO Auto-generated method stub
+		Pelicula newPeli = new Pelicula(textFieldTitulo.getText(), textFieldCategoria.getText(), Double.parseDouble(textFieldPrecio.getText()), textFieldFecha.getText(), textFieldDescripcion.getText());
+    	//userListModel.addElement(newUser);
+    	
+
+    	client = ClientBuilder.newClient();
+
+	        final WebTarget appTarget = client.target("http://localhost:8080/webapi");
+	        final WebTarget pelisTarget = appTarget.path("peliculas");
+	        final WebTarget peliculasAllTarget = pelisTarget.path("all");
+	        final WebTarget addPeliTarget = pelisTarget.path("reg");
+    	
+    	WebTarget peliRegTarget = pelisTarget.path("reg");
+			List<String> peliL = new ArrayList<>(); 
+    		peliL.add(newPeli.getNombrePelicula());
+    		peliL.add(newPeli.getCategoria());
+    		peliL.add(String.valueOf(newPeli.getPrecio()));
+    		peliL.add(newPeli.getFecha());
+    		peliL.add(newPeli.getDescripcion());
+			
+			//userRegTarget.request().post(Entity.entity(newUser, MediaType.APPLICATION_JSON));
+			
+    		peliRegTarget.request().post(Entity.entity(peliL, MediaType.APPLICATION_JSON));
+    }
+	
 }

@@ -3,9 +3,18 @@ package es.deusto.spq.cliente.gui;
 import static javax.swing.JOptionPane.ERROR_MESSAGE;
 
 import java.awt.EventQueue;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.List;
 
+import javax.swing.DefaultListModel;
+import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JList;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
@@ -18,19 +27,7 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
 
-import es.deusto.spq.cliente.ClientApp;
 import es.deusto.spq.pojo.Pelicula;
-import es.deusto.spq.pojo.Usuario;
-
-import javax.swing.JScrollPane;
-import javax.swing.JList;
-import javax.swing.JOptionPane;
-import javax.swing.JScrollBar;
-import javax.swing.DefaultListModel;
-import javax.swing.JButton;
-import java.awt.event.ActionListener;
-import java.util.List;
-import java.awt.event.ActionEvent;
 
 public class VentanaModPeliculas extends JFrame {
 
@@ -56,13 +53,17 @@ public class VentanaModPeliculas extends JFrame {
 	 * Create the frame.
 	 */
    private Client client;
+   private DefaultListModel<Pelicula> peliListModel;
+   private JList<Pelicula> listaPelis;
+   private WebTarget peliculasAllTarget;
+   private WebTarget pelisTarget;
 	public VentanaModPeliculas() {
 		
 		  client = ClientBuilder.newClient();
 
 	        final WebTarget appTarget = client.target("http://localhost:8080/webapi");
-	        final WebTarget pelisTarget = appTarget.path("peliculas");
-	        final WebTarget peliculasAllTarget = pelisTarget.path("all");
+	        pelisTarget = appTarget.path("peliculas");
+	        peliculasAllTarget = pelisTarget.path("all");
 	        final WebTarget addPeliTarget = pelisTarget.path("reg");
 
 		//setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -77,8 +78,8 @@ public class VentanaModPeliculas extends JFrame {
 		//JList listaPeliculas = new JList();
 		//scrollPane.setRowHeaderView(listaPeliculas);
 		
-	     final DefaultListModel<Pelicula> peliListModel = new DefaultListModel<>();
-	     JList<Pelicula> listaPelis = new JList<>(peliListModel);
+	     peliListModel = new DefaultListModel<>();
+	     listaPelis = new JList<>(peliListModel);
 	     
 	     JScrollPane scrollPane = new JScrollPane(listaPelis);
 		scrollPane.setBounds(6, 6, 600, 444);
@@ -104,7 +105,7 @@ public class VentanaModPeliculas extends JFrame {
 		
 		
 		
-		JButton btnModSeleccion = new JButton("Modificar Selección");
+		final JButton btnModSeleccion = new JButton("Modificar Selección");
 		btnModSeleccion.setEnabled(false);
 		btnModSeleccion.setBounds(611, 123, 183, 29);
 		contentPane.add(btnModSeleccion);
@@ -144,7 +145,7 @@ public class VentanaModPeliculas extends JFrame {
 			
 		});
 		
-		JButton btnEliminarPelicula = new JButton("Eliminar Selección");
+		final JButton btnEliminarPelicula = new JButton("Eliminar Selección");
 		btnEliminarPelicula.setBounds(611, 177, 183, 29);
 		contentPane.add(btnEliminarPelicula);
 		
@@ -185,5 +186,83 @@ public class VentanaModPeliculas extends JFrame {
 	            }
 
 	        });
+		
+		
 	}
+	
+	public DefaultListModel<Pelicula> getPeliListModel() {
+		// TODO Auto-generated method stub
+		return peliListModel;
+	}
+	public void setPeliListModel(DefaultListModel<Pelicula> peliListModel2) {
+		// TODO Auto-generated method stub
+		this.peliListModel = peliListModel2;
+		
+	}
+	public JList<Pelicula> getPeliculasList() {
+		// TODO Auto-generated method stub
+		return listaPelis;
+	}
+	public void setPeliculasList(JList<Pelicula> listaPelis2) {
+		// TODO Auto-generated method stub
+		this.listaPelis = listaPelis2;
+	}
+
+	public void btnGetPeliculasActionPerformed(Object object) {
+	    try {
+	        GenericType<List<Pelicula>> genericType = new GenericType<List<Pelicula>>() {};
+	        List<Pelicula> peliculas = peliculasAllTarget.request(MediaType.APPLICATION_JSON).get(genericType);
+	        peliListModel.clear();
+	        for (Pelicula peli : peliculas) {
+	            peliListModel.addElement(peli);
+	        }
+	    } catch (ProcessingException ex) {
+	        JOptionPane.showMessageDialog(VentanaModPeliculas.this, "Error connecting with server", "Error message", ERROR_MESSAGE);
+	    }
+	}
+
+	public void btnEliminarPeliculaActionPerformed(Object object) {
+		
+		
+		
+		
+	    this.setListSelection((Pelicula) object);
+
+	    Pelicula selectedPelicula = listaPelis.getSelectedValue();
+	    String peliculaNombre = selectedPelicula.getNombrePelicula();
+
+	    WebTarget deleteTarget = pelisTarget.path("/{"+peliculaNombre+"}");
+	    Response response = deleteTarget.resolveTemplate("peliculaNombre", peliculaNombre)
+	            .request()
+	            .buildDelete()
+	            .invoke();
+
+	    if (response.getStatus() == Status.OK.getStatusCode()) {
+	        JOptionPane.showMessageDialog(VentanaModPeliculas.this, "Pelicula '" + peliculaNombre + "' correctly deleted", "Message", JOptionPane.INFORMATION_MESSAGE);
+	        DefaultListModel<Pelicula> peliListModel = getPeliListModel();
+	        peliListModel.removeElement(selectedPelicula);
+	    } else {
+	        JOptionPane.showMessageDialog(VentanaModPeliculas.this, "Could not delete pelicula '" + peliculaNombre + "'", "Message", JOptionPane.ERROR_MESSAGE);
+	    }
+	}
+
+
+
+	public void btnModificarPeliculaActionPerformed(Object object) {
+	    int selectedIndex = listaPelis.getSelectedIndex();
+	    if (selectedIndex != -1) {
+	        Pelicula selectedPelicula = listaPelis.getSelectedValue();
+	        VentanaModPeliculaForm vMPF = new VentanaModPeliculaForm(selectedPelicula);
+	        vMPF.setVisible(true);
+	    }
+	}
+
+
+	public void setListSelection(Pelicula selectedPelicula) {
+	    listaPelis.setSelectedValue(selectedPelicula, true);
+	}
+
+
+	
+	 
 }

@@ -116,7 +116,7 @@ public class VentanaAmigo extends JFrame {
 			contentpane.add(scrollPane);
 			
 			final DefaultListModel<Usuario> userListModel = new DefaultListModel<>();
-	        JList<Usuario> userList = new JList<>(userListModel);
+	        final JList<Usuario> userList = new JList<>(userListModel);
 
 	        scrollPane.add(userList);
 	        
@@ -126,7 +126,7 @@ public class VentanaAmigo extends JFrame {
 	        final JTextField passwordTextField = new JTextField("", 10);
 	        passwordTextField.setBounds(142, 182, 130, 26);
 	        final JTextField cardTextField = new JTextField("", 10);
-	        JRadioButton rdbtnNewRadioButton = new JRadioButton("is admin");
+	        final JRadioButton rdbtnNewRadioButton = new JRadioButton("is admin");
 			
 			
 			JButton getAmigosButton = new JButton("Get Amigos");

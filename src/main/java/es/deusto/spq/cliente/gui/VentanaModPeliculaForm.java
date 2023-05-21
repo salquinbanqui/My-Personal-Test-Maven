@@ -37,6 +37,8 @@ public class VentanaModPeliculaForm extends JFrame {
 	private JTextField textFieldDescripcion;
 	
 	private Client client;
+	JButton btnGuardarCambios;
+	
 	
 	
 	
@@ -105,45 +107,45 @@ public class VentanaModPeliculaForm extends JFrame {
 		lblDescripcion.setBounds(20, 157, 104, 16);
 		contentPane.add(lblDescripcion);
 		
-		textFieldTitulo = new JTextField();
-		textFieldTitulo.setBounds(113, 35, 260, 26);
-		contentPane.add(textFieldTitulo);
-		textFieldTitulo.setColumns(10);
-		textFieldTitulo.setText(p.getNombrePelicula());
+		setTextFieldTitulo(new JTextField());
+		getTextFieldTitulo().setBounds(113, 35, 260, 26);
+		contentPane.add(getTextFieldTitulo());
+		getTextFieldTitulo().setColumns(10);
+		getTextFieldTitulo().setText(p.getNombrePelicula());
 		
-		textFieldCategoria = new JTextField();
-		textFieldCategoria.setBounds(113, 63, 153, 26);
-		contentPane.add(textFieldCategoria);
-		textFieldCategoria.setColumns(10);
-		textFieldCategoria.setText(p.getCategoria());
+		setTextFieldCategoria(new JTextField());
+		getTextFieldCategoria().setBounds(113, 63, 153, 26);
+		contentPane.add(getTextFieldCategoria());
+		getTextFieldCategoria().setColumns(10);
+		getTextFieldCategoria().setText(p.getCategoria());
 		
-		textFieldPrecio = new JTextField();
-		textFieldPrecio.setHorizontalAlignment(SwingConstants.RIGHT);
-		textFieldPrecio.setBounds(113, 91, 80, 26);
-		contentPane.add(textFieldPrecio);
-		textFieldPrecio.setColumns(10);
-		textFieldPrecio.setText(String.valueOf(p.getPrecio()));
+		setTextFieldPrecio(new JTextField());
+		getTextFieldPrecio().setHorizontalAlignment(SwingConstants.RIGHT);
+		getTextFieldPrecio().setBounds(113, 91, 80, 26);
+		contentPane.add(getTextFieldPrecio());
+		getTextFieldPrecio().setColumns(10);
+		getTextFieldPrecio().setText(String.valueOf(p.getPrecio()));
 		
-		textFieldFecha = new JTextField();
-		textFieldFecha.setBounds(113, 119, 130, 26);
-		contentPane.add(textFieldFecha);
-		textFieldFecha.setColumns(10);
-		textFieldFecha.setText(p.getFecha());
+		setTextFieldFecha(new JTextField());
+		getTextFieldFecha().setBounds(113, 119, 130, 26);
+		contentPane.add(getTextFieldFecha());
+		getTextFieldFecha().setColumns(10);
+		getTextFieldFecha().setText(p.getFecha());
 		
-		textFieldDescripcion = new JTextField();
-		textFieldDescripcion.setBounds(113, 152, 260, 90);
-		contentPane.add(textFieldDescripcion);
-		textFieldDescripcion.setColumns(10);
-		textFieldDescripcion.setText(p.getDescripcion());
+		setTextFieldDescripcion(new JTextField());
+		getTextFieldDescripcion().setBounds(113, 152, 260, 90);
+		contentPane.add(getTextFieldDescripcion());
+		getTextFieldDescripcion().setColumns(10);
+		getTextFieldDescripcion().setText(p.getDescripcion());
 		
 		
 		JLabel lblNewLabel = new JLabel("€");
 		lblNewLabel.setBounds(205, 96, 61, 16);
 		contentPane.add(lblNewLabel);
 		
-		JButton btnGuardarCambios = new JButton("Guardar cambios");
-		btnGuardarCambios.setBounds(400, 35, 164, 29);
-		contentPane.add(btnGuardarCambios);
+		setBtnGuardarCambios(new JButton("Guardar cambios"));
+		getBtnGuardarCambios().setBounds(400, 35, 164, 29);
+		contentPane.add(getBtnGuardarCambios());
 		
 		JSeparator separator_1 = new JSeparator();
 		separator_1.setOrientation(SwingConstants.VERTICAL);
@@ -155,12 +157,12 @@ public class VentanaModPeliculaForm extends JFrame {
 		contentPane.add(btnVolver);
 	
 	
-	btnGuardarCambios.addActionListener(new ActionListener() {
+	getBtnGuardarCambios().addActionListener(new ActionListener() {
          
          @Override
          public void actionPerformed(ActionEvent e) {
          	//DBManager.getInstance();
-         	Pelicula newPeli = new Pelicula(textFieldTitulo.getText(), textFieldCategoria.getText(), Double.parseDouble(textFieldPrecio.getText()), textFieldFecha.getText(), textFieldDescripcion.getText());
+         	Pelicula newPeli = new Pelicula(getTextFieldTitulo().getText(), getTextFieldCategoria().getText(), Double.parseDouble(getTextFieldPrecio().getText()), getTextFieldFecha().getText(), getTextFieldDescripcion().getText());
          	//userListModel.addElement(newUser);
          	
          	
@@ -184,4 +186,67 @@ public class VentanaModPeliculaForm extends JFrame {
 	
 
 	}
+
+	public JTextField getTextFieldTitulo() {
+		return textFieldTitulo;
+	}
+
+	public void setTextFieldTitulo(JTextField textFieldTitulo) {
+		this.textFieldTitulo = textFieldTitulo;
+	}
+
+	public JTextField getTextFieldCategoria() {
+		return textFieldCategoria;
+	}
+
+	public void setTextFieldCategoria(JTextField textFieldCategoria) {
+		this.textFieldCategoria = textFieldCategoria;
+	}
+
+	public JTextField getTextFieldPrecio() {
+		return textFieldPrecio;
+	}
+
+	public void setTextFieldPrecio(JTextField textFieldPrecio) {
+		this.textFieldPrecio = textFieldPrecio;
+	}
+
+	public JTextField getTextFieldFecha() {
+		return textFieldFecha;
+	}
+
+	public void setTextFieldFecha(JTextField textFieldFecha) {
+		this.textFieldFecha = textFieldFecha;
+	}
+
+	public JTextField getTextFieldDescripcion() {
+		return textFieldDescripcion;
+	}
+
+	public void setTextFieldDescripcion(JTextField textFieldDescripcion) {
+		this.textFieldDescripcion = textFieldDescripcion;
+	}
+
+	public JButton getBtnGuardarCambios() {
+		return btnGuardarCambios;
+	}
+
+	public void setBtnGuardarCambios(JButton btnGuardarCambios) {
+		this.btnGuardarCambios = btnGuardarCambios;
+	}
+
+	public void setPelicula(Pelicula peliculaMock) {
+	    getTextFieldTitulo().setText(peliculaMock.getNombrePelicula());
+	    getTextFieldCategoria().setText(peliculaMock.getCategoria());
+	    getTextFieldPrecio().setText(String.valueOf(peliculaMock.getPrecio()));
+	    getTextFieldFecha().setText(peliculaMock.getFecha());
+	    getTextFieldDescripcion().setText(peliculaMock.getDescripcion());
+	}
+	
+
 }
+
+
+
+
+

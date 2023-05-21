@@ -156,5 +156,83 @@ public class VentanaLogin extends JFrame {
 			});
 		}
 
+
+
+
+		public JPasswordField getTextoContrasenya() {
+			// TODO Auto-generated method stub
+			return this.textoContrasenya;
+		}
+
+
+
+
+		public JButton getBotonIniciarSesion() {
+			// TODO Auto-generated method stub
+			return this.botonIniciarSesion;
+		}
+
+
+
+
+		public void btnRegistrarseActionPerformed(Object object) {
+			// TODO Auto-generated method stub
+			new VentanaRegistro();
+			dispose();
+			
+		}
+
+
+
+
+		public JTextField getTextoUsuario() {
+			// TODO Auto-generated method stub
+			return this.textoUsuario;
+		}
+
+
+
+
+		public JButton getBotonRegistrarse() {
+			// TODO Auto-generated method stub
+			return this.botonRegistrarse;
+		}
+
+
+
+
+		public void btnIniciarSesionActionPerformed(Object object) {
+			// TODO Auto-generated method stub
+			controller.loginGestionPelis(textoUsuario.getText(), textoContrasenya.getText());
+			VentanaAdmin vi = new VentanaAdmin(client);
+			vi.setVisible(true);
+			setVisible(false);
+			
+		}
+
+
+
+
+		public JLabel getLabelContrasenya() {
+			// TODO Auto-generated method stub
+			return this.labelContrasenya;
+		}
+
+
+
+
+		public JLabel getLabelUsuario() {
+			// TODO Auto-generated method stub
+			return this.labelUsuario;
+		}
+
+
+
+
+
+
+
+
+
 	}
 
