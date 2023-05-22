@@ -24,10 +24,13 @@ jobs:
     - name: Clean compile
       run: mvn --batch-mode --update-snapshots clean compile 
    
-    - name: Prepare database for integration tests
+    - name: Set up MySQL
       run: |
        sudo /etc/init.d/mysql start
        mysql -uroot -proot < sql/db_psc.sql
          mvn --batch-mode --update-snapshots datanucleus:enhance
          mvn --batch-mode --update-snapshots datanucleus:schema-create
          mvn --batch-mode --update-snapshots exec:java -PServer
+
+    - name: Build with Maven
+      run: mvn --batch-mode --update-snapshots test
