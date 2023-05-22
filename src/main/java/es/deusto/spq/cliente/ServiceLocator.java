@@ -43,6 +43,14 @@ public class ServiceLocator {
 		return url;
 	}
 	
+	/**Método para agregar un usuario a gestion pelis
+	 * LLama al metodo al RemoteFacade del servidor con la URL establecida
+	 * @param nombre del usuario que se registra
+	 * @param email del usuario que se registra
+	 * @param password del usuario que se registra
+	 * @param tarjeta del usuario que se registra
+	 * @return Devuelve true si todo ha salido correctamente
+	 */
 	public boolean agregarUsuarioGestionPelis(String nombreUsuario, String email, String password, String tarjeta) {
 		WebTarget registerUserWebTarget = wt.path("server/registroGestionPelis");
 		Usuario u = new Usuario();
@@ -116,6 +124,10 @@ public class ServiceLocator {
 		return 0;
 	}
 	
+	/**Método obtener todas las peliculass de la bd
+	 * LLama al metodo al RemoteFacade del servidor con la URL establecida
+	 * @return peliculas de la bd
+	 */
 	
 	public List<Pelicula> obtenerPeliculas() {
         WebTarget webTarget4 = wt.path("server/obtenerPeliculas");

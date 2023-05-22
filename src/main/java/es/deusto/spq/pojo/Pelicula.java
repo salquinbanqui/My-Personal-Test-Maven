@@ -15,6 +15,13 @@ public class Pelicula {
 	private String fecha;
 	private String descripcion;
 	
+	/** Constructor de pelicula 
+	 * @param nombre Nombre de pelicula
+	 * @param categoria Categoria de pelicula 
+	 * @param precio Precio de pelicula 
+	 * @param fecha Fecha de pelicula 
+	 * @param descripcion Descripcion de pelicula
+	 */
 	
 	public Pelicula(String nombrePelicula, String categoria, double precio, String fecha, String descripcion) {
 		super();
@@ -48,13 +55,13 @@ public class Pelicula {
 		this.id = id;
 	}
 
-	public String getNombre() {
+	public String getNombrePelicula() {
 		return nombrePelicula;
 	}
 
 
 
-	public void setNombre(String nombre) {
+	public void setNombrePelicula(String nombre) {
 		this.nombrePelicula = nombre;
 	}
 

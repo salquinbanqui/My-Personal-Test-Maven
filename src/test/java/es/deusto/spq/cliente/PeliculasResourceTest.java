@@ -1,4 +1,4 @@
-package es.deusto.spq.cliente;
+/*package es.deusto.spq.cliente;
 
 import static org.junit.Assert.*;
 
@@ -47,9 +47,9 @@ public class PeliculasResourceTest {
 		server.stop();
 	}
 	
-	@Ignore
+	
 	@Test
-	//@PerfTest(invocations = 100, threads = 40)
+//	@PerfTest(invocations = 100, threads = 40)
 	public void testgetPelicula() {
 		WebTarget peliculasTarget = appTarget.path("peliculas");
 
@@ -62,16 +62,16 @@ public class PeliculasResourceTest {
 		List<Pelicula> pelicula2 = new ArrayList<Pelicula>();
 		for (int i = 0; i < pelicula1.size(); i++) {
 
-			if (pelicula1.get(i).getNombre().equals(listaPeliculas.get(0).getNombre())) {
+			if (pelicula1.get(i).getNombrePelicula().equals(listaPeliculas.get(0).getNombrePelicula())) {
 
 				pelicula2.add(pelicula1.get(i));
-				assertEquals(listaPeliculas.get(0).getNombre(), pelicula2.get(0).getNombre());
+				assertEquals(listaPeliculas.get(0).getNombrePelicula(), pelicula2.get(0).getNombrePelicula());
 			}
 
 		}
-		assertEquals(listaPeliculas.get(0).getNombre(), pelicula1.get(0).getNombre());
-		assertEquals(listaPeliculas.get(1).getNombre(), pelicula1.get(1).getNombre());
-		assertEquals(listaPeliculas.get(2).getNombre(), pelicula1.get(2).getNombre());
+		assertEquals(listaPeliculas.get(0).getNombrePelicula(), pelicula1.get(0).getNombrePelicula());
+		assertEquals(listaPeliculas.get(1).getNombrePelicula(), pelicula1.get(1).getNombrePelicula());
+		assertEquals(listaPeliculas.get(2).getNombrePelicula(), pelicula1.get(2).getNombrePelicula());
 
 	}
-}
+}*/

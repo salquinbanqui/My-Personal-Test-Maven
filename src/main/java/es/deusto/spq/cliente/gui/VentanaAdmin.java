@@ -59,14 +59,24 @@ public class VentanaAdmin extends JFrame {
 			public void actionPerformed(ActionEvent arg0) {
 				VentanaModPeliculas vMP = new VentanaModPeliculas();
 				vMP.setVisible(true);
+				dispose();
 			}
 		});
+		
+		
 		btnModificarCatalogo.setBounds(239, 123, 187, 29);
 		contentPane.add(btnModificarCatalogo);
 		
 		JButton btnModificarUsuario = new JButton("Modificar Usuario");
 		btnModificarUsuario.setBounds(239, 164, 187, 29);
 		contentPane.add(btnModificarUsuario);
+		btnModificarUsuario.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				VentanaModificarUsuario VMU = new VentanaModificarUsuario();
+				VMU.setVisible(true);
+				dispose();
+			}
+		});
 		
 		JButton btnAnyadirNoticia = new JButton("Añadir Noticia");
 		btnAnyadirNoticia.setBounds(6, 164, 170, 29);
@@ -100,4 +110,5 @@ public class VentanaAdmin extends JFrame {
 		lblModificicar.setBounds(256, 78, 170, 16);
 		contentPane.add(lblModificicar);
 	}
+
 }

@@ -58,6 +58,9 @@ public class VentanaLogin extends JFrame {
 		final WebTarget userTarget = appTarget.path("usuarios");
 		final WebTarget userAllTarget = userTarget.path("all");
 		
+		/**
+		 * Create the frame.
+		 */
 		
 		public  VentanaLogin() {
 			
@@ -117,6 +120,7 @@ public class VentanaLogin extends JFrame {
 					controller.loginGestionPelis(textoUsuario.getText(), textoContrasenya.getText());
 					VentanaAdmin vi = new VentanaAdmin(client);
 					vi.setVisible(true);
+					setVisible(false);
 					
 				}
 				
@@ -132,7 +136,7 @@ public class VentanaLogin extends JFrame {
 
 				}
 			});
-			setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+			//setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 			setSize(542, 355);
 			setVisible(true);
 			setTitle("Pelis PSC");
@@ -140,7 +144,9 @@ public class VentanaLogin extends JFrame {
 		}
 
 		
-		
+		/**
+		 * Launch the application.
+		 */
 
 		public static void main(String[] args) {
 			EventQueue.invokeLater(new Runnable() {

@@ -13,12 +13,12 @@ import javax.swing.JButton;
 
 public class VentanaInicio extends JFrame{
 	
-	/**
-	 * 
-	 */
+	
 	private static final long serialVersionUID = 1L;
 	private JPanel contentpane;
-
+	/**
+	 * Create the frame.
+	 */
 	public VentanaInicio() {
 		
 		contentpane = new JPanel();
@@ -49,8 +49,8 @@ public class VentanaInicio extends JFrame{
 		JButton btnPerfil = new JButton("Perfil");
 		btnPerfil.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				VentanaPerfil vp = new VentanaPerfil();
-				vp.setVisible(true);
+			//	VentanaPerfil vp = new VentanaPerfil();
+				//vp.setVisible(true);
 			}
 		});
 		btnPerfil.setFont(new Font("Dialog", Font.BOLD | Font.ITALIC, 16));
@@ -88,7 +88,9 @@ public class VentanaInicio extends JFrame{
 		});
 
 	}
-	
+	/**
+	 * Launch the application.
+	 */
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {

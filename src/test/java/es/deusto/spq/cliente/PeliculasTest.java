@@ -18,13 +18,13 @@ public class PeliculasTest {
 	
 	@Test
 	public void testGetNombre() {
-		assertEquals("Titanic", p.getNombre());
+		assertEquals("Titanic", p.getNombrePelicula());
 	}
 	
 	@Test
 	public void testSetNombre() {
-		p.setNombre("UP");
-		assertEquals("UP", p.getNombre());
+		p.setNombrePelicula("UP");
+		assertEquals("UP", p.getNombrePelicula());
 	}
 	
 	@Test

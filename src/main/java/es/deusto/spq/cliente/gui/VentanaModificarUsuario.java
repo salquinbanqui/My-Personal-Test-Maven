@@ -32,7 +32,7 @@ import java.awt.event.ActionListener;
 import java.util.List;
 import java.awt.event.ActionEvent;
 
-public class VentanaModPeliculas extends JFrame {
+public class VentanaModificarUsuario extends JFrame {
 
 	private JPanel contentPane;
 
@@ -43,7 +43,7 @@ public class VentanaModPeliculas extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					VentanaModPeliculas frame = new VentanaModPeliculas();
+					VentanaModificarUsuario frame = new VentanaModificarUsuario();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -56,14 +56,14 @@ public class VentanaModPeliculas extends JFrame {
 	 * Create the frame.
 	 */
    private Client client;
-	public VentanaModPeliculas() {
+	public VentanaModificarUsuario() {
 		
 		  client = ClientBuilder.newClient();
 
 	        final WebTarget appTarget = client.target("http://localhost:8080/webapi");
-	        final WebTarget pelisTarget = appTarget.path("peliculas");
-	        final WebTarget peliculasAllTarget = pelisTarget.path("all");
-	        final WebTarget addPeliTarget = pelisTarget.path("reg");
+	        final WebTarget usuariosTarget = appTarget.path("usuarios");
+	        final WebTarget usuariosAllTarget = usuariosTarget.path("all");
+	        final WebTarget addUsuarioTarget = usuariosTarget.path("reg");
 
 		//setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 800, 500);
@@ -77,30 +77,30 @@ public class VentanaModPeliculas extends JFrame {
 		//JList listaPeliculas = new JList();
 		//scrollPane.setRowHeaderView(listaPeliculas);
 		
-	     final DefaultListModel<Pelicula> peliListModel = new DefaultListModel<>();
-	     JList<Pelicula> listaPelis = new JList<>(peliListModel);
+	     final DefaultListModel<Usuario> userListModel = new DefaultListModel<>();
+	     JList<Usuario> listaUsuarios = new JList<>(userListModel);
 	     
-	     JScrollPane scrollPane = new JScrollPane(listaPelis);
+	     JScrollPane scrollPane = new JScrollPane(listaUsuarios);
 		scrollPane.setBounds(6, 6, 600, 444);
 		contentPane.add(scrollPane);
 		
-		JButton btnGetPeliculas = new JButton("Get Peliculas");
-		btnGetPeliculas.addActionListener(new ActionListener() {
+		JButton btnGetUsuarios = new JButton("Get Usuarios");
+		btnGetUsuarios.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				 try {
-	                    GenericType<List<Pelicula>> genericType = new GenericType<List<Pelicula>>() {};
-	                    List<Pelicula> peliculas = peliculasAllTarget.request(MediaType.APPLICATION_JSON).get(genericType);
-	                    peliListModel.clear();
-	                    for (Pelicula peli : peliculas) {
-	                    	peliListModel.addElement(peli);
+	                    GenericType<List<Usuario>> genericType = new GenericType<List<Usuario>>() {};
+	                    List<Usuario> usuarios = usuariosAllTarget.request(MediaType.APPLICATION_JSON).get(genericType);
+	                    userListModel.clear();
+	                    for (Usuario usu : usuarios) {
+	                    	userListModel.addElement(usu);
 	                    }
 	                } catch (ProcessingException ex) {
-	                    JOptionPane.showMessageDialog(VentanaModPeliculas.this, "Error connecting with server", "Error message", ERROR_MESSAGE);
+	                    JOptionPane.showMessageDialog(VentanaModificarUsuario.this, "Error connecting with server", "Error message", ERROR_MESSAGE);
 	                }
 			}
 		});
-		btnGetPeliculas.setBounds(611, 46, 183, 29);
-		contentPane.add(btnGetPeliculas);
+		btnGetUsuarios.setBounds(611, 46, 183, 29);
+		contentPane.add(btnGetUsuarios);
 		
 		
 		
@@ -111,15 +111,15 @@ public class VentanaModPeliculas extends JFrame {
 		
 		btnModSeleccion.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				VentanaModPeliculaForm vMPF = new VentanaModPeliculaForm(listaPelis.getSelectedValue());
-				vMPF.setVisible(true);
+				VentanaModificarUsuario2 vMUF = new VentanaModificarUsuario2(listaUsuarios.getSelectedValue());
+				vMUF.setVisible(true);
 			}
 		});
 		
 		
-		listaPelis.addListSelectionListener(new ListSelectionListener() {
+		listaUsuarios.addListSelectionListener(new ListSelectionListener() {
 		    public void valueChanged(ListSelectionEvent e) {
-		        if (!e.getValueIsAdjusting() && listaPelis.getSelectedIndex() != -1) {
+		        if (!e.getValueIsAdjusting() && listaUsuarios.getSelectedIndex() != -1) {
 		        	btnModSeleccion.setEnabled(true);
 		        } else {
 		        	btnModSeleccion.setEnabled(false);
@@ -144,42 +144,42 @@ public class VentanaModPeliculas extends JFrame {
 			
 		});
 		
-		JButton btnEliminarPelicula = new JButton("Eliminar Selección");
-		btnEliminarPelicula.setBounds(611, 177, 183, 29);
-		contentPane.add(btnEliminarPelicula);
+		JButton btnEliminarUsuario = new JButton("Eliminar Selección");
+		btnEliminarUsuario.setBounds(611, 177, 183, 29);
+		contentPane.add(btnEliminarUsuario);
 		
 		
-		listaPelis.addListSelectionListener(new ListSelectionListener() {
+		listaUsuarios.addListSelectionListener(new ListSelectionListener() {
 		    public void valueChanged(ListSelectionEvent e) {
-		        if (!e.getValueIsAdjusting() && listaPelis.getSelectedIndex() != -1) {
-		        	btnEliminarPelicula.setEnabled(true);
+		        if (!e.getValueIsAdjusting() && listaUsuarios.getSelectedIndex() != -1) {
+		        	btnEliminarUsuario.setEnabled(true);
 		        } else {
-		        	btnEliminarPelicula.setEnabled(false);
+		        	btnEliminarUsuario.setEnabled(false);
 		        }
 		    }
 		});
 		
 		
-		btnEliminarPelicula.addActionListener(new ActionListener() {
+		btnEliminarUsuario.addActionListener(new ActionListener() {
 	        	
 	            @Override
 	            public void actionPerformed(ActionEvent e) {
-	                WebTarget deleteTarget = pelisTarget.path(listaPelis.getSelectedValue().getNombrePelicula());
+	                WebTarget deleteTarget = usuariosTarget.path(listaUsuarios.getSelectedValue().getNombreUsuario());
 	                Response response = deleteTarget.request().buildDelete().invoke();
 	                
 	               // deleteTarget.request().delete();
-	                System.out.println(listaPelis.getSelectedValue().getNombrePelicula());
+	                System.out.println(listaUsuarios.getSelectedValue().getNombreUsuario());
 	                
 	               // WebTarget.class.
 	               
 	                
 	                if (response.getStatus() == Status.OK.getStatusCode()) {
-	                    JOptionPane.showMessageDialog(VentanaModPeliculas.this, "Pelicula '" + listaPelis.getSelectedValue().getNombrePelicula() + "'" + " correctly deleted", "Message", JOptionPane.INFORMATION_MESSAGE);
-	                    peliListModel.removeElementAt(listaPelis.getSelectedIndex());
+	                    JOptionPane.showMessageDialog(VentanaModificarUsuario.this, "Usuario '" + listaUsuarios.getSelectedValue().getNombreUsuario() + "'" + " correctly deleted", "Message", JOptionPane.INFORMATION_MESSAGE);
+	                    userListModel.removeElementAt(listaUsuarios.getSelectedIndex());
 	                    
 	                    
 	                } else {
-	                    JOptionPane.showMessageDialog(VentanaModPeliculas.this, "Could not delete pelicula '" + listaPelis.getSelectedValue().getNombrePelicula() + "'", "Message", JOptionPane.ERROR_MESSAGE);
+	                    JOptionPane.showMessageDialog(VentanaModificarUsuario.this, "Could not delete user '" + listaUsuarios.getSelectedValue().getNombreUsuario() + "'", "Message", JOptionPane.ERROR_MESSAGE);
 	                }
 	               
 	            }

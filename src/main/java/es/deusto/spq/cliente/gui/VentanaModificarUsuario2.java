@@ -27,14 +27,14 @@ import javax.swing.JSeparator;
 import java.awt.Color;
 import javax.swing.SwingConstants;
 
-public class VentanaModPeliculaForm extends JFrame {
+public class VentanaModificarUsuario2 extends JFrame {
 
 	private JPanel contentPane;
-	private JTextField textFieldTitulo;
-	private JTextField textFieldCategoria;
-	private JTextField textFieldPrecio;
-	private JTextField textFieldFecha;
-	private JTextField textFieldDescripcion;
+	private JTextField textFieldUsername;
+	private JTextField textFieldEmail;
+	private JTextField textFieldPassword;
+	private JTextField textFieldTarjeta;
+	private JTextField textFieldAdmin;
 	
 	private Client client;
 	
@@ -64,12 +64,12 @@ public class VentanaModPeliculaForm extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public VentanaModPeliculaForm(Pelicula p) {
+	public VentanaModificarUsuario2(Usuario u) {
 		
 		client = (Client) ClientBuilder.newClient();
 		
 	     final WebTarget appTarget = client.target("http://localhost:8080/webapi");
-		  final WebTarget pelisTarget = appTarget.path("peliculas");
+		  final WebTarget usuariosTarget = appTarget.path("usuarios");
 		
 		//setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 570, 340);
@@ -85,61 +85,56 @@ public class VentanaModPeliculaForm extends JFrame {
 		separator.setBounds(400, 6, 0, 273);
 		contentPane.add(separator);
 		
-		JLabel lblTitulo = new JLabel("Titulo: ");
-		lblTitulo.setBounds(20, 40, 61, 16);
-		contentPane.add(lblTitulo);
+		JLabel lblUsername = new JLabel("Username: ");
+		lblUsername.setBounds(20, 40, 104, 16);
+		contentPane.add(lblUsername);
 		
-		JLabel lblCategoria = new JLabel("Categoria: ");
-		lblCategoria.setBounds(20, 68, 78, 16);
-		contentPane.add(lblCategoria);
+		JLabel lblEmail = new JLabel("Email: ");
+		lblEmail.setBounds(20, 73, 78, 16);
+		contentPane.add(lblEmail);
 		
-		JLabel lblPrecio = new JLabel("Precio: ");
-		lblPrecio.setBounds(20, 96, 61, 16);
-		contentPane.add(lblPrecio);
+		JLabel lblPassword = new JLabel("Password: ");
+		lblPassword.setBounds(20, 101, 104, 16);
+		contentPane.add(lblPassword);
 		
-		JLabel lblFecha = new JLabel("Fecha: ");
-		lblFecha.setBounds(20, 124, 104, 16);
-		contentPane.add(lblFecha);
+		JLabel lblTarjeta = new JLabel("Tarjeta: ");
+		lblTarjeta.setBounds(20, 170, 104, 16);
+		contentPane.add(lblTarjeta);
 		
-		JLabel lblDescripcion = new JLabel("Descripción: ");
-		lblDescripcion.setBounds(20, 157, 104, 16);
-		contentPane.add(lblDescripcion);
+		JLabel lblAdmin = new JLabel("Admin: ");
+		lblAdmin.setBounds(20, 220, 104, 16);
+		contentPane.add(lblAdmin);
 		
-		textFieldTitulo = new JTextField();
-		textFieldTitulo.setBounds(113, 35, 260, 26);
-		contentPane.add(textFieldTitulo);
-		textFieldTitulo.setColumns(10);
-		textFieldTitulo.setText(p.getNombrePelicula());
+		textFieldUsername = new JTextField();
+		textFieldUsername.setBounds(128, 35, 260, 26);
+		contentPane.add(textFieldUsername);
+		textFieldUsername.setColumns(10);
+		textFieldUsername.setText(u.getNombreUsuario());
 		
-		textFieldCategoria = new JTextField();
-		textFieldCategoria.setBounds(113, 63, 153, 26);
-		contentPane.add(textFieldCategoria);
-		textFieldCategoria.setColumns(10);
-		textFieldCategoria.setText(p.getCategoria());
+		textFieldEmail = new JTextField();
+		textFieldEmail.setBounds(128, 68, 190, 26);
+		contentPane.add(textFieldEmail);
+		textFieldEmail.setColumns(10);
+		textFieldEmail.setText(u.getEmail());
 		
-		textFieldPrecio = new JTextField();
-		textFieldPrecio.setHorizontalAlignment(SwingConstants.RIGHT);
-		textFieldPrecio.setBounds(113, 91, 80, 26);
-		contentPane.add(textFieldPrecio);
-		textFieldPrecio.setColumns(10);
-		textFieldPrecio.setText(String.valueOf(p.getPrecio()));
+		textFieldPassword = new JTextField();
+		textFieldPassword.setHorizontalAlignment(SwingConstants.LEFT);
+		textFieldPassword.setBounds(128, 96, 190, 26);
+		contentPane.add(textFieldPassword);
+		textFieldPassword.setColumns(10);
+		textFieldPassword.setText(String.valueOf(u.getPassword()));
 		
-		textFieldFecha = new JTextField();
-		textFieldFecha.setBounds(113, 119, 130, 26);
-		contentPane.add(textFieldFecha);
-		textFieldFecha.setColumns(10);
-		textFieldFecha.setText(p.getFecha());
+		textFieldTarjeta = new JTextField();
+		textFieldTarjeta.setBounds(128, 165, 130, 26);
+		contentPane.add(textFieldTarjeta);
+		textFieldTarjeta.setColumns(10);
+		textFieldTarjeta.setText(u.getTarjeta());
 		
-		textFieldDescripcion = new JTextField();
-		textFieldDescripcion.setBounds(113, 152, 260, 90);
-		contentPane.add(textFieldDescripcion);
-		textFieldDescripcion.setColumns(10);
-		textFieldDescripcion.setText(p.getDescripcion());
-		
-		
-		JLabel lblNewLabel = new JLabel("€");
-		lblNewLabel.setBounds(205, 96, 61, 16);
-		contentPane.add(lblNewLabel);
+		textFieldAdmin = new JTextField();
+		textFieldAdmin.setBounds(128, 214, 130, 29);
+		contentPane.add(textFieldAdmin);
+		textFieldAdmin.setColumns(10);
+		textFieldAdmin.setText(u.getAdmin());
 		
 		JButton btnGuardarCambios = new JButton("Guardar cambios");
 		btnGuardarCambios.setBounds(400, 35, 164, 29);
@@ -160,17 +155,17 @@ public class VentanaModPeliculaForm extends JFrame {
          @Override
          public void actionPerformed(ActionEvent e) {
          	//DBManager.getInstance();
-         	Pelicula newPeli = new Pelicula(textFieldTitulo.getText(), textFieldCategoria.getText(), Double.parseDouble(textFieldPrecio.getText()), textFieldFecha.getText(), textFieldDescripcion.getText());
+         //	Uusario newUser = new Usuario(textFieldUsername.getText(), textFieldEmail.getText(), textFieldPassword.getText(), textFieldTarjeta.getText(), String.valueOf(textFieldAdmin.getText()));
          	//userListModel.addElement(newUser);
          	
          	
-         	WebTarget peliRegTarget = pelisTarget.path("reg");
+         	WebTarget peliRegTarget = usuariosTarget.path("reg");
 				List<String> peliL = new ArrayList<>(); 
-         		peliL.add(newPeli.getNombrePelicula());
-         		peliL.add(newPeli.getCategoria());
-         		peliL.add(String.valueOf(newPeli.getPrecio()));
-         		peliL.add(newPeli.getFecha());
-         		peliL.add(newPeli.getDescripcion());
+     //    		peliL.add(newPeli.getNombrePelicula());
+       //  		peliL.add(newPeli.getCategoria());
+         //		peliL.add(String.valueOf(newPeli.getPrecio()));
+         	//	peliL.add(newPeli.getFecha());
+         	//	peliL.add(newPeli.getDescripcion());
 				
 				//userRegTarget.request().post(Entity.entity(newUser, MediaType.APPLICATION_JSON));
 				
