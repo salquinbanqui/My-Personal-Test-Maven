@@ -31,3 +31,6 @@ jobs:
          mvn --batch-mode --update-snapshots datanucleus:enhance
          mvn --batch-mode --update-snapshots datanucleus:schema-create
          mvn --batch-mode --update-snapshots exec:java -PServer
+    - name: Run tests
+      run: |
+          tmux new-session -d -s tests "mvn --batch-mode --update-snapshots test"
