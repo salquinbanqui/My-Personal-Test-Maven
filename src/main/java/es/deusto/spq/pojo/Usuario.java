@@ -90,6 +90,9 @@ public class Usuario {
 		return admin;
 	}
 
+	public void addFunds(double amount) {
+        tarjeta += amount;
+    }
 	public void setAdmin(boolean admin) {
 		this.admin = admin;
 	}
