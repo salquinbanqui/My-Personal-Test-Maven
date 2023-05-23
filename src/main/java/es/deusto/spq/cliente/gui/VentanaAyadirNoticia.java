@@ -1,13 +1,19 @@
 package es.deusto.spq.cliente.gui;
 
+import java.awt.Color;
 import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JSeparator;
+import javax.swing.JTextField;
+import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
@@ -17,15 +23,8 @@ import javax.ws.rs.core.MediaType;
 
 import es.deusto.spq.pojo.Pelicula;
 
-import javax.swing.JLabel;
-import javax.swing.JTextField;
-import javax.swing.JButton;
-import javax.swing.JSeparator;
-import java.awt.Color;
-import javax.swing.SwingConstants;
-
-public class VentanaAnyadirPelicula extends JFrame {
-
+public class VentanaAyadirNoticia extends JFrame {
+	
 	private JPanel contentPane;
 	private JTextField textFieldTitulo;
 	private JTextField textFieldCategoria;
@@ -54,7 +53,7 @@ public class VentanaAnyadirPelicula extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public VentanaAnyadirPelicula() {
+	public VentanaAyadirNoticia() {
 		//setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 570, 340);
 		contentPane = new JPanel();
@@ -69,19 +68,19 @@ public class VentanaAnyadirPelicula extends JFrame {
 		separator.setBounds(400, 6, 0, 273);
 		contentPane.add(separator);
 		
-		JLabel lblTitulo = new JLabel("Titulo: ");
-		lblTitulo.setBounds(20, 40, 61, 16);
+		JLabel lblTitulo = new JLabel("Novedad Pelicula:");
+		lblTitulo.setBounds(20, 40, 104, 16);
 		contentPane.add(lblTitulo);
 		
 		JLabel lblCategoria = new JLabel("Categoria: ");
 		lblCategoria.setBounds(20, 68, 78, 16);
 		contentPane.add(lblCategoria);
 		
-		JLabel lblPrecio = new JLabel("Precio: ");
-		lblPrecio.setBounds(20, 96, 61, 16);
+		JLabel lblPrecio = new JLabel("Precio estimado:");
+		lblPrecio.setBounds(20, 96, 93, 16);
 		contentPane.add(lblPrecio);
 		
-		JLabel lblFecha = new JLabel("Fecha: ");
+		JLabel lblFecha = new JLabel("Fecha proxima: ");
 		lblFecha.setBounds(20, 124, 104, 16);
 		contentPane.add(lblFecha);
 		
@@ -90,32 +89,32 @@ public class VentanaAnyadirPelicula extends JFrame {
 		contentPane.add(lblDescripcion);
 		
 		textFieldTitulo = new JTextField();
-		textFieldTitulo.setBounds(113, 35, 130, 26);
+		textFieldTitulo.setBounds(144, 35, 130, 26);
 		contentPane.add(textFieldTitulo);
 		textFieldTitulo.setColumns(10);
 		
 		textFieldCategoria = new JTextField();
-		textFieldCategoria.setBounds(113, 63, 130, 26);
+		textFieldCategoria.setBounds(144, 63, 130, 26);
 		contentPane.add(textFieldCategoria);
 		textFieldCategoria.setColumns(10);
 		
 		textFieldPrecio = new JTextField();
-		textFieldPrecio.setBounds(113, 91, 61, 26);
+		textFieldPrecio.setBounds(144, 91, 61, 26);
 		contentPane.add(textFieldPrecio);
 		textFieldPrecio.setColumns(10);
 		
 		textFieldFecha = new JTextField();
-		textFieldFecha.setBounds(113, 119, 61, 26);
+		textFieldFecha.setBounds(144, 119, 61, 26);
 		contentPane.add(textFieldFecha);
 		textFieldFecha.setColumns(10);
 		
 		textFieldDescripcion = new JTextField();
-		textFieldDescripcion.setBounds(113, 152, 260, 90);
+		textFieldDescripcion.setBounds(142, 152, 231, 90);
 		contentPane.add(textFieldDescripcion);
 		textFieldDescripcion.setColumns(10);
 		
 		JLabel lblNewLabel = new JLabel("€");
-		lblNewLabel.setBounds(175, 96, 61, 16);
+		lblNewLabel.setBounds(281, 96, 61, 16);
 		contentPane.add(lblNewLabel);
 		
 		JButton btnAnyadir = new JButton("Añadir");
