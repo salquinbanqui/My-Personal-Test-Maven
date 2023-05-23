@@ -49,29 +49,30 @@ public class PeliculasResourceTest {
 	
 	
 	@Test
-//	@PerfTest(invocations = 100, threads = 40)
-	public void testgetPelicula() {
-		WebTarget peliculasTarget = appTarget.path("peliculas");
+	@PerfTest(invocations = 100, threads = 40)
 
-		List<Pelicula> listaPeliculas = Arrays.asList(new Pelicula("Tarzan", "dibujos",3.5,"26-03-2009","pelicula de dibujos para niños "), new Pelicula("Tarzan", "dibujos",3.5,"26-03-2009","pelicula de dibujos para niños "), 
-				new Pelicula("Tarzan", "dibujos",3.5,"26-03-2009","pelicula de dibujos para niños "));
-
+	public void testaddPelicula() {
+		
+		List<String> peliculasP = new ArrayList<>();
+		when(textFieldTitulo.getText()).thenReturn("La Mosca");
+		peliculasP.add(textFieldTitulo.getText());
+		when(textFieldCategoria.getText()).thenReturn("Terror");
+		peliculasP.add(textFieldCategoria.getText());
+		when(textFieldPrecio.getText()).thenReturn("5");
+		peliculasP.add(textFieldPrecio.getText());
+		when(textFieldFecha.getText()).thenReturn("13-08-2014");
+		peliculasP.add(textFieldFecha.getText());
+		when(textFieldDesc.getText()).thenReturn("Pelicula sobre moscas asesinas");
+		peliculasP.add(textFieldDesc.getText());
+		WebTarget productInsTarget = productTarget.path("ins");
+		productInsTarget.request().post(Entity.entity(peliculasP, MediaType.APPLICATION_JSON));
+		
+		WebTarget productNomTarget = productTarget.path("nom").queryParam("La Mosca", "Terror");
 		GenericType<List<Pelicula>> genericType = new GenericType<List<Pelicula>>() {
 		};
-		List<Pelicula> pelicula1 = peliculasTarget.request(MediaType.APPLICATION_JSON).get(genericType);
-		List<Pelicula> pelicula2 = new ArrayList<Pelicula>();
-		for (int i = 0; i < pelicula1.size(); i++) {
-
-			if (pelicula1.get(i).getNombrePelicula().equals(listaPeliculas.get(0).getNombrePelicula())) {
-
-				pelicula2.add(pelicula1.get(i));
-				assertEquals(listaPeliculas.get(0).getNombrePelicula(), pelicula2.get(0).getNombrePelicula());
-			}
-
-		}
-		assertEquals(listaPeliculas.get(0).getNombrePelicula(), pelicula1.get(0).getNombrePelicula());
-		assertEquals(listaPeliculas.get(1).getNombrePelicula(), pelicula1.get(1).getNombrePelicula());
-		assertEquals(listaPeliculas.get(2).getNombrePelicula(), pelicula1.get(2).getNombrePelicula());
-
+		List<Pelicula> peliculas = productNomTarget.request(MediaType.APPLICATION_JSON).get(genericType);
+		
+		assertEquals("La Mosca", peliculas.get(0).getNombrePelicula());
+		
 	}
 }*/

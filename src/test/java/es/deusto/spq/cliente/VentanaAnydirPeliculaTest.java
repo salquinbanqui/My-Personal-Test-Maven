@@ -1,4 +1,4 @@
-/*package es.deusto.spq.cliente;
+package es.deusto.spq.cliente;
 
 import static org.junit.Assert.*;
 import static org.junit.Assert.assertEquals;
@@ -41,7 +41,7 @@ public class VentanaAnydirPeliculaTest {
 	        server = Main.startServer();
 	        Client c = ClientBuilder.newClient();
 	        appTarget = c.target(Main.BASE_URI);
-	        productTarget = appTarget.path("productos");
+	        productTarget = appTarget.path("peliculas");
 	        
 	        
 	    }
@@ -50,7 +50,7 @@ public class VentanaAnydirPeliculaTest {
 	    public void tearDown() throws Exception {
 	    	
 	    	
-	    	List<String> pelis = Arrays.asList("Peliculas");
+			List<String> pelis = Arrays.asList("Peliculas");
 	    	WebTarget productElimTarget = productTarget.path("elim");
 	        productElimTarget.request().post(Entity.entity(pelis, MediaType.APPLICATION_JSON));
 	        
@@ -59,8 +59,8 @@ public class VentanaAnydirPeliculaTest {
 	        
 	    }
 	    
-	@Test
-	public void testAñadirProducto() {
+/*	@Test
+	public void testAñadirPelicula() {
 		
 		List<String> peliculasP = new ArrayList<>();
 		when(textFieldTitulo.getText()).thenReturn("La Mosca");
@@ -84,6 +84,6 @@ public class VentanaAnydirPeliculaTest {
 		assertEquals("La Mosca", peliculas.get(0).getNombrePelicula());
 		
 	}
-	
+	*/
 
-}*/
+}
