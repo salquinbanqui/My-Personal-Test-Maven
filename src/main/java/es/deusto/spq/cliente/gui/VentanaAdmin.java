@@ -81,6 +81,12 @@ public class VentanaAdmin extends JFrame {
 		JButton btnAnyadirNoticia = new JButton("Añadir Noticia");
 		btnAnyadirNoticia.setBounds(6, 164, 170, 29);
 		contentPane.add(btnAnyadirNoticia);
+		btnAnyadirNoticia.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				VentanaAyadirNoticia vAP = new VentanaAyadirNoticia();
+				vAP.setVisible(true);
+			}
+		});
 		
 		JButton btnAnyadirPelicula = new JButton("Añadir Pelicula");
 		btnAnyadirPelicula.setBounds(6, 123, 170, 29);

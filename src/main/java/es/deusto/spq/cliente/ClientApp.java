@@ -50,14 +50,9 @@ public class ClientApp extends JFrame {
     private Client client;
 
     public ClientApp() {
-        client = ClientBuilder.newClient();
+      
+    	client = ClientBuilder.newClient();
         
-        
-
-
-
-
-
         final WebTarget appTarget = client.target("http://localhost:8080/webapi");
         final WebTarget userTarget = appTarget.path("usuarios");
         final WebTarget userAllTarget = userTarget.path("all");

@@ -1,57 +1,66 @@
-/*package es.deusto.spq.cliente;
+package es.deusto.spq.cliente;
 
 import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
+import javax.ws.rs.core.GenericType;
+import javax.ws.rs.core.MediaType;
+import static org.mockito.Mockito.when;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-
+import javax.ws.rs.client.Entity;
+import javax.swing.JTextField;
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
 import javax.ws.rs.client.WebTarget;
-import javax.ws.rs.core.GenericType;
-import javax.ws.rs.core.MediaType;
-
-import org.databene.contiperf.PerfTest;
-import org.databene.contiperf.junit.ContiPerfRule;
 import org.glassfish.grizzly.http.server.HttpServer;
 import org.junit.After;
 import org.junit.Before;
-import org.junit.Ignore;
-import org.junit.Rule;
 import org.junit.Test;
-
+import org.mockito.Mockito;
 import es.deusto.spq.pojo.Pelicula;
 import es.deusto.spq.server.Main;
 
-public class PeliculasResourceTest {
+public class VentanaAnydirPeliculaTest {
 
-	
 	private HttpServer server;
 	private WebTarget appTarget;
-	private Client c;
+	WebTarget productTarget;
+	private JTextField textFieldTitulo = Mockito.mock(JTextField.class);
+	private JTextField textFieldCategoria = Mockito.mock(JTextField.class);
+	private JTextField textFieldPrecio = Mockito.mock(JTextField.class);
+	private JTextField textFieldFecha = Mockito.mock(JTextField.class);
+	private JTextField textFieldDesc = Mockito.mock(JTextField.class);
 	
-	@Rule
-	public ContiPerfRule rule = new ContiPerfRule();
 	
-	@Before
-	public void setUp() throws Exception {
-		server = Main.startServer();
-		c = ClientBuilder.newClient();
-		appTarget = c.target(Main.BASE_URI);
-	}
+	 @Before
+	    public void setUp() throws Exception {
+		 
+	      
+	        server = Main.startServer();
+	        Client c = ClientBuilder.newClient();
+	        appTarget = c.target(Main.BASE_URI);
+	        productTarget = appTarget.path("peliculas");
+	        
+	        
+	    }
 
-	@SuppressWarnings("deprecation")
-	@After
-	public void tearDown() throws Exception {
-		server.stop();
-	}
-	
-	
-	@Test
-	@PerfTest(invocations = 100, threads = 40)
-
-	public void testaddPelicula() {
+	    @After
+	    public void tearDown() throws Exception {
+	    	
+	    	
+			List<String> pelis = Arrays.asList("Peliculas");
+	    	WebTarget productElimTarget = productTarget.path("elim");
+	        productElimTarget.request().post(Entity.entity(pelis, MediaType.APPLICATION_JSON));
+	        
+	    	
+	        server.stop();
+	        
+	    }
+	    
+/*	@Test
+	public void testAñadirPelicula() {
 		
 		List<String> peliculasP = new ArrayList<>();
 		when(textFieldTitulo.getText()).thenReturn("La Mosca");
@@ -75,4 +84,6 @@ public class PeliculasResourceTest {
 		assertEquals("La Mosca", peliculas.get(0).getNombrePelicula());
 		
 	}
-}*/
+	*/
+
+}
