@@ -25,12 +25,20 @@ import es.deusto.spq.pojo.Pelicula;
 
 
 
+
+
 @Path("peliculas")
 public class PeliculasResource {
 	private final static Logger LOGGER = Logger.getLogger(Logger.class);
 	private Pelicula p1;
+	PersistenceManagerFactory pmf;
+	PersistenceManager pm;
 	
 	HashMap<String,Pelicula> mp = new HashMap<>();
+	
+    public PeliculasResource(PersistenceManagerFactory pmf) {
+        this.pmf = pmf;
+    }
 	
 	
  @GET
@@ -40,8 +48,8 @@ public class PeliculasResource {
  // This data could be retrieved from a database
 	// DBManager.getInstance().getUsuario("*");
 	 
-	 PersistenceManagerFactory pmf = JDOHelper.getPersistenceManagerFactory("datanucleus.properties");
-	 PersistenceManager pm = pmf.getPersistenceManager();
+	 pmf = JDOHelper.getPersistenceManagerFactory("datanucleus.properties");
+	 pm = pmf.getPersistenceManager();
 	 //List<Usuario> usuarios = DBManager.getInstance().getUsuarios();
 // usuarios.add(new Usuario("samuelkiwi", "samuel.martin@opendeusto.es", "password_samu", "XXXX-XXXX-XXXX-XXXX"));
 // usuarios.add(new Usuario("jotajota", "jose@opendeusto.es", "password_jose", "XXXX-XXXX-XXXX-XXXX"));
@@ -137,6 +145,13 @@ public class PeliculasResource {
          return Response.status(Response.Status.NOT_FOUND).build();
      }
  }
+
+
+public void setPersistenceManagerFactory(Object any) {
+	// TODO Auto-generated method stub
+	this.pmf = (PersistenceManagerFactory) any;
+	
+}
  
  
  

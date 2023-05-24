@@ -16,7 +16,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
 public class VentanaAdmin extends JFrame {
-
+Client c2;
 	private JPanel contentPane;
 
 	/**
@@ -39,6 +39,7 @@ public class VentanaAdmin extends JFrame {
 	 * Create the frame.
 	 */
 	public VentanaAdmin(Client c) {
+		c2 = c;
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
@@ -115,6 +116,11 @@ public class VentanaAdmin extends JFrame {
 		lblModificicar.setFont(new Font("Lucida Grande", Font.BOLD | Font.ITALIC, 14));
 		lblModificicar.setBounds(256, 78, 170, 16);
 		contentPane.add(lblModificicar);
+	}
+
+	public Object getClient() {
+		// TODO Auto-generated method stub
+		return this.c2;
 	}
 
 }

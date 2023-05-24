@@ -77,7 +77,7 @@ public class VentanaAmigo extends JFrame {
 		//scrollPane.setRowHeaderView(listaAmigos);
 		
 	     final DefaultListModel<Usuario> amigoListModel = new DefaultListModel<>();
-	     JList<Usuario> listaAmigos = new JList<>(amigoListModel);
+	     final JList<Usuario> listaAmigos = new JList<>(amigoListModel);
 	     
 	     JScrollPane scrollPane = new JScrollPane(listaAmigos);
 		scrollPane.setBounds(6, 6, 600, 444);
@@ -103,7 +103,7 @@ public class VentanaAmigo extends JFrame {
 		
 		
 		
-		JButton btnModSeleccion = new JButton("Modificar Selección");
+		final JButton btnModSeleccion = new JButton("Modificar Selección");
 		btnModSeleccion.setEnabled(false);
 		btnModSeleccion.setBounds(611, 123, 183, 29);
 		contentPane.add(btnModSeleccion);
@@ -143,7 +143,7 @@ public class VentanaAmigo extends JFrame {
 			
 		});
 		
-		JButton btnEliminarAmigo = new JButton("Eliminar Selección");
+		final JButton btnEliminarAmigo = new JButton("Eliminar Selección");
 		btnEliminarAmigo.setBounds(611, 177, 183, 29);
 		contentPane.add(btnEliminarAmigo);
 		
