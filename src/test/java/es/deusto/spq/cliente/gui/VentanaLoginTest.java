@@ -1,4 +1,4 @@
-package es.deusto.spq.cliente;
+package es.deusto.spq.cliente.gui;
 
 import static org.junit.Assert.*;
 

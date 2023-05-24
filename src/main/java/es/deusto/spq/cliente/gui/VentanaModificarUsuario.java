@@ -78,7 +78,7 @@ public class VentanaModificarUsuario extends JFrame {
 		//scrollPane.setRowHeaderView(listaPeliculas);
 		
 	     final DefaultListModel<Usuario> userListModel = new DefaultListModel<>();
-	     JList<Usuario> listaUsuarios = new JList<>(userListModel);
+	     final JList<Usuario> listaUsuarios = new JList<>(userListModel);
 	     
 	     JScrollPane scrollPane = new JScrollPane(listaUsuarios);
 		scrollPane.setBounds(6, 6, 600, 444);
@@ -104,7 +104,7 @@ public class VentanaModificarUsuario extends JFrame {
 		
 		
 		
-		JButton btnModSeleccion = new JButton("Modificar Selección");
+		final JButton btnModSeleccion = new JButton("Modificar Selección");
 		btnModSeleccion.setEnabled(false);
 		btnModSeleccion.setBounds(611, 123, 183, 29);
 		contentPane.add(btnModSeleccion);
@@ -144,7 +144,7 @@ public class VentanaModificarUsuario extends JFrame {
 			
 		});
 		
-		JButton btnEliminarUsuario = new JButton("Eliminar Selección");
+		final JButton btnEliminarUsuario = new JButton("Eliminar Selección");
 		btnEliminarUsuario.setBounds(611, 177, 183, 29);
 		contentPane.add(btnEliminarUsuario);
 		

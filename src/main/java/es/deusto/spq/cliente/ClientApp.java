@@ -90,7 +90,7 @@ public class ClientApp extends JFrame {
         getContentPane().add(buttonsPanel, BorderLayout.SOUTH);
 
         final DefaultListModel<Usuario> userListModel = new DefaultListModel<>();
-        JList<Usuario> userList = new JList<>(userListModel);
+        final JList<Usuario> userList = new JList<>(userListModel);
 
         JScrollPane listScrollPane = new JScrollPane(userList);
         getContentPane().add(listScrollPane, BorderLayout.WEST);
@@ -141,7 +141,7 @@ public class ClientApp extends JFrame {
         lblNewLabel_1.setBounds(55, 307, 61, 16);
         rightPanel.add(lblNewLabel_1);
         
-        JRadioButton rdbtnNewRadioButton = new JRadioButton("is admin");
+        final JRadioButton rdbtnNewRadioButton = new JRadioButton("is admin");
         rdbtnNewRadioButton.setBounds(131, 303, 141, 23);
         rightPanel.add(rdbtnNewRadioButton);
         

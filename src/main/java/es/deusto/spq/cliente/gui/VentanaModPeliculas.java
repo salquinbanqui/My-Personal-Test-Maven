@@ -78,7 +78,7 @@ public class VentanaModPeliculas extends JFrame {
 		//scrollPane.setRowHeaderView(listaPeliculas);
 		
 	     final DefaultListModel<Pelicula> peliListModel = new DefaultListModel<>();
-	     JList<Pelicula> listaPelis = new JList<>(peliListModel);
+	     final JList<Pelicula> listaPelis = new JList<>(peliListModel);
 	     
 	     JScrollPane scrollPane = new JScrollPane(listaPelis);
 		scrollPane.setBounds(6, 6, 600, 444);
@@ -104,7 +104,7 @@ public class VentanaModPeliculas extends JFrame {
 		
 		
 		
-		JButton btnModSeleccion = new JButton("Modificar Selección");
+		final JButton btnModSeleccion = new JButton("Modificar Selección");
 		btnModSeleccion.setEnabled(false);
 		btnModSeleccion.setBounds(611, 123, 183, 29);
 		contentPane.add(btnModSeleccion);
@@ -144,7 +144,7 @@ public class VentanaModPeliculas extends JFrame {
 			
 		});
 		
-		JButton btnEliminarPelicula = new JButton("Eliminar Selección");
+		final JButton btnEliminarPelicula = new JButton("Eliminar Selección");
 		btnEliminarPelicula.setBounds(611, 177, 183, 29);
 		contentPane.add(btnEliminarPelicula);
 		
