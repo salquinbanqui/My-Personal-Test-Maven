@@ -46,6 +46,11 @@ public class VentanaInicio extends JFrame{
 		btnAmigos.setFont(new Font("Harrington", Font.BOLD | Font.ITALIC, 16));
 		contentpane.add(btnAmigos);
 		
+		JButton btnNotis = new JButton("Notificaciones");
+		btnNotis.setBounds(137, 240, 153, 31);
+		btnNotis.setFont(new Font("Harrington", Font.BOLD | Font.ITALIC, 16));
+		contentpane.add(btnNotis);
+		
 		JButton btnPerfil = new JButton("Perfil");
 		btnPerfil.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -86,7 +91,27 @@ public class VentanaInicio extends JFrame{
 
 			}
 		});
+		
+		/*btnPerfil.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				 new VentanaPerfil();
+				dispose();
+			}
+		});*/
+		
+		btnNotis.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				new VentanaNotificaciones();
+				dispose();
 
+			}
+		});
+		
 	}
 	/**
 	 * Launch the application.

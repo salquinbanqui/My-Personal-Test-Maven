@@ -2,6 +2,9 @@ package es.deusto.spq.cliente.gui;
 
 import javax.swing.JFrame;
 import javax.swing.JTextArea;
+
+import org.glassfish.grizzly.streams.AbstractStreamWriter.DisposeBufferCompletionHandler;
+
 import javax.swing.JButton;
 import java.awt.BorderLayout;
 import java.awt.event.ActionListener;
@@ -26,7 +29,7 @@ public class VentanaNotificaciones
         JButton btnAtras = new JButton("Atras");
         btnAtras.addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent e) {
-        		
+        		 new VentanaInicio();
         	}
         });
         ventana.getContentPane().add(btnAtras, BorderLayout.SOUTH);
